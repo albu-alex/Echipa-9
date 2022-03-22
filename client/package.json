@@ -11,5 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "firebase": "^9.6.9"
-  }
+  },
+  "type" : "module"
 }
