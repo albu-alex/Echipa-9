@@ -3,7 +3,11 @@
   --green: #3E885B;
   --dark-green: #2F4B26;
   --light-yellow: #FFBF00;
-  --dark-yellow: #E6AF2E
+  --dark-yellow: #E6AF2E;
+  --body-background: #f6f5f7;
+  --link-color: #333;
+  --input-background: #eee;
+  --social-container-border: #ddd;
 }
 
 body {
