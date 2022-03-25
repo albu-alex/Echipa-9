@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useGlobalContext } from '../../context';
+import validateSignIn from "../../methods/validateSignIn"
 
 import './login-register.styles.css';
 
 const LoginRegister = () => {
     const { isSignIn, changeToRegister, changeToSignIn } = useGlobalContext();
+    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("")
 
     return (
         <div>
@@ -27,7 +30,7 @@ const LoginRegister = () => {
                         <input type="email" placeholder="Email" />
                         <input type="password" placeholder="Password" />
                         <a href="#">Forgot your password?</a>
-                        <button>Sign In</button>
+                        <button onClick={() => validateSignIn()}>Sign In</button>
                     </form>
                 </div>
                 <div className="overlay-container">
