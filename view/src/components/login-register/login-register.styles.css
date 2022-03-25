@@ -43,8 +43,8 @@ a {
 
 button {
 	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
+	border: 1px solid var(--dark-green);
+	background-color: var(--green);
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -84,6 +84,7 @@ input {
 	padding: 12px 15px;
 	margin: 8px 0;
 	width: 100%;
+	border-radius: 10px;
 }
 
 .container {
@@ -157,9 +158,7 @@ input {
 }
 
 .overlay {
-	background: #FF416C;
-	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-	background: linear-gradient(to right, #FF4B2B, #FF416C);
+	background-image: linear-gradient(to right top, #d6f8d6, #b1dbb5, #8bbf95, #66a377, #3e885b);;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -223,27 +222,14 @@ input {
 	width: 40px;
 }
 
-footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
+a {
+	opacity: 0.5;
 }
 
-footer p {
-    margin: 10px 0;
+a:hover {
+	opacity: 1;
 }
 
-footer i {
-    color: red;
-}
-
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
+button:hover {
+	cursor: pointer;
 }

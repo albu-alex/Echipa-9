@@ -3,9 +3,17 @@ import React, { useState, useContext } from 'react';
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-    // states and functions here
+    const [isSignIn, setIsSignIn] = useState(true);
 
-    return <AppContext.Provider value={{}}>{children}</AppContext.Provider>;  // states and functions in value field
+    const changeToSignIn = () => {
+        setIsSignIn(true);
+    }
+
+    const changeToRegister = () => {
+        setIsSignIn(false);
+    }
+
+    return <AppContext.Provider value={{ isSignIn, changeToSignIn, changeToRegister }}>{children}</AppContext.Provider>;
 }
 
 export const useGlobalContext = () => {
