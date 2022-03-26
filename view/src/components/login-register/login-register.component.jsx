@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useGlobalContext } from '../../context';
-import validateSignIn from "../../methods/validateSignIn"
+import { validateSignIn } from "../../methods/validateSignIn"
 
 import './login-register.styles.css';
 
@@ -27,10 +27,14 @@ const LoginRegister = () => {
                 <div className="form-container sign-in-container">
                     <form action="#">
                         <h1>Sign in</h1>
-                        <input type="email" placeholder="Email" />
-                        <input type="password" placeholder="Password" />
+                        <input type="email" placeholder="Email"
+                               onChange={event => setEmail(event.target.value)}
+                               defaultValue={email}/>
+                        <input type="password" placeholder="Password"
+                               onChange={event => setPassword(event.target.value)}
+                               defaultValue={password}/>
                         <a href="#">Forgot your password?</a>
-                        <button onClick={() => validateSignIn()}>Sign In</button>
+                        <button onClick={() => validateSignIn(email, password)}>Sign In</button>
                     </form>
                 </div>
                 <div className="overlay-container">
