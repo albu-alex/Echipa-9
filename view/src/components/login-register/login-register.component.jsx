@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { useGlobalContext } from '../../context';
 import { validateSignIn } from "../../methods/validateSignIn"
+import { validateRegister } from "../../methods/validateRegister";
 
 import './login-register.styles.css';
 
@@ -8,6 +9,10 @@ const LoginRegister = () => {
     const { isSignIn, changeToRegister, changeToSignIn } = useGlobalContext();
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [type, setType] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
 
     return (
         <div>
@@ -15,13 +20,26 @@ const LoginRegister = () => {
                 <div className="form-container sign-up-container">
                     <form action="#">
                         <h1>Create Account</h1>
-                        <input type="text" placeholder="First Name" />
-                        <input type="text" placeholder="Last Name" />
-                        <input type="text" placeholder="Type (chair, reviewer, author)" />
-                        <input type="email" placeholder="Email" />
-                        <input type="password" placeholder="Password" />
-                        <input type="password" placeholder="Confirm password" />
-                        <button>Sign Up</button>
+                        <input type="text" placeholder="First Name"
+                               onChange={event => setFirstName(event.target.value)}
+                               defaultValue={firstName}/>
+                        <input type="text" placeholder="Last Name"
+                               onChange={event => setLastName(event.target.value)}
+                               defaultValue={lastName}/>
+                        <input type="text" placeholder="Type (chair, reviewer, author)"
+                               onChange={event => setType(event.target.value)}
+                               defaultValue={type}/>
+                        <input type="email" placeholder="Email"
+                               onChange={event => setEmail(event.target.value)}
+                               defaultValue={email}/>
+                        <input type="password" placeholder="Password"
+                               onChange={event => setPassword(event.target.value)}
+                               defaultValue={password}/>
+                        <input type="password" placeholder="Confirm password"
+                               onChange={event => setConfirmPassword(event.target.value)}
+                               defaultValue={confirmPassword}/>
+                        <button onClick={() =>
+                            validateRegister(firstName, lastName, type, email, password, confirmPassword)}>Sign Up</button>
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
