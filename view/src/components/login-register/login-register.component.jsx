@@ -18,7 +18,7 @@ const LoginRegister = () => {
         <div>
             <div className={`${isSignIn ? 'container' : 'right-panel-active container'}`} id="container">
                 <div className="form-container sign-up-container">
-                    <form action="#">
+                    <form>
                         <h1>Create Account</h1>
                         <input type="text" placeholder="First Name"
                                onChange={event => setFirstName(event.target.value)}
@@ -38,12 +38,12 @@ const LoginRegister = () => {
                         <input type="password" placeholder="Confirm password"
                                onChange={event => setConfirmPassword(event.target.value)}
                                defaultValue={confirmPassword}/>
-                        <button onClick={() =>
+                        <button type={"submit"} onClick={() =>
                             validateRegister(firstName, lastName, type, email, password, confirmPassword)}>Sign Up</button>
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
-                    <form action="#">
+                    <form>
                         <h1>Sign in</h1>
                         <input type="email" placeholder="Email"
                                onChange={event => setEmail(event.target.value)}
@@ -52,7 +52,8 @@ const LoginRegister = () => {
                                onChange={event => setPassword(event.target.value)}
                                defaultValue={password}/>
                         <a href="#">Forgot your password?</a>
-                        <button onClick={() => validateSignIn(email, password)}>Sign In</button>
+                        <button type={"submit"}
+                            onClick={() => validateSignIn(email, password)}>Sign In</button>
                     </form>
                 </div>
                 <div className="overlay-container">
