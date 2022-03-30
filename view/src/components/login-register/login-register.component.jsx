@@ -5,6 +5,32 @@ import { validateRegister } from "../../methods/validateRegister";
 
 import './login-register.styles.css';
 
+
+// Nu e neaparat sa facem asa, am facut asta repede ca sa pot comunica cumva cu backend-ul
+// @pauladam2001 Am lasat asta aici ca sa nu ma complic. O poti modifica/muta oricum/oriunde :)))
+const callBackendAPI = {
+    signIn: async (email, password) => {
+        const response = await fetch(`/sign-in?email=${email}&password=${password}`);
+
+        if(response.status !== 200) {
+            alert('Login falied!');     // TODO: show a nice message
+        }
+        else {
+            alert('Login successful!') // TODO: redirect to main page
+        }
+    },
+    signUp: async (firstName, lastName, type, email, password) => {
+        const response = await fetch(`/sign-up?email=${email}&password=${password}&fname=${firstName}&lname=${lastName}&type=${type}`);
+
+        if(response.status !== 200) {
+            alert('Sing Up falied!');     // TODO: show a nice message
+        }
+        else {
+            alert('Sing Up successful!') // TODO: redirect to main page
+        }
+    }
+}
+
 const LoginRegister = () => {
     const { isSignIn, changeToRegister, changeToSignIn } = useGlobalContext();
     const [password, setPassword] = useState("")
@@ -38,8 +64,10 @@ const LoginRegister = () => {
                         <input type="password" placeholder="Confirm password"
                                onChange={event => setConfirmPassword(event.target.value)}
                                defaultValue={confirmPassword}/>
-                        <button type={"submit"} onClick={() =>
-                            validateRegister(firstName, lastName, type, email, password, confirmPassword)}>Sign Up</button>
+                        <button type={"submit"} onClick={() =>  {
+                                validateRegister(firstName, lastName, type, email, password, confirmPassword)
+                                callBackendAPI.signUp(firstName, lastName, type, email, password)
+                            }}>Sign Up</button>
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
@@ -53,7 +81,10 @@ const LoginRegister = () => {
                                defaultValue={password}/>
                         <a href="#">Forgot your password?</a>
                         <button type={"submit"}
-                            onClick={() => validateSignIn(email, password)}>Sign In</button>
+                            onClick={() => {
+                                    validateSignIn(email, password)
+                                    callBackendAPI.signIn(email, password)
+                                }}>Sign In</button>
                     </form>
                 </div>
                 <div className="overlay-container">
