@@ -1,0 +1,9 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "The Web-App server",
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2"
+  }
+}
