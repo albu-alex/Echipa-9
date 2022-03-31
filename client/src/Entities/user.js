@@ -1,6 +1,5 @@
 class User {
     #username
-    #password
     #name
     #email
     #phoneNumber
@@ -8,26 +7,17 @@ class User {
     #age
     #type
 
-    /*
-    constructor(username, password, name, email, phoneNumber, address, age) {
-        this.#username = username;
-        this.#password = password;
-        this.#name = name;
-        this.#email = email;
-        this.#phoneNumber = phoneNumber;
-        this.#address = address;
-        this.#age = age;
-    }
-    */
-
     constructor(name, email, type) {
+        this.#username = undefined;
         this.#name = name;
         this.#email = email;
+        this.#phoneNumber = undefined;
+        this.#address = undefined;
+        this.#age = undefined;
         this.#type = type;
     }
 
     getUsername() { return this.#username; }
-    getPassword() { return this.#password; }
     getName() { return this.#name; }
     getEmail() { return this.#email; }
     getPhoneNumber() { return this.#phoneNumber; }
@@ -36,7 +26,6 @@ class User {
     getType() { return this.#type; }
 
     setUsername(newUsername) { this.#username = newUsername; }
-    setPassWord(newPassword) { this.#password = newPassword; }
     setName(newName) { this.#name = newName; }
     setEmail(newEmail) { this.#email = newEmail; }
     setPhoneNumber(newPhoneNumber) { this.#phoneNumber = newPhoneNumber; }
@@ -46,48 +35,27 @@ class User {
 
     toString() { return `Name: ${this.#name} | Email: ${this.#email}`}
 
-    
-    toFirestore() {
-        return {
-            name: this.#name,
-            email: this.#email,
-            type: this.#type
-        }
-    }
-
-    static fromFirestore(Object) {
-        return new User(
-            Object.name,
-            Object.email,
-            Object.type,
-        );
-    }
-
-    /*
     toFirestore() {
         return {
             username: this.#username,
-            password: this.#password,
             name: this.#name,
             email: this.#email,
             phoneNumber: this.#phoneNumber,
             address: this.#address,
-            age: this.#age
+            age: this.#age,
+            type:this.#type
         }
     }
 
     static fromFirestore(Object) {
-        return new User(
-            Object.username,
-            Object.password,
-            Object.name,
-            Object.email,
-            Object.phoneNumber,
-            Object.address,
-            parseInt(Object.age)
-        );
+        let user = new User(Object.name, Object.email, Object.type);
+        user.setUsername(Object.username);
+        user.setPhoneNumber(Object.phoneNumber);
+        user.setAddress(Object.address);
+        user.setAge(parseInt(Object.age));
+
+        return user;
     }
-    */
 }
 
 exports.User = User;
