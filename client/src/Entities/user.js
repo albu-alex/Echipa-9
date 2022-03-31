@@ -8,12 +8,12 @@ class User {
     #type
 
     constructor(name, email, type) {
-        this.#username = undefined;
+        this.#username = null;
         this.#name = name;
         this.#email = email;
-        this.#phoneNumber = undefined;
-        this.#address = undefined;
-        this.#age = undefined;
+        this.#phoneNumber = null;
+        this.#address = null;
+        this.#age = null;
         this.#type = type;
     }
 
