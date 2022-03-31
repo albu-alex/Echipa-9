@@ -1,11 +1,15 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useGlobalContext } from '../../context';
-
-import './login-register.styles.css';
 
 import { signIn, signUp } from '../../auth/authenticate.mjs';
 
-const LoginRegister = () => {
+import './login-register.styles.css';
+
+// Test email
+// test@test.test -> test123!
+
+
+const LoginRegister = (props) => {
     const { isSignIn, changeToRegister, changeToSignIn } = useGlobalContext();
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
@@ -21,48 +25,49 @@ const LoginRegister = () => {
                     <form>
                         <h1>Create Account</h1>
                         <input type="text" placeholder="First Name"
-                               onChange={event => setFirstName(event.target.value)}
-                               defaultValue={firstName}/>
+                            onChange={event => setFirstName(event.target.value)}
+                            defaultValue={firstName} />
                         <input type="text" placeholder="Last Name"
-                               onChange={event => setLastName(event.target.value)}
-                               defaultValue={lastName}/>
+                            onChange={event => setLastName(event.target.value)}
+                            defaultValue={lastName} />
                         <input type="text" placeholder="Type (chair, reviewer, author)"
-                               onChange={event => setType(event.target.value)}
-                               defaultValue={type}/>
+                            onChange={event => setType(event.target.value)}
+                            defaultValue={type} />
                         <input type="email" placeholder="Email"
-                               onChange={event => setEmail(event.target.value)}
-                               defaultValue={email}/>
+                            onChange={event => setEmail(event.target.value)}
+                            defaultValue={email} />
                         <input type="password" placeholder="Password"
-                               onChange={event => setPassword(event.target.value)}
-                               defaultValue={password}/>
+                            onChange={event => setPassword(event.target.value)}
+                            defaultValue={password} />
                         <input type="password" placeholder="Confirm password"
-                               onChange={event => setConfirmPassword(event.target.value)}
-                               defaultValue={confirmPassword}/>
-                        <button type={"submit"} onClick={(e) =>  {
+                            onChange={event => setConfirmPassword(event.target.value)}
+                            defaultValue={confirmPassword} />
+                        <button type={"submit"} onClick={(e) => {
 
-                                    e.preventDefault();
-                                    signUp(firstName, lastName, type, email, password, confirmPassword);
+                            e.preventDefault();
+                            signUp(firstName, lastName, type, email, password, confirmPassword);
 
-                                }}>Sign Up</button>
+                        }}>Sign Up</button>
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
                     <form>
                         <h1>Sign in</h1>
                         <input type="email" placeholder="Email"
-                               onChange={event => setEmail(event.target.value)}
-                               defaultValue={email}/>
+                            onChange={event => setEmail(event.target.value)}
+                            defaultValue={email} />
                         <input type="password" placeholder="Password"
-                               onChange={event => setPassword(event.target.value)}
-                               defaultValue={password}/>
-                        <a href="#">Forgot your password?</a>
+                            onChange={event => setPassword(event.target.value)}
+                            defaultValue={password} />
+                        <a href="/reset">Forgot your password?</a>
                         <button type={"submit"}
                             onClick={(e) => {
 
-                                    e.preventDefault(); 
-                                    signIn(email, password);
+                                e.preventDefault();
+                                signIn(email, password)
 
-                                }}>Sign In</button>
+                            }}>Sign In
+                        </button>
                     </form>
                 </div>
                 <div className="overlay-container">

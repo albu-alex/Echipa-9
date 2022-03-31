@@ -14,15 +14,15 @@ const callBackendAPI = async (uid, ...args) => {
         };
     }
     else {
-        requestHeaders = {'usertoken': `Bearer ${uid}`};
+        requestHeaders = { 'usertoken': `Bearer ${uid}` };
     }
 
     const response = await fetch('/login', {
         method: 'POST',
-        headers : requestHeaders
+        headers: requestHeaders
     });
 
-    if(response.status !== 200) {
+    if (response.status !== 200) {
         throw new Error('Failed to communicate with backend!');
     }
 }
@@ -35,7 +35,7 @@ const signIn = async (email, password) => {
         alert('Sign in successful!');
     }
     catch (error) {
-        alert(error.message); // TODO: Print a nice message
+        alert(error.message);
     }
 }
 
@@ -47,7 +47,7 @@ const signUp = async (firstName, lastName, type, email, password, confirmPasswor
         alert('Sign up successful!');
     }
     catch (error) {
-        alert(error.message); // TODO: Print a nice message
+        alert(error.message);
     }
 }
 
