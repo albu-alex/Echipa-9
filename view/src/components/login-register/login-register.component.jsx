@@ -59,7 +59,7 @@ const LoginRegister = () => {
                         <button type={"submit"}
                             onClick={(e) => {
 
-                                    e.preventDefault();
+                                    e.preventDefault(); 
                                     signIn(email, password);
 
                                 }}>Sign In</button>

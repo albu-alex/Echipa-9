@@ -18,6 +18,7 @@ export function validateSignIn(email, password) {
         //return
     }
     // ! password regex does not work!
+    
     /*
     if(!password.match(passwordRegex)) {
         throw new Error('Password should contain at least one digit, at least one lower case, at least one upper case and should be at least 8 characters long');
