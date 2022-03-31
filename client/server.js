@@ -9,7 +9,7 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 async function startServer() {
   let userManager = new UserManager();
 
-  app.get('/login', async (req, res) => {     // ! Might be vulnerable to XSS
+  app.post('/login', async (req, res) => {    // ! Might be vulnerable to XSS
     const uid = req.headers.usertoken.split(' ')[1];
     const name = req.headers.username;
     const email = req.headers.useremail;

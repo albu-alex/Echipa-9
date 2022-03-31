@@ -18,7 +18,7 @@ const callBackendAPI = async (uid, ...args) => {
     }
 
     const response = await fetch('/login', {
-        //method: 'POST',
+        method: 'POST',
         headers : requestHeaders
     });
 

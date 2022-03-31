@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "The Web-App server",
-  "main": "index.js",
+  "main": "server.js",
   "dependencies": {
     "express": "^4.17.3",
     "firebase-admin": "^10.0.2"
