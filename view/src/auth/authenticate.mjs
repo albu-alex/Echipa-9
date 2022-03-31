@@ -1,74 +1,27 @@
-import { auth } from './config/firebaseConfig.mjs';
+import { validateSignIn } from '../methods/validateSignIn.js';
+import { validateRegister } from '../methods/validateRegister.js';
+import { firebaseSignIn, firebaseSignUp } from "./firebaseAuth.mjs";
 
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
-
-
-const signIn = async (email, password) => {
+const signIn = (email, password) => {
     try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        console.log(userCredential);
-        alert('Sign in successful!');
+        validateSignIn(email, password);
+        firebaseSignIn(email, password);
+        // TODO: make request to backend
     }
     catch (error) {
-        console.error(error.message);
-        throw error;
+        alert(error.message); // TODO: Print a nice message
     }
 }
 
-const signUp = async (firstName, lastName, type, email, password) => {
+const signUp = (firstName, lastName, type, email, password, confirmPassword) => {
     try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        console.log(userCredential);
-        alert('Sign up successful!');
+        validateRegister(firstName, lastName, type, email, password, confirmPassword);
+        firebaseSignUp(email, password);
+        // TODO: make request to backend
     }
     catch (error) {
-        console.error(error.message);
-        throw error;
+        alert(error.message); // TODO: Print a nice message
     }
 }
-
-
-const monitorAuthState = async () => {
-    onAuthStateChanged(auth, user => {
-        if (user) {
-            console.log(user);
-            alert(`User loged in!`);
-        }
-        else {
-            console.log(user);
-            alert('You are not logged in!')
-        }
-    })
-}
-//monitorAuthState();
 
 export { signIn, signUp };
-
-
-
-/*
-function signIn (email, password) {
-    console.log(email, password);
-
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            console.log('User:', userCredential.user);
-        })
-        .catch((error) => {
-            console.error('Login failed!\n', error.message);
-        })
-}*/
-
-/*
-const signUp = async (firstName, lastName, type, email, password) => {
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-        console.log('User:', userCredential.user);
-    })
-    .catch((error) => {
-        console.error('SignUp failed!\n', error.message);
-    })
-
-    await new Promise(resolve => setTimeout(resolve, 15000))
-}
-*/

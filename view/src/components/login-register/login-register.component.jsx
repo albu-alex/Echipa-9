@@ -43,13 +43,7 @@ const LoginRegister = () => {
                         <button type={"submit"} onClick={(e) =>  {
 
                                     e.preventDefault();
-                                    try {
-                                        validateRegister(firstName, lastName, type, email, password, confirmPassword)
-                                        signUp(firstName, lastName, type, email, password);
-                                    }
-                                    catch (error) {
-                                        alert(error.message);
-                                    }
+                                    signUp(firstName, lastName, type, email, password);
 
                                 }}>Sign Up</button>
                     </form>
@@ -68,13 +62,7 @@ const LoginRegister = () => {
                             onClick={(e) => {
 
                                     e.preventDefault();
-                                    try {
-                                        validateSignIn(email, password)
-                                        signIn(email, password);
-                                    }
-                                    catch (error) {
-                                        alert(error.message);
-                                    }
+                                    signIn(email, password);
 
                                 }}>Sign In</button>
                     </form>
