@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import { useGlobalContext } from '../../context';
-import { validateSignIn } from "../../methods/validateSignIn"
-import { validateRegister } from "../../methods/validateRegister";
 
 import './login-register.styles.css';
 
