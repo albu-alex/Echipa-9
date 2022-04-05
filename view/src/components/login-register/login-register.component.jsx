@@ -18,6 +18,15 @@ const LoginRegister = (props) => {
     const [type, setType] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
 
+    const resetState = () => {
+        setPassword("")
+        setEmail("")
+        setFirstName("")
+        setLastName("")
+        setType("")
+        setConfirmPassword("")
+    }
+
     return (
         <div>
             <div className={`${isSignIn ? 'container' : 'right-panel-active container'}`} id="container">
@@ -43,10 +52,9 @@ const LoginRegister = (props) => {
                             onChange={event => setConfirmPassword(event.target.value)}
                             defaultValue={confirmPassword} />
                         <button type={"submit"} onClick={(e) => {
-
                             e.preventDefault();
                             signUp(firstName, lastName, type, email, password, confirmPassword);
-
+                            resetState()
                         }}>Sign Up</button>
                     </form>
                 </div>
@@ -62,10 +70,9 @@ const LoginRegister = (props) => {
                         <a href="/reset">Forgot your password?</a>
                         <button type={"submit"}
                             onClick={(e) => {
-
                                 e.preventDefault();
                                 signIn(email, password)
-
+                                resetState()
                             }}>Sign In
                         </button>
                     </form>
