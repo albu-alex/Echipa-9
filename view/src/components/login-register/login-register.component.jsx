@@ -35,22 +35,22 @@ const LoginRegister = (props) => {
                         <h1>Create Account</h1>
                         <input type="text" placeholder="First Name"
                             onChange={event => setFirstName(event.target.value)}
-                            defaultValue={firstName} />
+                            defaultValue={firstName} value={firstName} />
                         <input type="text" placeholder="Last Name"
                             onChange={event => setLastName(event.target.value)}
-                            defaultValue={lastName} />
+                            defaultValue={lastName} value={lastName} />
                         <input type="text" placeholder="Type (chair, reviewer, author)"
                             onChange={event => setType(event.target.value)}
-                            defaultValue={type} />
+                            defaultValue={type} value={type} />
                         <input type="email" placeholder="Email"
                             onChange={event => setEmail(event.target.value)}
-                            defaultValue={email} />
+                            defaultValue={email} value={email} />
                         <input type="password" placeholder="Password"
                             onChange={event => setPassword(event.target.value)}
-                            defaultValue={password} />
+                            defaultValue={password} value={password} />
                         <input type="password" placeholder="Confirm password"
                             onChange={event => setConfirmPassword(event.target.value)}
-                            defaultValue={confirmPassword} />
+                            defaultValue={confirmPassword} value={confirmPassword} />
                         <button type={"submit"} onClick={(e) => {
                             e.preventDefault();
                             signUp(firstName, lastName, type, email, password, confirmPassword);
@@ -63,10 +63,10 @@ const LoginRegister = (props) => {
                         <h1>Sign in</h1>
                         <input type="email" placeholder="Email"
                             onChange={event => setEmail(event.target.value)}
-                            defaultValue={email} />
+                            defaultValue={email} value={email} />
                         <input type="password" placeholder="Password"
                             onChange={event => setPassword(event.target.value)}
-                            defaultValue={password} />
+                            defaultValue={password} value={password} />
                         <a href="/reset">Forgot your password?</a>
                         <button type={"submit"}
                             onClick={(e) => {
