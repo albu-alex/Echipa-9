@@ -19,7 +19,7 @@ const LoginRegister = (props) => {
     const [confirmPassword, setConfirmPassword] = useState("")
 
     return (
-        <div>
+        <div class='login-register'>
             <div className={`${isSignIn ? 'container' : 'right-panel-active container'}`} id="container">
                 <div className="form-container sign-up-container">
                     <form>
