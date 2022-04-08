@@ -1,0 +1,59 @@
+.ol-cards,
+.ol-cards * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.ol-cards {
+    --flapWidth: 2rem;
+    --flapHeigth: 1rem;
+    --iconSize: 3rem;
+    --numberSize: 3rem;
+    --colGapSize: 2rem;
+    width: min(100%, 40rem);
+    margin-inline: auto;
+    display: grid;
+    gap: 2rem;
+    padding-inline-start: var(--flapWidth);
+    font-family: sans-serif;
+    color: #222;
+    counter-reset: ol-cards-count;
+    list-style: none;
+}
+
+.ol-cards>li {
+    display: grid;
+    grid-template-areas:
+        "icon title nr"
+        "icon descr nr";
+    gap: 0 var(--colGapSize);
+    align-items: center;
+    padding: var(--colGapSize) var(--flapWidth) var(--colGapSize) 0;
+    border-radius: 1rem 5rem 5rem 1rem;
+    background-image: linear-gradient(to bottom right, #e9eaec, #ffffff);
+    /* background-color: var(--light-green); */
+    counter-increment: ol-cards-count;
+    filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.25));
+    box-shadow: inset 2px 2px 2px white, inset -1px -1px 1px rgba(0, 0, 0, 0.25);
+    padding-top: 30px;
+    padding-left: 20px;
+}
+
+.ol-cards>li>.title {
+    grid-area: title;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.ol-cards>li>.descr {
+    grid-area: descr;
+}
+
+.ol-cards>li::after {
+    grid-area: nr;
+    content: counter(ol-cards-count, decimal-leading-zero);
+    color: var(--accent-color);
+    font-size: var(--numberSize);
+    font-weight: 700;
+}
