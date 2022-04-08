@@ -18,15 +18,24 @@ const Sidebar = () => {
                 </header>
                 <ul>
                     {/* conditional rendering based on who is logged in */}
+
+                    {/* author */}
                     <Link to='/authorpapers' className='no-decoration'>
                         <li class="icon-papers"><span>&nbsp;&nbsp; My papers</span></li>
                     </Link>
+                    {/* reviewer */}
+                    <Link to='/reviewerpapers' className='no-decoration'>
+                        <li class="icon-papers"><span>&nbsp;&nbsp; Papers</span></li>
+                    </Link>
+                    {/* SAME with Reviewers, but is for Reviewer and it shows him the authors */}
                     <Link to='/allauthors' className='no-decoration'>
                         <li class="icon-authors"><span>&nbsp;&nbsp; Authors</span></li>
                     </Link>
+                    {/* SAME with Authors, but is for author and it shows him the reviewers */}
                     <Link to='/allreviewers' className='no-decoration'>
                         <li class="icon-reviewers"><span>&nbsp;&nbsp; Reviewers</span></li>
                     </Link>
+                    {/* Author */}
                     <Link to='/allconferences' className='no-decoration'>
                         <li class="icon-conferences"><span>&nbsp;&nbsp; Conference Sessions</span></li>
                     </Link>
