@@ -1,4 +1,6 @@
 .header {
-    float: right;
-    margin: 0px;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }

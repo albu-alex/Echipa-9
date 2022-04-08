@@ -1,0 +1,10 @@
+.button-container {
+    position: relative;
+    padding-top: 100px;
+    margin-left: 28em;
+    padding-left: 10em;
+    bottom: 0%;
+    margin-bottom: 10em;
+    display: flex;
+    gap: 30px;
+}
