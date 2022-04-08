@@ -208,3 +208,7 @@
     text-decoration: none;
     color: white;
 }
+
+.no-decoration:not(:hover) {
+    opacity: 0.9;
+}

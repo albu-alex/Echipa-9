@@ -11,7 +11,9 @@ const Sidebar = () => {
             <nav class="menu" tabindex="0">
                 <div class="smartphone-menu-trigger"></div>
                 <header class="avatar">
-                    <AiOutlineUser size={80} />
+                    <Link to='/updateuserinfo' className='no-decoration'>
+                        <AiOutlineUser size={80} />
+                    </Link>
                     <h2>*Name from DB*</h2>
                 </header>
                 <ul>
