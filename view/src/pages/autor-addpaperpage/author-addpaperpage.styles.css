@@ -5,10 +5,7 @@
 }
 
 .form-style-5 {
-    /* max-width: 500px; */
-    padding: 10px 10px;
     margin-left: 15em;
-    /* padding: 20px; */
     border-radius: 15px;
     width: 500px;
     font-family: Georgia, "Times New Roman", Times, serif;
@@ -20,7 +17,6 @@
 
 .form-style-5 legend {
     font-size: 1.4em;
-    margin-bottom: 10px;
     padding-bottom: 2em;
 }
 

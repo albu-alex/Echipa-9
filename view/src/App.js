@@ -8,6 +8,7 @@ import AuthorAddPaperPage from './pages/autor-addpaperpage/author-addpaperpage.c
 import AuthorPapersPage from './pages/author-paperspage/author-paperspage.component';
 
 import './App.css';
+import AuthorUploadCameraPage from './pages/author-uploadcamerapage/author-uploadcamerapage.component';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route exact path='/authorhome' element={<AuthorHomePage />} />
           <Route exact path='/authoraddpaper' element={<AuthorAddPaperPage />} />
           <Route exact path='/authorpapers' element={<AuthorPapersPage />} />
+          <Route exact path='/authorcameracopy' element={<AuthorUploadCameraPage />} />
         </Routes>
       </Router>
     </div>
