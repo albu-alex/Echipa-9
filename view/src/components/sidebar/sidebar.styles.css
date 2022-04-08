@@ -203,3 +203,8 @@
         pointer-events: none;
     }
 }
+
+.no-decoration {
+    text-decoration: none;
+    color: white;
+}
