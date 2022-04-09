@@ -3,13 +3,16 @@ import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'r
 
 import LoginPage from './pages/login-registerpage/login-registerpage.component';
 import ErrorPage from './pages/errorpage/errorpage.component';
+
 import AuthorHomePage from './pages/author-homepage/author-homepage.component';
-import AuthorAddPaperPage from './pages/autor-addpaperpage/author-addpaperpage.component';
+import AuthorAddPaperPage from './pages/author-addpaperpage/author-addpaperpage.component';
 import AuthorPapersPage from './pages/author-paperspage/author-paperspage.component';
 import AuthorUploadCameraPage from './pages/author-uploadcamerapage/author-uploadcamerapage.component';
 
 import ReviewerHomePage from './pages/reviewer-homepage/reviewer-homepage.component';
 import ReviewerPapersPage from './pages/reviewer-paperspage/reviewer-paperspage.component';
+import ReviewerAuthorsPage from './pages/reviewer-authorspage/reviewer-authorspage.component';
+import ReviewerOnePaperPage from './pages/reviewer-onepaperpage/reviewer-onepaperpage.component';
 
 import './App.css';
 
@@ -29,6 +32,8 @@ function App() {
 
           <Route exact path='/reviewerhome' element={<ReviewerHomePage />} />
           <Route exact path='/reviewerpapers' element={<ReviewerPapersPage />} />
+          <Route exact path='/allauthors' element={<ReviewerAuthorsPage />} />
+          <Route exact path='/itwillbepaperid' element={<ReviewerOnePaperPage />} />
         </Routes>
       </Router>
     </div>

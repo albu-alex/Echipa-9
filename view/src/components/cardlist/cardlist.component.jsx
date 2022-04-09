@@ -34,14 +34,40 @@ const CardList = () => {
         }
     ];
 
+    let dummyAuthors = [
+        {
+            name: 'Daria Andrioaie',
+            title: 'Paper 1'
+        },
+        {
+            name: 'Elina Barabas',
+            title: 'Paper 2'
+        },
+        {
+            name: 'Teodora Arsene',
+            title: 'Paper 3'
+        }
+    ];
+
+    let isReviewer = false;
+
     return (
         <div className='cards-container'>
-            {dummyCards.map((paper, index) => {
-                const { title, topic, status } = paper;
-                return (
-                    <Card key={index} index={index + 1} title={title} topic={topic} status={status} />
-                );
-            })}
+            {isReviewer ? (
+                dummyAuthors.map((author, index) => {
+                    const { title, name } = author;
+                    return (
+                        <Card isReviewer={isReviewer} key={index} index={index + 1} title={title} name={name} />
+                    );
+                })
+            ) : (
+                dummyCards.map((paper, index) => {
+                    const { title, topic, status } = paper;
+                    return (
+                        <Card isReviewer={isReviewer} key={index} index={index + 1} title={title} topic={topic} status={status} />
+                    );
+                })
+            )}
         </div>
     );
 }

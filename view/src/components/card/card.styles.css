@@ -1,6 +1,5 @@
 .card {
     width: 250px;
-    /* max-width: 250px; */
     max-height: 250px;
     position: relative;
     height: 250px;
@@ -31,6 +30,16 @@
     transform: translateY(-40px);
 }
 
+.card .box:hover .signal-button {
+    transform: translateY(-5px);
+    cursor: pointer;
+}
+
+.card .box:hover .signal-hidden {
+    color: white;
+    background-color: var(--dark-green);
+}
+
 .card .box:before {
     content: "";
     position: absolute;
@@ -59,7 +68,6 @@
     color: #fff;
     z-index: 1;
     transition: 0.5s;
-    /* margin-bottom: 15px; */
 }
 
 .card .box .content p {
@@ -68,4 +76,18 @@
     color: rgba(255, 255, 255, 0.9);
     z-index: 1;
     transition: 0.5s;
+}
+
+.signal-button {
+    padding-bottom: 15px;
+}
+
+.signal-hidden {
+    color: var(--green);
+    border: var(--green);
+    transition: 0.8s;
+}
+
+.signal-button-hidden {
+    display: none;
 }
