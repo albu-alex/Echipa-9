@@ -2,6 +2,8 @@ import { validateSignIn } from '../methods/validateSignIn.js';
 import { validateRegister } from '../methods/validateRegister.js';
 import { firebaseSignIn, firebaseSignUp } from "./firebaseAuth.mjs";
 
+import { auth } from "./config/firebaseConfig.mjs";
+
 
 const callBackendAPI = async (link, uid, ...args) => {
     let requestHeaders = null;
@@ -33,10 +35,25 @@ const signIn = async (email, password) => {
     try {
         validateSignIn(email, password);
         const uid = await firebaseSignIn(email, password);
-        const response = await callBackendAPI('/signIn', uid);
+        callBackendAPI('/signIn', uid).then(response => {
+            auth.currentUser.getIdToken(true);
 
-        console.log(response);
-        alert('Sign in successful!');
+            auth.currentUser.getIdTokenResult().then(idTokenResult => {
+                switch (idTokenResult.claims.role) {
+                    case 'chair':
+                        window.location.href = './chairhome';
+                        break;
+                    case 'author':
+                        window.location.href = './authorhome';
+                        break;
+                    case 'reviewer':
+                        window.location.href = './reviewerhome';
+                        break;
+                    default:
+                        console.log('Invalid role!');
+                }
+            })
+        });
     }
     catch (error) {
         alert(error.message);
@@ -49,7 +66,7 @@ const signUp = async (firstName, lastName, type, email, password, confirmPasswor
         const uid = await firebaseSignUp(email, password);
         const response = await callBackendAPI('/signUp', uid, firstName, lastName, email, type);
 
-        console.log(response);
+        //console.log(response);
         alert('Sign up successful!');
     }
     catch (error) {
