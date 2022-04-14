@@ -6,6 +6,7 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthState
 const firebaseSignIn = async (email, password) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        console.log(userCredential.user);
         return userCredential.user.uid;
     }
     catch (error) {
@@ -23,19 +24,16 @@ const firebaseSignUp = async (email, password) => {
     }
 }
 
-
-const monitorAuthState = async () => {
-    onAuthStateChanged(auth, user => {
-        if (user) {
-            console.log(user);
-            alert(`User loged in!`);
-        }
-        else {
-            console.log(user);
-            alert('You are not logged in!')
-        }
-    })
-}
-//monitorAuthState();
+/*
+auth.onAuthStateChanged(user => {
+    if (user) {
+        console.log('User logged in!');
+    }
+    else {
+        console.log('You are not logged in!')
+    }
+    
+});
+*/
 
 export { firebaseSignIn, firebaseSignUp };

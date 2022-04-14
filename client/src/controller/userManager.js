@@ -14,6 +14,8 @@ class UserManager {
             user = await this.setUser(uid, args);
         }
         this.users.push(user);
+
+        return user;
     }
 
     async getUser(uid) {
