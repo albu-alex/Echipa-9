@@ -13,11 +13,16 @@ async function startServer() {
   app.post('/signIn', async (req, res) => {    // ! Might be vulnerable to XSS
     const uid = req.headers.usertoken.split(' ')[1];
 
-    let newUser = await userManager.manageNewConnection(uid);
+    userManager.manageNewConnection(uid).then((newUser) => {
+      console.log(`>>> SignedIn: ${uid} | ${newUser.getName()} | ${newUser.getEmail()} | ${newUser.getType()}`);
+      res.send('ok');
+    }).catch(error => {
+      console.log(error.message);
 
-    console.log(`>>> SignedIn: ${uid} | ${newUser.getName()} | ${newUser.getEmail()} | ${newUser.getType()}`);
-    res.send('ok');
-  })
+      res.status(400);
+      res.send('Invalid request!');
+    });
+  });
 
   app.post('/signUp', async (req, res) => {    // ! Might be vulnerable to XSS
     const uid = req.headers.usertoken.split(' ')[1];
@@ -25,12 +30,29 @@ async function startServer() {
     const email = req.headers.useremail;
     const type = req.headers.usertype;
 
-    let newUser = await userManager.manageNewConnection(uid, name, email, type);
-    const status = await setUserRole(uid, newUser.getType());
+    userManager.manageNewConnection(uid, name, email, type).then(async (newUser) => {
+      const status = await setUserRole(uid, newUser.getType());
 
-    console.log(`>>> SignedUp: ${uid} | ${newUser.getName()} | ${newUser.getEmail()} | ${newUser.getType()}`);
-    console.log(status.message);
-    res.send(status);
+      console.log(`>>> SignedUp: ${uid} | ${newUser.getName()} | ${newUser.getEmail()} | ${newUser.getType()}`);
+      console.log(status.message);
+      res.send('ok');
+
+    }).catch(error => {
+      console.log(error.message);
+
+      res.status(400);
+      res.send('Invalid request!');
+    });
+  });
+
+
+  app.post('/isLoggedIn', (req, res) => {
+    const uid = req.headers.usertoken.split(' ')[1];
+    console.log(uid);
+
+    const isLoggedIn = userManager.isLoggedIn(uid);
+    console.log(isLoggedIn);
+    res.send(isLoggedIn);
   })
 }
 startServer();
