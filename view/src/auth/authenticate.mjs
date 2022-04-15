@@ -3,38 +3,13 @@ import { validateRegister } from '../methods/validateRegister.js';
 import { firebaseSignIn, firebaseSignUp } from "./firebaseAuth.mjs";
 
 import { auth } from "./config/firebaseConfig.mjs";
-
-
-const callBackendAPI = async (link, uid, ...args) => {
-    let requestHeaders = null;
-    if (args.length === 4) {
-        requestHeaders = {
-            'usertoken': `Bearer ${uid}`,
-            'username': args[0] + ' ' + args[1],
-            'useremail': args[2],
-            'usertype': args[3]
-        };
-    }
-    else {
-        requestHeaders = { 'usertoken': `Bearer ${uid}` };
-    }
-
-    const response = await fetch(link, {
-        method: 'POST',
-        headers: requestHeaders
-    });
-
-    if (response.status !== 200) {
-        throw new Error('Failed to communicate with backend!');
-    }
-
-    return response;
-}
+import { callBackendAPI } from '../scripts/backendRequest.mjs';
 
 const signIn = async (email, password) => {
     try {
         validateSignIn(email, password);
         const uid = await firebaseSignIn(email, password);
+
         callBackendAPI('/signIn', uid).then(response => {
             auth.currentUser.getIdToken(true);
 

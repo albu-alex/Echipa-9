@@ -1,7 +1,6 @@
 import { auth } from './config/firebaseConfig.mjs';
 
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, getIdTokenResult } from 'firebase/auth';
-
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 
 const firebaseSignIn = async (email, password) => {
     try {
@@ -11,7 +10,7 @@ const firebaseSignIn = async (email, password) => {
     catch (error) {
         throw new Error(error.message);;
     }
-}
+};
 
 const firebaseSignUp = async (email, password) => {
     try {
@@ -21,16 +20,30 @@ const firebaseSignUp = async (email, password) => {
     catch (error) {
         throw new Error(error.message);
     }
+};
+
+function checkAuthStatus() {
+    return new Promise((resolve, reject) => {
+        try {
+          auth.onAuthStateChanged(user => {
+               //console.log('userChecked:', user)
+               resolve(user);
+           });
+        } catch {
+          reject('api failed')
+        }
+      });
 }
 
-
-auth.onAuthStateChanged(user => {
+/*
+onAuthStateChanged(auth, (user) => {
     if (user) {
-        console.log('User logged in!');
+        console.log('You are logged in!');
     }
     else {
-        console.log('You are not logged in!')
+        console.log('You are not logged in!');
     }
 });
+*/
 
-export { firebaseSignIn, firebaseSignUp };
+export { firebaseSignIn, firebaseSignUp, checkAuthStatus };

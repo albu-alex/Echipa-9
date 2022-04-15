@@ -15,25 +15,34 @@ import ReviewerAuthorsPage from './pages/reviewer-authorspage/reviewer-authorspa
 import ReviewerOnePaperPage from './pages/reviewer-onepaperpage/reviewer-onepaperpage.component';
 
 import './App.css';
+import { LoginPrivateRoute, AuthorPrivateRoute, ReviewerPrivateRoute } from './pages/PrivateRoute';
 
 function App() {
   return (
     <div>
       <Router>
         <Routes>
-          {/* <Route exact path='/' element={<Navigate to='/login' replace />} />
+          <Route exact path='/' element={<Navigate to='/login' replace />} />
           <Route exact path='/login' element={<LoginPage />} />
-          <Route path='*' element={<ErrorPage />} /> */}
+          <Route path='*' element={<ErrorPage />} />
 
-          <Route exact path='/authorhome' element={<AuthorHomePage />} />
-          <Route exact path='/authoraddpaper' element={<AuthorAddPaperPage />} />
-          <Route exact path='/authorpapers' element={<AuthorPapersPage />} />
-          <Route exact path='/authorcameracopy' element={<AuthorUploadCameraPage />} />
+          <Route exact path='/' element={<LoginPrivateRoute/>}>
 
-          <Route exact path='/reviewerhome' element={<ReviewerHomePage />} />
-          <Route exact path='/reviewerpapers' element={<ReviewerPapersPage />} />
-          <Route exact path='/allauthors' element={<ReviewerAuthorsPage />} />
-          <Route exact path='/itwillbepaperid' element={<ReviewerOnePaperPage />} />
+            <Route exact path='/' element={<AuthorPrivateRoute/>}>
+              <Route exact path='/authorhome' element={<AuthorHomePage/>}/>
+              <Route exact path='/authoraddpaper' element={<AuthorAddPaperPage />} />
+              <Route exact path='/authorpapers' element={<AuthorPapersPage />} />
+              <Route exact path='/authorcameracopy' element={<AuthorUploadCameraPage />} />
+            </Route>
+
+            <Route exact path='/' element={<ReviewerPrivateRoute/>}>
+              <Route exact path='/reviewerhome' element={<ReviewerHomePage />} />
+              <Route exact path='/reviewerpapers' element={<ReviewerPapersPage />} />
+              <Route exact path='/allauthors' element={<ReviewerAuthorsPage />} />
+              <Route exact path='/itwillbepaperid' element={<ReviewerOnePaperPage />} />
+            </Route>
+          </Route>
+
         </Routes>
       </Router>
     </div>
