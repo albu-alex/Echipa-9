@@ -14,13 +14,10 @@ const ChairHomePage = () => {
             <div className='chair-homepage'>
                 <div className='buttons-container'>
                     <Link to='/chair-assign-paper'>
-                        <button style={{width: '20vw'}} className='bigger'>Assign paper</button>
+                        <button style={{width: '20vw'}} className='bigger'>See papers</button>
                     </Link>
-                    <Link to='/chair-review-paper'>
-                        <button style={{width: '20vw'}} className='bigger'>Review paper</button>
-                    </Link>
-                    <Link to='/chair-set-topics'>
-                        <button style={{width: '20vw'}} className='bigger'>Set topics</button>
+                    <Link to='/chair-organize-sessions'>
+                        <button style={{width: '20vw'}} className='bigger'>Organize sessions</button>
                     </Link>
                 </div>
             </div>
