@@ -8,7 +8,7 @@
 .buttons-container {
     display: flex;
     gap: 30px;
-    flex-direction: column;
+    flex-direction: row;
     width: 60vw;
 }
 
