@@ -23,9 +23,9 @@ function App() {
     <div>
       <Router>
         <Routes>
-          {/* <Route exact path='/' element={<Navigate to='/login' replace />} />
+          <Route exact path='/' element={<Navigate to='/login' replace />} />
           <Route exact path='/login' element={<LoginPage />} />
-          <Route path='*' element={<ErrorPage />} /> */}
+          <Route path='*' element={<ErrorPage />} />
 
           <Route exact path='/authorhome' element={<AuthorHomePage />} />
           <Route exact path='/authoraddpaper' element={<AuthorAddPaperPage />} />

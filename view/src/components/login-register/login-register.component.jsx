@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useGlobalContext } from '../../context';
+import { useNavigate } from 'react-router-dom';
 
 import { signIn, signUp } from '../../auth/authenticate.mjs';
 
@@ -26,6 +27,8 @@ const LoginRegister = (props) => {
         setType("")
         setConfirmPassword("")
     }
+
+    const location = useNavigate()
 
     return (
         <div class='login-register'>
@@ -71,8 +74,12 @@ const LoginRegister = (props) => {
                         <button type={"submit"}
                             onClick={(e) => {
                                 e.preventDefault();
-                                signIn(email, password)
+                                const link = signIn(email, password)
                                 resetState()
+                                link.then(function(result) {
+                                    console.log(result)
+                                    location(result)
+                                })
                             }}>Sign In
                         </button>
                     </form>

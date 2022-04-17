@@ -1,4 +1,5 @@
-import { auth } from './config/firebaseConfig.mjs';
+import { auth, db } from './config/firebaseConfig.mjs';
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 
@@ -9,7 +10,18 @@ const firebaseSignIn = async (email, password) => {
         return userCredential.user.uid;
     }
     catch (error) {
-        throw new Error(error.message);;
+        throw new Error(error.message);
+    }
+}
+
+const firebaseUserType = async (email) => {
+    try {
+        const q = query(collection(db, "Users"), where("email", "==", email))
+        let result = await getDocs(q)
+        return result.docs[0].data()['type']
+    }
+    catch (error) {
+        throw new Error(error.message);
     }
 }
 
@@ -38,4 +50,4 @@ const monitorAuthState = async () => {
 }
 //monitorAuthState();
 
-export { firebaseSignIn, firebaseSignUp };
+export { firebaseSignIn, firebaseSignUp, firebaseUserType };
