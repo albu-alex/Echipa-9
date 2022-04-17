@@ -14,6 +14,8 @@ import ReviewerPapersPage from './pages/reviewer-paperspage/reviewer-paperspage.
 import ReviewerAuthorsPage from './pages/reviewer-authorspage/reviewer-authorspage.component';
 import ReviewerOnePaperPage from './pages/reviewer-onepaperpage/reviewer-onepaperpage.component';
 
+import ChairHomePage from "./pages/chair-homepage/chair-homepage.component";
+
 import './App.css';
 
 function App() {
@@ -34,6 +36,8 @@ function App() {
           <Route exact path='/reviewerpapers' element={<ReviewerPapersPage />} />
           <Route exact path='/allauthors' element={<ReviewerAuthorsPage />} />
           <Route exact path='/itwillbepaperid' element={<ReviewerOnePaperPage />} />
+
+          <Route exact path='/chair-home' element={<ChairHomePage />} />
         </Routes>
       </Router>
     </div>
