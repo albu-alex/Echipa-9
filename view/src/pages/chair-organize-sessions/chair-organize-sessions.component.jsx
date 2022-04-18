@@ -12,10 +12,10 @@ const rowHeights = new Array(1000)
     .fill(true)
     .map(() => 25 + Math.round(Math.random() * 50));
 
-const getItemSize = index => rowHeights[index];
+const getItemSize = () => 80
 
-const Row = ({ style }) => (
-    <div style={style}><PresentationCard /></div>
+const Row = () => (
+    <PresentationCard />
 );
 
 const ChairOrganizeSessions = () => {
@@ -39,13 +39,13 @@ const ChairOrganizeSessions = () => {
                     </a>
                 </div>
                 <div className='list-container'>
-                    <List width={'100%'} height={250} className='list' itemCount={1000} itemSize={getItemSize}>
+                    <List width={'100%'} height={250} className='list' itemCount={200} itemSize={getItemSize}>
                         {Row}
                     </List>
                 </div>
                 <div className='buttons-container'>
                     <Link to='/chair-assign-paper'>
-                        <button style={{width: '20vw'}} className='bigger'>See papers</button>
+                        <button style={{width: '20vw'}} className='bigger'>Add presentation</button>
                     </Link>
                 </div>
             </div>
