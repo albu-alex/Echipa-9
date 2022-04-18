@@ -1,17 +1,34 @@
 .chair-homepage {
     padding-left: 20em;
-    padding-top: 20em;
+    padding-top: 5em;
     width: 85%;
     text-align: center;
+    height: 100vh;
 }
 
 .buttons-container {
+    position: relative;
+    margin-top: 10vh;
     display: flex;
     gap: 30px;
     flex-direction: row;
-    width: 60vw;
+    width: 50vw;
+    justify-content: center;
 }
 
 .bigger:hover {
     transform: scale(1.1);
+}
+
+.session-list{
+    display: flex;
+    flex-direction: row;
+    height: 10vh;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.list-container {
+    width: 65vw;
+    border: 1px solid #070700;
 }

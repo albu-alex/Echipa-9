@@ -1,0 +1,6 @@
+.card-container{
+    background-color: ghostwhite;
+    border: 1px solid #070700;
+    display: flex;
+    flex: 1;
+}
