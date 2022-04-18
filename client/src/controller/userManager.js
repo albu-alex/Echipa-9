@@ -45,10 +45,6 @@ class UserManager {
         return user;
     }
 
-    async isAllowedToPerform(viewId) {
-        const user = this.users.get(viewId);
-    }
-
     isLoggedIn(uid) {
         return this.users.has(uid);
     }
