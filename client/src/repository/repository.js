@@ -1,7 +1,7 @@
-const { User } = require('../Entities/user');
+// const { User } = require('../Entities/user');
+//
 
-
-class Repository<T> {
+class Repository {
 
     constructor() {
         this.data = new Set
@@ -46,3 +46,5 @@ class Repository<T> {
     }
 
 }
+
+exports.Repository = Repository;
