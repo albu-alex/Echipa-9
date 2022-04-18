@@ -1,6 +1,6 @@
 import { validateSignIn } from '../methods/validateSignIn.js';
 import { validateRegister } from '../methods/validateRegister.js';
-import { firebaseSignIn, firebaseSignUp } from "./firebaseAuth.mjs";
+import { firebaseSignIn, firebaseSignUp, firebaseUserType } from "./firebaseAuth.mjs";
 
 
 const callBackendAPI = async (uid, ...args) => {
@@ -31,8 +31,14 @@ const signIn = async (email, password) => {
     try {
         validateSignIn(email, password);
         const uid = await firebaseSignIn(email, password);
+        const type = await firebaseUserType(email);
         await callBackendAPI(uid);
-        alert('Sign in successful!');
+        switch (type) {
+            case "reviewer": return "/reviewerhome"
+            case "author": return "/authorhome"
+            case "chair": return "/chair-home"
+            default: return "/"
+        }
     }
     catch (error) {
         alert(error.message);

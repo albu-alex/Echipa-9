@@ -14,6 +14,9 @@ import ReviewerPapersPage from './pages/reviewer-paperspage/reviewer-paperspage.
 import ReviewerAuthorsPage from './pages/reviewer-authorspage/reviewer-authorspage.component';
 import ReviewerOnePaperPage from './pages/reviewer-onepaperpage/reviewer-onepaperpage.component';
 
+import ChairHomePage from "./pages/chair-homepage/chair-homepage.component";
+import ChairOrganizeSessions from "./pages/chair-organize-sessions/chair-organize-sessions.component";
+
 import './App.css';
 
 function App() {
@@ -21,19 +24,26 @@ function App() {
     <div>
       <Router>
         <Routes>
-          {/* <Route exact path='/' element={<Navigate to='/login' replace />} />
+          {/*Login routes*/}
+          <Route exact path='/' element={<Navigate to='/login' replace />} />
           <Route exact path='/login' element={<LoginPage />} />
-          <Route path='*' element={<ErrorPage />} /> */}
+          <Route path='*' element={<ErrorPage />} />
 
+          {/*Author routes*/}
           <Route exact path='/authorhome' element={<AuthorHomePage />} />
           <Route exact path='/authoraddpaper' element={<AuthorAddPaperPage />} />
           <Route exact path='/authorpapers' element={<AuthorPapersPage />} />
           <Route exact path='/authorcameracopy' element={<AuthorUploadCameraPage />} />
 
+          {/*Reviewer routes*/}
           <Route exact path='/reviewerhome' element={<ReviewerHomePage />} />
           <Route exact path='/reviewerpapers' element={<ReviewerPapersPage />} />
           <Route exact path='/allauthors' element={<ReviewerAuthorsPage />} />
           <Route exact path='/itwillbepaperid' element={<ReviewerOnePaperPage />} />
+
+          {/*Chair routes*/}
+          <Route exact path='/chair-home' element={<ChairHomePage />} />
+          <Route exact path = '/chair-organize-sessions' element={<ChairOrganizeSessions />} />
         </Routes>
       </Router>
     </div>

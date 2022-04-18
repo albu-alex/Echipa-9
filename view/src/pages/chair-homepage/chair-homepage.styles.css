@@ -1,0 +1,17 @@
+.chair-homepage {
+    padding-left: 20em;
+    padding-top: 20em;
+    width: 85%;
+    text-align: center;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 30px;
+    flex-direction: row;
+    width: 60vw;
+}
+
+.bigger:hover {
+    transform: scale(1.1);
+}
