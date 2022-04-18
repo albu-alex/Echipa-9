@@ -30,6 +30,8 @@ async function startServer() {
     const email = req.headers.useremail;
     const type = req.headers.usertype;
 
+    console.log(`>>> Test: ${uid} | ${name} | ${email} | ${type}`);
+
     userManager.manageNewConnection(uid, name, email, type).then(async (newUser) => {
       const status = await setUserRole(uid, newUser.getType());
 
@@ -48,7 +50,6 @@ async function startServer() {
 
   app.post('/isLoggedIn', (req, res) => {
     const uid = req.headers.usertoken.split(' ')[1];
-    console.log(uid);
 
     const isLoggedIn = userManager.isLoggedIn(uid);
     console.log(isLoggedIn);

@@ -1,6 +1,6 @@
 import { auth } from './config/firebaseConfig.mjs';
 
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 
 const firebaseSignIn = async (email, password) => {
     try {
@@ -26,7 +26,6 @@ function checkAuthStatus() {
     return new Promise((resolve, reject) => {
         try {
           auth.onAuthStateChanged(user => {
-               //console.log('userChecked:', user)
                resolve(user);
            });
         } catch {

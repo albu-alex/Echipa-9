@@ -18,7 +18,7 @@ class UserManager {
 
         let user = await this.getUser(uid);
 
-        if(user == null) {
+        if(user === null) {
             user = await this.setUser(uid, args);
         }
 

@@ -21,7 +21,6 @@ export const callBackendAPI = async (link, uid, ...args) => {
         throw new Error('Failed to communicate with backend!');
     }
 
-    response.text().then( (text) => {
-        return text;
-    })
+    const text = await response.text();
+    return text;
 }
