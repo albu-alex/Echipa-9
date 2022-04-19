@@ -2,60 +2,64 @@ class Conference {
     #id         // is an id needed for the conference since it is only one?
     #name
     #url
-    #subtitles  // list?
+    #topicsOfInterest  // list
     #chairId    // TODO: ask if we should use the id of the chair or the chair
     #deadlines  // map of all the deadlines regarding the conference ( paperSubmissionDL, paperReviewDL, ...)
 
-    constructor(id, name, url, subtitles, chairId, deadlines) {
+    constructor(id, name, url, topicsOfInterest, chairId, deadlines) {
         this.#id = id;
         this.#name = name;
         this.#url = url;
-        this.#subtitles = subtitles;
+        this.#topicsOfInterest = topicsOfInterest;
         this.#chairId = chairId;
         this.#deadlines = deadlines;
     }
 
-    getId() {
+    get id() {
         return this.#id;
     }
 
-    getName() {
+    set id(value) {
+        this.#id = value;
+    }
+
+    get name() {
         return this.#name;
     }
 
-    getUrl() {
+    set name(value) {
+        this.#name = value;
+    }
+
+    get url() {
         return this.#url;
     }
 
-    getSubtitles() {
-        return this.#subtitles;
+    set url(value) {
+        this.#url = value;
     }
 
-    getChairId() {
+    get topicsOfInterest() {
+        return this.#topicsOfInterest;
+    }
+
+    set topicsOfInterest(value) {
+        this.#topicsOfInterest = value;
+    }
+
+    get chairId() {
         return this.#chairId;
     }
 
-    getDeadlines() {
+    set chairId(value) {
+        this.#chairId = value;
+    }
+
+    get deadlines() {
         return this.#deadlines;
     }
 
-    setName(newName) {
-        this.#name = newName;
-    }
-
-    setUrl(newUrl) {
-        this.#url = newUrl;
-    }
-
-    setSubtitles(newSubtitles) {
-        this.#subtitles = newSubtitles;
-    }
-
-    setChairId(newChairId) {
-        this.#chairId = newChairId;
-    }
-
-    setDeadlines(newDeadlines) {
-        this.#deadlines = newDeadlines;
+    set deadlines(value) {
+        this.#deadlines = value;
     }
 }
