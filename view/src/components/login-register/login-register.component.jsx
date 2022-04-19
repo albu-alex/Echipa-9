@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useGlobalContext } from '../../context';
+import { useNavigate } from 'react-router-dom';
 
 import { signIn, signUp } from '../../auth/authenticate.mjs';
 
@@ -26,6 +27,8 @@ const LoginRegister = (props) => {
         setType("")
         setConfirmPassword("")
     }
+
+    const location = useNavigate()
 
     return (
         <div class='login-register'>
@@ -73,6 +76,7 @@ const LoginRegister = (props) => {
                                 e.preventDefault();
                                 signIn(email, password);
                                 resetState();
+
                             }}>Sign In
                         </button>
                     </form>
