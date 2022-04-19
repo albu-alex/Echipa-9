@@ -2,15 +2,20 @@ const { Repository } = require('../repository/repository');
 
 class Service {
 
-    constructor() {
-        this.repositoryClient = new Repository();
-        this.repositoryAuthor = new Repository();
-        this.repositoryPaper = new Repository();
-        this.repositoryReviewer = new Repository();
+    #repositoryChair;
+    #repositoryAuthor;
+    #repositoryPaper;
+    #repositoryReviewer;
+
+    constructor(repositoryChair, repositoryAuthor, repositoryPaper, repositoryReviewer) {
+        this.#repositoryChair = repositoryChair;
+        this.#repositoryAuthor = repositoryAuthor;
+        this.#repositoryPaper = repositoryPaper;
+        this.#repositoryReviewer = repositoryReviewer;
     }
 
     getRepositoryClient() {
-        return this.repositoryClient;
+        return this.repositoryChair;
     }
 
     getRepositoryAuthor() {
@@ -26,7 +31,7 @@ class Service {
     }
 
     setRepositoryClient(newRepository) {
-        this.repositoryClient = newRepository;
+        this.repositoryChair = newRepository;
     }
 
     setRepositoryAuthor(newRepository) {
