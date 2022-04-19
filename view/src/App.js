@@ -14,6 +14,9 @@ import ReviewerPapersPage from './pages/reviewer-paperspage/reviewer-paperspage.
 import ReviewerAuthorsPage from './pages/reviewer-authorspage/reviewer-authorspage.component';
 import ReviewerOnePaperPage from './pages/reviewer-onepaperpage/reviewer-onepaperpage.component';
 
+import ChairHomePage from "./pages/chair-homepage/chair-homepage.component";
+import ChairOrganizeSessions from "./pages/chair-organize-sessions/chair-organize-sessions.component";
+
 import './App.css';
 import { LoginPrivateRoute, AuthorPrivateRoute, ReviewerPrivateRoute } from './pages/PrivateRoute';
 
@@ -22,6 +25,7 @@ function App() {
     <div>
       <Router>
         <Routes>
+          {/*Login routes*/}
           <Route exact path='/' element={<Navigate to='/login' replace />} />
           <Route exact path='/login' element={<LoginPage />} />
           <Route path='*' element={<ErrorPage />} />
@@ -42,7 +46,10 @@ function App() {
               <Route exact path='/itwillbepaperid' element={<ReviewerOnePaperPage />} />
             </Route>
           </Route>
+          {/*Chair routes*/}
 
+          <Route exact path='/chair-home' element={<ChairHomePage />} />
+          <Route exact path = '/chair-organize-sessions' element={<ChairOrganizeSessions />} />
         </Routes>
       </Router>
     </div>

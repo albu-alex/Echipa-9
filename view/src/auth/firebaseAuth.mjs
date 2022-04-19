@@ -1,4 +1,5 @@
-import { auth } from './config/firebaseConfig.mjs';
+import { auth, db } from './config/firebaseConfig.mjs';
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 
@@ -8,9 +9,9 @@ const firebaseSignIn = async (email, password) => {
         return userCredential.user.uid;
     }
     catch (error) {
-        throw new Error(error.message);;
+        throw new Error(error.message);
     }
-};
+}
 
 const firebaseSignUp = async (email, password) => {
     try {
@@ -21,18 +22,6 @@ const firebaseSignUp = async (email, password) => {
         throw new Error(error.message);
     }
 };
-
-function checkAuthStatus() {
-    return new Promise((resolve, reject) => {
-        try {
-          auth.onAuthStateChanged(user => {
-               resolve(user);
-           });
-        } catch {
-          reject('api failed')
-        }
-      });
-}
 
 /*
 onAuthStateChanged(auth, (user) => {
@@ -45,4 +34,4 @@ onAuthStateChanged(auth, (user) => {
 });
 */
 
-export { firebaseSignIn, firebaseSignUp, checkAuthStatus };
+export { firebaseSignIn, firebaseSignUp };
