@@ -57,7 +57,7 @@ const LoginRegister = (props) => {
                         <button type={"submit"} onClick={(e) => {
                             e.preventDefault();
                             signUp(firstName, lastName, type, email, password, confirmPassword);
-                            resetState()
+                            resetState();
                         }}>Sign Up</button>
                     </form>
                 </div>
@@ -74,12 +74,8 @@ const LoginRegister = (props) => {
                         <button type={"submit"}
                             onClick={(e) => {
                                 e.preventDefault();
-                                const link = signIn(email, password)
-                                resetState()
-                                link.then(function(result) {
-                                    console.log(result)
-                                    location(result)
-                                })
+                                signIn(email, password);
+                                resetState();
                             }}>Sign In
                         </button>
                     </form>

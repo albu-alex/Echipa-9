@@ -2,43 +2,38 @@ import { validateSignIn } from '../methods/validateSignIn.js';
 import { validateRegister } from '../methods/validateRegister.js';
 import { firebaseSignIn, firebaseSignUp, firebaseUserType } from "./firebaseAuth.mjs";
 
-
-const callBackendAPI = async (uid, ...args) => {
-    let requestHeaders = null;
-    if (args.length === 4) {
-        requestHeaders = {
-            'usertoken': `Bearer ${uid}`,
-            'username': args[0] + ' ' + args[1],
-            'useremail': args[2],
-            'usertype': args[3]
-        };
-    }
-    else {
-        requestHeaders = { 'usertoken': `Bearer ${uid}` };
-    }
-
-    const response = await fetch('/login', {
-        method: 'POST',
-        headers: requestHeaders
-    });
-
-    if (response.status !== 200) {
-        throw new Error('Failed to communicate with backend!');
-    }
-}
+import { auth } from "./config/firebaseConfig.mjs";
+import { callBackendAPI } from '../scripts/backendRequest.mjs';
 
 const signIn = async (email, password) => {
     try {
         validateSignIn(email, password);
         const uid = await firebaseSignIn(email, password);
-        const type = await firebaseUserType(email);
-        await callBackendAPI(uid);
-        switch (type) {
-            case "reviewer": return "/reviewerhome"
-            case "author": return "/authorhome"
-            case "chair": return "/chair-home"
-            default: return "/"
-        }
+        callBackendAPI('/signIn', uid).then(response => {
+            auth.currentUser.getIdToken(true);
+
+            auth.currentUser.getIdTokenResult().then(idTokenResult => {
+                const role = idTokenResult.claims.role;
+
+                localStorage.setItem("uid", auth.currentUser.uid);
+                localStorage.setItem("isLoggedIn", "true");
+                localStorage.setItem("role", role);
+
+                switch (idTokenResult.claims.role) {
+                    case 'chair':
+                        window.location.href = './chairhome';
+                        break;
+                    case 'author':
+                        window.location.href = './authorhome';
+                        break;
+                    case 'reviewer':
+                        window.location.href = './reviewerhome';
+                        break;
+                    default:
+                        console.log('Invalid role!');
+                }
+            })
+        });
     }
     catch (error) {
         alert(error.message);
@@ -49,10 +44,27 @@ const signUp = async (firstName, lastName, type, email, password, confirmPasswor
     try {
         validateRegister(firstName, lastName, type, email, password, confirmPassword);
         const uid = await firebaseSignUp(email, password);
-        await callBackendAPI(uid, firstName, lastName, email, type);
-        alert('Sign up successful!');
-    }
-    catch (error) {
+
+        callBackendAPI('/signUp', uid, firstName, lastName, email, type).then(response => {
+            localStorage.setItem("uid", auth.currentUser.uid);
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("role", type);
+
+            switch (type) {
+                case 'chair':
+                    window.location.href = './chairhome';
+                    break;
+                case 'author':
+                    window.location.href = './authorhome';
+                    break;
+                case 'reviewer':
+                    window.location.href = './reviewerhome';
+                    break;
+                default:
+                    console.log('Invalid role!');
+            }
+        });
+    } catch (error) {
         alert(error.message);
     }
 }

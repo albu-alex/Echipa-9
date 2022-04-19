@@ -1,4 +1,5 @@
 class User {
+    #id
     #username
     #name
     #email
@@ -7,7 +8,8 @@ class User {
     #age
     #type
 
-    constructor(name, email, type) {
+    constructor(id, name, email, type) {
+        this.#id = id;
         this.#username = null;
         this.#name = name;
         this.#email = email;
@@ -17,6 +19,7 @@ class User {
         this.#type = type;
     }
 
+    getId() {return this.#id;}
     getUsername() { return this.#username; }
     getName() { return this.#name; }
     getEmail() { return this.#email; }
@@ -34,6 +37,8 @@ class User {
     setType(newType) { this.#type = newType; }
 
     toString() { return `Name: ${this.#name} | Email: ${this.#email}`}
+
+    // ! check default id in firebase
 
     toFirestore() {
         return {

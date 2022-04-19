@@ -18,6 +18,7 @@ import ChairHomePage from "./pages/chair-homepage/chair-homepage.component";
 import ChairOrganizeSessions from "./pages/chair-organize-sessions/chair-organize-sessions.component";
 
 import './App.css';
+import { LoginPrivateRoute, AuthorPrivateRoute, ReviewerPrivateRoute } from './pages/PrivateRoute';
 
 function App() {
   return (
@@ -29,19 +30,24 @@ function App() {
           <Route exact path='/login' element={<LoginPage />} />
           <Route path='*' element={<ErrorPage />} />
 
-          {/*Author routes*/}
-          <Route exact path='/authorhome' element={<AuthorHomePage />} />
-          <Route exact path='/authoraddpaper' element={<AuthorAddPaperPage />} />
-          <Route exact path='/authorpapers' element={<AuthorPapersPage />} />
-          <Route exact path='/authorcameracopy' element={<AuthorUploadCameraPage />} />
+          <Route exact path='/' element={<LoginPrivateRoute/>}>
 
-          {/*Reviewer routes*/}
-          <Route exact path='/reviewerhome' element={<ReviewerHomePage />} />
-          <Route exact path='/reviewerpapers' element={<ReviewerPapersPage />} />
-          <Route exact path='/allauthors' element={<ReviewerAuthorsPage />} />
-          <Route exact path='/itwillbepaperid' element={<ReviewerOnePaperPage />} />
+            <Route exact path='/' element={<AuthorPrivateRoute/>}>
+              <Route exact path='/authorhome' element={<AuthorHomePage/>}/>
+              <Route exact path='/authoraddpaper' element={<AuthorAddPaperPage />} />
+              <Route exact path='/authorpapers' element={<AuthorPapersPage />} />
+              <Route exact path='/authorcameracopy' element={<AuthorUploadCameraPage />} />
+            </Route>
 
+            <Route exact path='/' element={<ReviewerPrivateRoute/>}>
+              <Route exact path='/reviewerhome' element={<ReviewerHomePage />} />
+              <Route exact path='/reviewerpapers' element={<ReviewerPapersPage />} />
+              <Route exact path='/allauthors' element={<ReviewerAuthorsPage />} />
+              <Route exact path='/itwillbepaperid' element={<ReviewerOnePaperPage />} />
+            </Route>
+          </Route>
           {/*Chair routes*/}
+
           <Route exact path='/chair-home' element={<ChairHomePage />} />
           <Route exact path = '/chair-organize-sessions' element={<ChairOrganizeSessions />} />
         </Routes>
