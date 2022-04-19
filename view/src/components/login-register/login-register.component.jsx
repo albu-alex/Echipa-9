@@ -54,7 +54,7 @@ const LoginRegister = (props) => {
                         <button type={"submit"} onClick={(e) => {
                             e.preventDefault();
                             signUp(firstName, lastName, type, email, password, confirmPassword);
-                            resetState()
+                            resetState();
                         }}>Sign Up</button>
                     </form>
                 </div>
@@ -71,8 +71,8 @@ const LoginRegister = (props) => {
                         <button type={"submit"}
                             onClick={(e) => {
                                 e.preventDefault();
-                                signIn(email, password)
-                                resetState()
+                                signIn(email, password);
+                                resetState();
                             }}>Sign In
                         </button>
                     </form>
