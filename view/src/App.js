@@ -19,6 +19,7 @@ import ChairOrganizeSessions from "./pages/chair-organize-sessions/chair-organiz
 
 import './App.css';
 import { LoginPrivateRoute, AuthorPrivateRoute, ReviewerPrivateRoute } from './pages/PrivateRoute';
+import UserUpdateInfoPage from './pages/genericuser-updateinfopage/user-updateinfo.component';
 
 function App() {
   return (
@@ -50,6 +51,8 @@ function App() {
 
           <Route exact path='/chair-home' element={<ChairHomePage />} />
           <Route exact path = '/chair-organize-sessions' element={<ChairOrganizeSessions />} />
+
+          <Route exact path='/updateuserinfo' element={<UserUpdateInfoPage />} />
         </Routes>
       </Router>
     </div>
