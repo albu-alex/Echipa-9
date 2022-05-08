@@ -18,10 +18,12 @@ import ChairHomePage from "./pages/chair-homepage/chair-homepage.component";
 import ChairOrganizeSessions from "./pages/chair-organize-sessions/chair-organize-sessions.component";
 
 import './App.css';
+
 import {LoginPrivateRoute, AuthorPrivateRoute, ReviewerPrivateRoute, ChairPrivateRoute} from './pages/PrivateRoute';
 import ChairSeePapers from "./pages/chair-see-papers/chair-see-papers.component";
 import ChairReviewPaper from "./pages/chair-reviewpaper/chair-reviewpaper.component";
 import UpdateUserInfo from "./pages/update-user-info/update-user-info.component";
+import UserUpdateInfoPage from './pages/genericuser-updateinfopage/user-updateinfo.component';
 
 function App() {
   return (
@@ -31,7 +33,7 @@ function App() {
           {/*Login routes*/}
           <Route exact path='/' element={<Navigate to='/login' replace />} />
           <Route exact path='/login' element={<LoginPage />} />
-          <Route exact path = '/updateuserinfo' element={<UpdateUserInfo />} />
+          <Route exact path='/updateuserinfo' element={<UserUpdateInfoPage />} />
           <Route path='*' element={<ErrorPage />} />
 
           <Route exact path='/' element={<LoginPrivateRoute/>}>
@@ -57,8 +59,6 @@ function App() {
               <Route exact path = '/chairreviewpaper' element={<ChairReviewPaper/>} />
             </Route>
           </Route>
-
-
         </Routes>
       </Router>
     </div>
