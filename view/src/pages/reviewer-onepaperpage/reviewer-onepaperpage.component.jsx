@@ -8,6 +8,8 @@ import Slider from '../../components/slider/slider.component';
 import { IoMdArrowBack } from 'react-icons/io';
 
 import people from './people';
+import { sendReview } from "../../methods/sendReview";
+import { sendComment } from "../../methods/sendComment";
 
 import './reviewer-onepaperpage.styles.css';
 
