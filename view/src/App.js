@@ -22,7 +22,6 @@ import './App.css';
 import {LoginPrivateRoute, AuthorPrivateRoute, ReviewerPrivateRoute, ChairPrivateRoute} from './pages/PrivateRoute';
 import ChairSeePapers from "./pages/chair-see-papers/chair-see-papers.component";
 import ChairReviewPaper from "./pages/chair-reviewpaper/chair-reviewpaper.component";
-import UpdateUserInfo from "./pages/update-user-info/update-user-info.component";
 import UserUpdateInfoPage from './pages/genericuser-updateinfopage/user-updateinfo.component';
 
 function App() {
