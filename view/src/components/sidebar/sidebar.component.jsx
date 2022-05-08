@@ -32,7 +32,7 @@ const Sidebar = () => {
                         <li class="icon-authors"><span>&nbsp;&nbsp; Authors</span></li>
                     </Link>
                     {/* author */}
-                    <Link to='/allconferences' className='no-decoration'>
+                    <Link to='/chair-organize-sessions' className='no-decoration'>
                         <li class="icon-conferences"><span>&nbsp;&nbsp; Conference Sessions</span></li>
                     </Link>
                 </ul>
