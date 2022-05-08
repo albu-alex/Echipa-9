@@ -1,0 +1,56 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+}
+
+.user-header{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 30vh;
+    align-content: center;
+    justify-content: space-between;
+    border-bottom: 0.1vh solid black;
+    padding-left: 35vw;
+    padding-right: 25vw;
+}
+
+.header-details{
+    display: flex;
+    flex-direction: column;
+    height: 10vh;
+    width: 35%;
+    justify-content: space-between;
+}
+
+.content{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    height: 65vh;
+    margin-top: 5vh;
+    padding-left: 35vw;
+    padding-right: 25vw;
+}
+
+.personal{
+    display: flex;
+    flex-direction: column;
+}
+
+.about-me {
+    display: flex;
+    flex-direction: column;
+}
+
+.primaryText{
+    text-decoration: underline;
+    font-size: 1rem;
+}
+
+textarea{
+    height: 25vh;
+    width: 20vw;
+}

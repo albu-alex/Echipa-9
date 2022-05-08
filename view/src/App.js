@@ -21,6 +21,7 @@ import './App.css';
 import {LoginPrivateRoute, AuthorPrivateRoute, ReviewerPrivateRoute, ChairPrivateRoute} from './pages/PrivateRoute';
 import ChairSeePapers from "./pages/chair-see-papers/chair-see-papers.component";
 import ChairReviewPaper from "./pages/chair-reviewpaper/chair-reviewpaper.component";
+import UpdateUserInfo from "./pages/update-user-info/update-user-info.component";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           {/*Login routes*/}
           <Route exact path='/' element={<Navigate to='/login' replace />} />
           <Route exact path='/login' element={<LoginPage />} />
+          <Route exact path = '/updateuserinfo' element={<UpdateUserInfo />} />
           <Route path='*' element={<ErrorPage />} />
 
           <Route exact path='/' element={<LoginPrivateRoute/>}>
