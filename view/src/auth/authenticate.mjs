@@ -1,6 +1,6 @@
 import { validateSignIn } from '../methods/validateSignIn.js';
 import { validateRegister } from '../methods/validateRegister.js';
-import { firebaseSignIn, firebaseSignUp, firebaseUserType } from "./firebaseAuth.mjs";
+import { firebaseSignIn, firebaseSignUp } from "./firebaseAuth.mjs";
 
 import { auth } from "./config/firebaseConfig.mjs";
 import { callBackendAPI } from '../scripts/backendRequest.mjs';
@@ -16,6 +16,7 @@ const signIn = async (email, password) => {
                 const role = idTokenResult.claims.role;
 
                 localStorage.setItem("uid", auth.currentUser.uid);
+                localStorage.setItem("email", auth.currentUser.email)
                 localStorage.setItem("isLoggedIn", "true");
                 localStorage.setItem("role", role);
 
@@ -47,6 +48,7 @@ const signUp = async (firstName, lastName, type, email, password, confirmPasswor
 
         callBackendAPI('/signUp', uid, firstName, lastName, email, type).then(response => {
             localStorage.setItem("uid", auth.currentUser.uid);
+            localStorage.setItem("email", email)
             localStorage.setItem("isLoggedIn", "true");
             localStorage.setItem("role", type);
 

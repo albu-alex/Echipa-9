@@ -12,12 +12,10 @@ const ReviewerHomePage = () => {
             <Header />
             <Sidebar />
             <div className='reviewer-homepage'>
-                <p>Background, maybe with the deadline for paper review</p>
-                <div className='buttons-container reviewer-homepage-container'>
-                    <Link to='/reviewerpapers'>
-                        <button className='bigger'>Review Papers</button>
-                    </Link>
-                </div>
+                <p>You have 5 papers left to review</p>
+                <Link to='/reviewerpapers'>
+                    <button className='bigger'>Review Papers</button>
+                </Link>
             </div>
         </>
     )
