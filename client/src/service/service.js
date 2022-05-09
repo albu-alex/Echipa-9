@@ -45,6 +45,37 @@ class Service {
     set repositoryReviewer(value) {
         this.#repositoryReviewer = value;
     }
+
+// getRepositoryClient() {
+    //     return this.#repositoryChair;
+    // }
+    //
+    // getRepositoryAuthor() {
+    //     return this.repositoryAuthor;
+    // }
+    //
+    // getRepositoryPaper() {
+    //     return this.repositoryPaper;
+    // }
+    //
+    // getRepositoryReviewer() {
+    //     return this.repositoryReviewer;
+    // }
+    //
+    // setRepositoryClient(newRepository) {
+    //     this.repositoryChair = newRepository;
+    // }
+    //
+    // setRepositoryAuthor(newRepository) {
+    //     this.repositoryAuthor= newRepository;
+    // }
+    //
+    // setRepositoryPaper(newRepository) {
+    //     this.repositoryPaper = newRepository;
+    // }
+    // setRepositoryReviewer(newRepository) {
+    //     this.repositoryReviewer = newRepository;
+    // }
 }
 
 exports.Service = Service;
