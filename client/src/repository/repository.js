@@ -4,7 +4,7 @@
 class Repository {
 
     constructor() {
-        this.data = new Set
+        this.data = new Set();
     }
 
     getOne(searchedId) {
