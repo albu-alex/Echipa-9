@@ -2,8 +2,13 @@ const { UserManager } = require('./src/controller/userManager');
 const { setUserRole } = require('./src/auth/setUserRole');
 
 const express = require('express');
+const bp = require('body-parser')
 const app = express();
 const port = process.env.PORT || 5000;
+
+
+app.use(bp.json())
+app.use(bp.urlencoded({ extended: true }))
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -52,6 +57,16 @@ async function startServer() {
     const isLoggedIn = userManager.isLoggedIn(uid);
     console.log(isLoggedIn);
     res.send(isLoggedIn);
+  })
+
+  app.post('/add-review', (req, res) => {
+    console.log("received a review");
+    console.log(req.body);
+    console.log("....");
+
+    res.send("received review " + req.body.review);
+
+    console.log("sent response");
   })
 }
 startServer();

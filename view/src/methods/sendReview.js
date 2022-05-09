@@ -4,13 +4,15 @@ export async function sendReview(review) {
     const data = {
         "review": review
     }
+
     await fetch('/add-review', {
         method: 'POST',
         headers: {
             'Content-Type' : 'application/json',
             'Authorization': 'Bearer ' + authToken
         },
-        body: data
+        body: JSON.stringify(data)
+        // body: data
     })
     .then(() => {
         alert("Yay")
