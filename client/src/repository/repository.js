@@ -2,42 +2,41 @@
 
 class Repository {
     
-    #data;
+    _data: Set;
 
     constructor() {
-        this.#data = new Set
+        this._data = new Set
     }
 
     getOne(searchedId) {
-        this.#data.forEach(entity => {
+        this._data.forEach(entity => {
             if(entity.id === searchedId) return entity;
         })
 
         throw 'There is no object with this id.';
     }
-
-
+    
     getAll() {
-        return this.#data;
+        return this._data;
     }
 
     addData(newData) {
-        if (this.#data.has(newData)) {
+        if (this._data.has(newData)) {
             throw 'Object to be added is already in the database.';
         }
-        this.#data.add(newData);
+        this._data.add(newData);
     }
 
     deleteData(toBeDeleted) {
-        if (!this.#data.delete(toBeDeleted)) {
+        if (!this._data.delete(toBeDeleted)) {
             throw 'Object to be deleted was not found.';
         }
     }
 
     updateData(oldData, newData) {
-        if (this.#data.has(oldData)) {
-            this.#data.delete(oldData);
-            this.#data.add(newData);
+        if (this._data.has(oldData)) {
+            this._data.delete(oldData);
+            this._data.add(newData);
         }
     }
 }

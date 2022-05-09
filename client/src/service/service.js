@@ -2,53 +2,53 @@ const { Repository } = require('../repository/repository');
 
 class Service {
 
-    #repositoryChair;
-    #repositoryAuthor;
-    #repositoryPaper;
-    #repositoryReviewer;
+    _repositoryChair: Repository;
+    _repositoryAuthor: Repository;
+    _repositoryPaper: Repository;
+    _repositoryReviewer: Repository;
 
-    constructor(repositoryChair, repositoryAuthor, repositoryPaper, repositoryReviewer) {
-        this.#repositoryChair = repositoryChair;
-        this.#repositoryAuthor = repositoryAuthor;
-        this.#repositoryPaper = repositoryPaper;
-        this.#repositoryReviewer = repositoryReviewer;
+    constructor(repositoryChair: Repository, repositoryAuthor: Repository, repositoryPaper: Repository, repositoryReviewer: Repository) {
+        this._repositoryChair = repositoryChair;
+        this._repositoryAuthor = repositoryAuthor;
+        this._repositoryPaper = repositoryPaper;
+        this._repositoryReviewer = repositoryReviewer;
     }
 
     get repositoryChair() {
-        return this.#repositoryChair;
+        return this._repositoryChair;
     }
 
     set repositoryChair(value) {
-        this.#repositoryChair = value;
+        this._repositoryChair = value;
     }
 
     get repositoryAuthor() {
-        return this.#repositoryAuthor;
+        return this._repositoryAuthor;
     }
 
     set repositoryAuthor(value) {
-        this.#repositoryAuthor = value;
+        this._repositoryAuthor = value;
     }
 
     get repositoryPaper() {
-        return this.#repositoryPaper;
+        return this._repositoryPaper;
     }
 
     set repositoryPaper(value) {
-        this.#repositoryPaper = value;
+        this._repositoryPaper = value;
     }
 
     get repositoryReviewer() {
-        return this.#repositoryReviewer;
+        return this._repositoryReviewer;
     }
 
     set repositoryReviewer(value) {
-        this.#repositoryReviewer = value;
+        this._repositoryReviewer = value;
     }
 
 // getRepositoryClient() {
-    //     return this.#repositoryChair;
-    // }
+//         return this._repositoryChair.;
+//     }
     //
     // getRepositoryAuthor() {
     //     return this.repositoryAuthor;

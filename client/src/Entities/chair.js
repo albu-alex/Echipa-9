@@ -5,3 +5,5 @@ class Chair extends User {
         super(name, email, "chair");
     }
 }
+
+exports.Chair = Chair
