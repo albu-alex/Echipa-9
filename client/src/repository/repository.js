@@ -10,7 +10,7 @@ class Repository {
     getOne(searchedId) {
 
         this.data.forEach(entity => {
-            if(entity.getId() === searchedId) return entity;
+            if(entity.id === searchedId) return entity;
         })
 
         throw 'There is no object with this id.';

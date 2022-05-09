@@ -14,7 +14,7 @@ async function startServer() {
     const uid = req.headers.usertoken.split(' ')[1];
 
     userManager.manageNewConnection(uid).then((newUser) => {
-      console.log(`>>> SignedIn: ${uid} | ${newUser.getName()} | ${newUser.getEmail()} | ${newUser.getType()}`);
+      console.log(`>>> SignedIn: ${uid} | ${newUser.name} | ${newUser.email} | ${newUser.type}`);
       res.send('ok');
     }).catch(error => {
       console.log(error.message);
@@ -31,9 +31,9 @@ async function startServer() {
     const type = req.headers.usertype;
 
     userManager.manageNewConnection(uid, name, email, type).then(async (newUser) => {
-      const status = await setUserRole(uid, newUser.getType());
+      const status = await setUserRole(uid, newUser.type);
 
-      console.log(`>>> SignedUp: ${uid} | ${newUser.getName()} | ${newUser.getEmail()} | ${newUser.getType()}`);
+      console.log(`>>> SignedUp: ${uid} | ${newUser.name} | ${newUser.email} | ${newUser.type}`);
       console.log(status.message);
       res.send('ok');
 
