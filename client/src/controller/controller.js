@@ -59,5 +59,6 @@ class Controller {
         this.#conference.url = url;
         this.#conference.topicsOfInterest = topicsOfInterest;
     }
-
 }
+
+exports.Controller = Controller;
