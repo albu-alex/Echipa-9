@@ -14,36 +14,68 @@ class Service {
         this.#repositoryReviewer = repositoryReviewer;
     }
 
-    getRepositoryClient() {
-        return this.repositoryChair;
+    get repositoryChair() {
+        return this.#repositoryChair;
     }
 
-    getRepositoryAuthor() {
-        return this.repositoryAuthor;
+    set repositoryChair(value) {
+        this.#repositoryChair = value;
     }
 
-    getRepositoryPaper() {
-        return this.repositoryPaper;
+    get repositoryAuthor() {
+        return this.#repositoryAuthor;
     }
 
-    getRepositoryReviewer() {
-        return this.repositoryReviewer;
+    set repositoryAuthor(value) {
+        this.#repositoryAuthor = value;
     }
 
-    setRepositoryClient(newRepository) {
-        this.repositoryChair = newRepository;
+    get repositoryPaper() {
+        return this.#repositoryPaper;
     }
 
-    setRepositoryAuthor(newRepository) {
-        this.repositoryAuthor= newRepository;
+    set repositoryPaper(value) {
+        this.#repositoryPaper = value;
     }
 
-    setRepositoryPaper(newRepository) {
-        this.repositoryPaper = newRepository;
+    get repositoryReviewer() {
+        return this.#repositoryReviewer;
     }
-    setRepositoryReviewer(newRepository) {
-        this.repositoryReviewer = newRepository;
+
+    set repositoryReviewer(value) {
+        this.#repositoryReviewer = value;
     }
+
+// getRepositoryClient() {
+    //     return this.#repositoryChair;
+    // }
+    //
+    // getRepositoryAuthor() {
+    //     return this.repositoryAuthor;
+    // }
+    //
+    // getRepositoryPaper() {
+    //     return this.repositoryPaper;
+    // }
+    //
+    // getRepositoryReviewer() {
+    //     return this.repositoryReviewer;
+    // }
+    //
+    // setRepositoryClient(newRepository) {
+    //     this.repositoryChair = newRepository;
+    // }
+    //
+    // setRepositoryAuthor(newRepository) {
+    //     this.repositoryAuthor= newRepository;
+    // }
+    //
+    // setRepositoryPaper(newRepository) {
+    //     this.repositoryPaper = newRepository;
+    // }
+    // setRepositoryReviewer(newRepository) {
+    //     this.repositoryReviewer = newRepository;
+    // }
 }
 
 exports.Service = Service;
