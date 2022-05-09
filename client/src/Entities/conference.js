@@ -63,3 +63,5 @@ class Conference {
         this.#deadlines = value;
     }
 }
+
+exports.Conference = Conference

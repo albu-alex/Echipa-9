@@ -105,7 +105,6 @@ class User {
     // ! check default id in firebase
 
     toFirestore() {
-        // this.#username = "placinta";
         return {
             username: this.#username,
             name: this.#name,
