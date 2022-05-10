@@ -46,8 +46,9 @@ class Service {
         PaperService.uploadPaper(data, filename);
     }
 
-    downloadPaper(storagePath, localPath) {
-        PaperService.downloadPaper(storagePath, localPath);
+
+    downloadPaper(paperPath) {
+        return PaperService.downloadPaper(paperPath, localPath);
     }
 }
 

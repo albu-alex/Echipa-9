@@ -9,6 +9,7 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 async function startServer() {
   let userManager = new UserManager();
+  let service = new Service();
 
   app.post('/signIn', async (req, res) => {    // ! Might be vulnerable to XSS
     const uid = req.headers.usertoken.split(' ')[1];
@@ -53,5 +54,26 @@ async function startServer() {
     console.log(isLoggedIn);
     res.send(isLoggedIn);
   })
+
+
+  app.uploadPaper('/uploadPaper', (req, res) => {
+    const uid = req.headers.usertoken.split(' ')[1];
+
+    const paperData = null;
+    const name = 'name';
+
+    service.uploadPaper(paperData, name);
+
+  });
+
+
+  app.getPaper('/getPaper', (req, res) => {
+    const uid = req.headers.usertoken.split(' ')[1];
+
+    const paper_path = 'name';
+
+    const data = service.uploadPaper(paperData);
+
+  });
 }
 startServer();
