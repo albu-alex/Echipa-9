@@ -19,3 +19,9 @@
 <a href="https://github.com/albu-alex/Echipa-9/blob/main/diagrams/Use%20Case%20Diagram%20-%20Conference%20Management%20System.pdf">
 &nbsp &nbsp &nbsp Click here
 </a>
+
+# Architecture Diagram
+
+<a href="https://github.com/albu-alex/Echipa-9/blob/main/diagrams/Architecture%20diagram.pdf">
+&nbsp &nbsp &nbsp Click here
+</a>
