@@ -1,11 +1,14 @@
+const { Conference } = require('../Entities/conference')
+const { Service } = require('../service/service')
+
 class Controller {
     #conference: Conference
-    #chairsService
-    #reviewersService
-    #authorsService
-    #papersService
+    #chairsService: Service
+    #reviewersService: Service
+    #authorsService: Service
+    #papersService: Service
 
-    constructor(conference: Conference, chairsService, reviewersService, authorsService, papersService) {
+    constructor(conference: Conference, chairsService: Service, reviewersService: Service, authorsService: Service, papersService: Service) {
         this.#conference = conference;
         this.#chairsService = chairsService;
         this.#reviewersService = reviewersService;
@@ -60,4 +63,10 @@ class Controller {
         this.#conference.topicsOfInterest = topicsOfInterest;
     }
 
+    // REVIEWER functionalities
+    addReviewToPaper(reviewerId, paperId, review) {
+        this.#reviewersService
+    }
 }
+
+exports.Controller = Controller;

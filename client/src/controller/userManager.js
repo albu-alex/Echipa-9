@@ -4,7 +4,8 @@ const { db } = require('../config/firebaseConfig');
 class UserManager {
     constructor() {
         this.collection = 'Users';
-        this.users = new Map();
+
+        this.users = new Map();     // TODO: replace with repo
     }
 
     getUsers() {
