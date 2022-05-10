@@ -12,7 +12,6 @@ export async function sendReview(review) {
             'Authorization': 'Bearer ' + authToken
         },
         body: JSON.stringify(data)
-        // body: data
     })
     .then(() => {
         alert("Yay")

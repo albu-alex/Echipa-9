@@ -15,7 +15,7 @@ export async function saveUserData(firstName, surname, phoneNumber, email, webpa
             'Content-Type' : 'application/json',
             'Authorization': 'Bearer ' + authToken
         },
-        body: data
+        body: JSON.stringify(data)
     })
     .then(() => {
         alert("Yay")

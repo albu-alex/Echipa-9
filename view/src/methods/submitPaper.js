@@ -14,7 +14,7 @@ export async function submitPaper(topic, title, coAuthor, keywords, resume) {
             'Content-Type' : 'application/json',
             'Authorization': 'Bearer ' + authToken
         },
-        body: data
+        body: JSON.stringify(data)
     })
     .then(() => {
         alert("Yay")

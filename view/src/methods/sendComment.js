@@ -10,7 +10,7 @@ export async function sendComment(comment) {
             'Content-Type' : 'application/json',
             'Authorization': 'Bearer ' + authToken
         },
-        body: data
+        body: JSON.stringify(data)
     })
     .then(() => {
         alert("Yay")
