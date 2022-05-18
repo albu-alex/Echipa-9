@@ -2,27 +2,18 @@ const { admin } = require('../config/firebaseConfig');
 const { db } = require('../config/firebaseConfig');
 
 const { User } = require('../Entities/user');
-const { UserValidator } = require('../service/userValidator');
 
 class UserManager {
     constructor() {
         this.collection = 'Users';
     }
 
-    async signIn(idToken) {
-        const userData = await UserValidator.getUserData(idToken);
-        const uid = userData.uid;
-        console.log(userData);
-
+    async signIn(uid) {
         const user = await this.getUser(uid);
         console.log(`>>> SignedIn: ${uid} | ${user.getName()} | ${user.getEmail()} | ${user.getType()}`);
     }
 
-    async signUp(idToken, name, email, type) {
-        const userData = await UserValidator.getUserData(idToken);
-        const uid = userData.uid;
-        console.log(userData);
-
+    async signUp(uid, name, email, type) {
         const user = await this.setUser(uid, name, email, type);
         console.log(`>>> SignedUp: ${uid} | ${user.getName()} | ${user.getEmail()} | ${user.getType()}`);
 

@@ -1,10 +1,13 @@
-const { UserManager } = require('./src/controller/userManager');
-const { UserValidator } = require('./src/service/userValidator');
+const { AppService } = require('./src/controller/appService');
 
 const express = require('express');
 const bp = require('body-parser')
 const app = express();
 const port = process.env.PORT || 5000;
+
+const multer = require('multer');
+let storage = multer.memoryStorage();
+let upload = multer({ storage: storage });
 
 
 app.use(bp.json())
@@ -13,21 +16,21 @@ app.use(bp.urlencoded({ extended: true }))
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 async function startServer() {
-  const userManager = new UserManager();
-  // let service = new Service();
+  const appService = new AppService();
 
   app.post('/signIn', async (req, res) => {
     try {
       const idToken = req.headers.authorization.split(' ')[1];
+      console.log(idToken);
 
-      await userManager.signIn(idToken);
+      await appService.signIn(idToken);
       res.send('ok');
 
       } catch(error) {
         console.log(error.message);
   
         res.status(400);
-        res.send('Invalid request!');
+        res.send(error.message);
       }
   });
 
@@ -39,33 +42,34 @@ async function startServer() {
       const email = req.headers.useremail;
       const type = req.headers.usertype;
 
-      await userManager.signUp(idToken, name, email, type);
+      await appService.signUp(idToken, name, email, type);
       res.send('ok')
 
       } catch(error) {
         console.log(error.message);
   
         res.status(400);
-        res.send('Invalid request!');
+        res.send(error.message);
       }
   });
 
-//   app.uploadPaper('/uploadPaper', (req, res) => {
-//     const uid = req.headers.usertoken.split(' ')[1];
+  app.post('/submit-paper', upload.single('paper'), async (req, res) => {
+    try {
+      const idToken = req.headers.authorization.split(' ')[1];
 
-//     const paperData = null;
-//     const name = 'name';
+      const paperData = JSON.parse(req.headers.paperdata);
+      const file = req.file;
 
-//     service.uploadPaper(paperData, name);
+      await appService.uploadPaper(idToken, paperData, file);
 
-//   });
+      res.send('ok');
 
+    } catch(error) {
+      console.log(error.message);
 
-//   app.getPaper('/getPaper', (req, res) => {
-//     const uid = req.headers.usertoken.split(' ')[1];
-
-//     const paper_path = 'name';
-
-//     const data = service.uploadPaper(paperData);
+      res.status(400);
+      res.send(error.message);
+    }
+  });
 }
 startServer();

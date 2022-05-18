@@ -6,11 +6,11 @@ class UserValidator {
             const userData = await admin.auth().verifyIdToken(idToken);
 
             return {
-                'uid': userData.uid,
-                'role': userData.role
+                uid: userData.uid,
+                role: userData.role
             };
         } catch(error) {
-            throw Error('Invalid user!')
+            throw Error('Invalid user!');
         }
     }
 }

@@ -23,13 +23,15 @@ class PaperService {
             destination: localPath,
         };
     
-        await storageRef.file(storagePath).download(options)
+        const res = await storageRef.file(storagePath).get();
+        return res;
     }
 }
 
 
 
 (async() => {
-    const path = await PaperService.uploadPaper('D:\\etc\\UBB_FMI\\Sem 4\\SE\\test.txt', 'test.txt');
-    await PaperService.downloadPaper(path, 'D:\\etc\\UBB_FMI\\Sem 4\\SE\\test_downloaded.txt');
+    //const path = await PaperService.uploadPaper('D:\\etc\\UBB_FMI\\Sem 4\\SE\\test.txt', 'test.txt');
+    const res = await PaperService.downloadPaper('papers/test.txt', 'D:\\etc\\UBB_FMI\\Sem 4\\SE\\test_downloaded.txt');
+    console.log(res);
 })();
