@@ -1,0 +1,11 @@
+.card-container{
+    background-color: ghostwhite;
+    border: 1px solid #070700;
+    display: flex;
+    width: 100%;
+    height: 30vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    flex-direction: column;
+    justify-content: left;
+}

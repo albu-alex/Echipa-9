@@ -1,0 +1,9 @@
+.errorpage-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.errorpage-button {
+    padding-top: 5em;
+}

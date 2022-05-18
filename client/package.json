@@ -1,15 +1,10 @@
 {
-  "name": "client",
+  "name": "server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "description": "The Web-App server",
+  "main": "server.js",
   "dependencies": {
-    "firebase": "^9.6.9"
+    "express": "^4.17.3",
+    "firebase-admin": "^10.0.2"
   }
 }
