@@ -2,12 +2,16 @@ const { admin } = require('../config/firebaseConfig');
 
 class UserValidator {
     static async getUserData(idToken) {
-        const result = await admin.auth().verifyIdToken(idToken);
-        
-        return { 
-            'role': result.role,
-            'uid': result.uid
-        };
+        try {
+            const userData = await admin.auth().verifyIdToken(idToken);
+
+            return {
+                'uid': userData.uid,
+                'role': userData.role
+            };
+        } catch(error) {
+            throw Error('Invalid user!')
+        }
     }
 }
 

@@ -16,8 +16,9 @@ async function startServer() {
     try {
       const idToken = req.headers.usertoken.split(' ')[1];
       
-      const user_data = await UserValidator.getUserData(idToken);
-      const uid = user_data['uid'];
+      const userData = await UserValidator.getUserData(idToken);
+      console.log(userData);
+      const uid = userData['uid'];
 
       userManager.manageNewConnection(uid).then((newUser) => {
         console.log(`>>> SignedIn: ${uid} | ${newUser.getName()} | ${newUser.getEmail()} | ${newUser.getType()}`);
@@ -38,8 +39,6 @@ async function startServer() {
   
       const user_data = await UserValidator.getUserData(idToken);
       const uid = user_data['uid'];
-  
-      console.log(user_data);
   
       const name = req.headers.username;
       const email = req.headers.useremail;
