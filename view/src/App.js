@@ -14,16 +14,25 @@ import ReviewerPapersPage from './pages/reviewer-paperspage/reviewer-paperspage.
 import ReviewerAuthorsPage from './pages/reviewer-authorspage/reviewer-authorspage.component';
 import ReviewerOnePaperPage from './pages/reviewer-onepaperpage/reviewer-onepaperpage.component';
 
+import ChairHomePage from "./pages/chair-homepage/chair-homepage.component";
+import ChairOrganizeSessions from "./pages/chair-organize-sessions/chair-organize-sessions.component";
+
 import './App.css';
-import { LoginPrivateRoute, AuthorPrivateRoute, ReviewerPrivateRoute } from './pages/PrivateRoute';
+
+import {LoginPrivateRoute, AuthorPrivateRoute, ReviewerPrivateRoute, ChairPrivateRoute} from './pages/PrivateRoute';
+import ChairSeePapers from "./pages/chair-see-papers/chair-see-papers.component";
+import ChairReviewPaper from "./pages/chair-reviewpaper/chair-reviewpaper.component";
+import UserUpdateInfoPage from './pages/genericuser-updateinfopage/user-updateinfo.component';
 
 function App() {
   return (
     <div>
       <Router>
         <Routes>
+          {/*Login routes*/}
           <Route exact path='/' element={<Navigate to='/login' replace />} />
           <Route exact path='/login' element={<LoginPage />} />
+          <Route exact path='/updateuserinfo' element={<UserUpdateInfoPage />} />
           <Route path='*' element={<ErrorPage />} />
 
           <Route exact path='/' element={<LoginPrivateRoute/>}>
@@ -41,8 +50,14 @@ function App() {
               <Route exact path='/allauthors' element={<ReviewerAuthorsPage />} />
               <Route exact path='/itwillbepaperid' element={<ReviewerOnePaperPage />} />
             </Route>
-          </Route>
 
+            <Route exact path='/' element={<ChairPrivateRoute/>}>
+              <Route exact path='/chairhome' element={<ChairHomePage />} />
+              <Route exact path = '/chair-organize-sessions' element={<ChairOrganizeSessions />} />
+              <Route exact path = '/chairseepapers' element={<ChairSeePapers/>} />
+              <Route exact path = '/chairreviewpaper' element={<ChairReviewPaper/>} />
+            </Route>
+          </Route>
         </Routes>
       </Router>
     </div>

@@ -15,3 +15,8 @@ export const ReviewerPrivateRoute = () => {
     const isReviewer = localStorage.getItem("role") === "reviewer" ? true : false;
     return isReviewer ? <Outlet /> : <Navigate to="/authorhome" />;
 }
+
+export const ChairPrivateRoute = () => {
+    const isChair = localStorage.getItem("role") === "chair" ? true : false;
+    return isChair ? <Outlet /> : <Navigate to="/chairhome" />;
+}

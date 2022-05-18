@@ -2,8 +2,13 @@ const { UserManager } = require('./src/controller/userManager');
 const { UserValidator } = require('./src/service/userValidator');
 
 const express = require('express');
+const bp = require('body-parser')
 const app = express();
 const port = process.env.PORT || 5000;
+
+
+app.use(bp.json())
+app.use(bp.urlencoded({ extended: true }))
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -62,7 +67,5 @@ async function startServer() {
 //     const paper_path = 'name';
 
 //     const data = service.uploadPaper(paperData);
-
-//   });
 }
 startServer();

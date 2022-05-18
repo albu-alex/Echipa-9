@@ -4,6 +4,7 @@
   "description": "The Web-App server",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.20.0",
     "express": "^4.17.3",
     "firebase-admin": "^10.0.2"
   }

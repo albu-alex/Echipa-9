@@ -8,6 +8,8 @@ import Slider from '../../components/slider/slider.component';
 import { IoMdArrowBack } from 'react-icons/io';
 
 import people from './people';
+import { sendReview } from "../../methods/sendReview";
+import { sendComment } from "../../methods/sendComment";
 
 import './reviewer-onepaperpage.styles.css';
 
@@ -15,6 +17,8 @@ const ReviewerOnePaperPage = () => {
     let title = 'Paper 1 title', topic = 'Topic 1', authors = ['Author 1'], keywords = ['Keyword 1'];
 
     const [index, setIndex] = useState(0);
+    const [review, setReview] = useState("");
+    const [comment, setComment] = useState("");
 
     useEffect(() => {
         const lastIndex = people.length - 1;
@@ -66,7 +70,7 @@ const ReviewerOnePaperPage = () => {
                     <label for="input-a">Write review...</label>
                 </div>
                 <div>
-                    <button className='bigger right-placed'>Submit</button>
+                    <button className='bigger right-placed' onChange={text => setReview(text)} onClick={() => sendReview(review)}>Submit</button>
                 </div>
             </div>
 
@@ -76,7 +80,7 @@ const ReviewerOnePaperPage = () => {
 
             <div className='flex-container'>
                 <div class="input" style={{ paddingBottom: '10px' }}>
-                    <input type="text" id="input-b" />
+                    <input type="text" id="input-b" onChange={text => setComment(text)} onClick={() => sendComment(comment)} />
                     <label for="input-b">Write comment...</label>
                 </div>
                 <div>

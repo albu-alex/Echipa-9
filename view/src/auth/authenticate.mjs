@@ -18,6 +18,7 @@ const signIn = async (email, password) => {
                 const role = idTokenResult.claims.role;
 
                 localStorage.setItem("uid", auth.currentUser.uid);
+                localStorage.setItem("email", auth.currentUser.email)
                 localStorage.setItem("isLoggedIn", "true");
                 localStorage.setItem("role", role);
 
@@ -50,7 +51,11 @@ const signUp = async (firstName, lastName, type, email, password, confirmPasswor
         callBackendAPI('/signUp', userData['idToken'], firstName, lastName, email, type).then(response => {
 
             localStorage.setItem("uid", auth.currentUser.uid);
+<<<<<<< HEAD
             localStorage.setItem("idToken", userData['idToken']);
+=======
+            localStorage.setItem("email", email)
+>>>>>>> a5eae8d823e1af16e3e0e95425e096743463f5a3
             localStorage.setItem("isLoggedIn", "true");
             localStorage.setItem("role", type);
 
@@ -72,43 +77,5 @@ const signUp = async (firstName, lastName, type, email, password, confirmPasswor
         alert(error.message);
     }
 }
-
-/*
-const signUp = async (firstName, lastName, type, email, password, confirmPassword) => {
-    try {
-        validateRegister(firstName, lastName, type, email, password, confirmPassword);
-        const uid = await firebaseSignUp(email, password);
-
-        callBackendAPI('/signUp', uid, firstName, lastName, email, type).then(response => {
-            auth.currentUser.getIdToken(true);
-
-            auth.currentUser.getIdTokenResult().then(idTokenResult => {
-                const role = idTokenResult.claims.role;
-
-                localStorage.setItem("uid", auth.currentUser.uid);
-                localStorage.setItem("isLoggedIn", "true");
-                localStorage.setItem("role", role);
-
-                switch (role) {
-                    case 'chair':
-                        window.location.href = './chairhome';
-                        break;
-                    case 'author':
-                        window.location.href = './authorhome';
-                        break;
-                    case 'reviewer':
-                        window.location.href = './reviewerhome';
-                        break;
-                    default:
-                        console.log('Invalid role!');
-                }
-            })
-        })
-    }
-    catch (error) {
-        alert(error.message);
-    }
-}
-*/
 
 export { signIn, signUp };

@@ -76,7 +76,6 @@ const LoginRegister = (props) => {
                                 e.preventDefault();
                                 signIn(email, password);
                                 resetState();
-
                             }}>Sign In
                         </button>
                     </form>

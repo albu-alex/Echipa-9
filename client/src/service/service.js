@@ -3,42 +3,48 @@ const { PaperService } = require('./paperService');
 
 class Service {
 
-    constructor() {
-        this.repositoryClient = new Repository();
-        this.repositoryAuthor = new Repository();
-        this.repositoryPaper = new Repository();
-        this.repositoryReviewer = new Repository();
+    #repositoryChair;
+    #repositoryAuthor;
+    #repositoryPaper;
+    #repositoryReviewer;
+
+    constructor(repositoryChair, repositoryAuthor, repositoryPaper, repositoryReviewer) {
+        this.#repositoryChair = repositoryChair;
+        this.#repositoryAuthor = repositoryAuthor;
+        this.#repositoryPaper = repositoryPaper;
+        this.#repositoryReviewer = repositoryReviewer;
     }
 
-    getRepositoryClient() {
-        return this.repositoryClient;
+    get repositoryChair() {
+        return this.#repositoryChair;
     }
 
-    getRepositoryAuthor() {
-        return this.repositoryAuthor;
+    set repositoryChair(value) {
+        this.#repositoryChair = value;
     }
 
-    getRepositoryPaper() {
-        return this.repositoryPaper;
+    get repositoryAuthor() {
+        return this.#repositoryAuthor;
     }
 
-    getRepositoryReviewer() {
-        return this.repositoryReviewer;
+    set repositoryAuthor(value) {
+        this.#repositoryAuthor = value;
     }
 
-    setRepositoryClient(newRepository) {
-        this.repositoryClient = newRepository;
+    get repositoryPaper() {
+        return this.#repositoryPaper;
     }
 
-    setRepositoryAuthor(newRepository) {
-        this.repositoryAuthor= newRepository;
+    set repositoryPaper(value) {
+        this.#repositoryPaper = value;
     }
 
-    setRepositoryPaper(newRepository) {
-        this.repositoryPaper = newRepository;
+    get repositoryReviewer() {
+        return this.#repositoryReviewer;
     }
-    setRepositoryReviewer(newRepository) {
-        this.repositoryReviewer = newRepository;
+
+    set repositoryReviewer(value) {
+        this.#repositoryReviewer = value;
     }
 
 

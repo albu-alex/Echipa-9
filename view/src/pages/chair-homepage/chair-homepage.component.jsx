@@ -13,7 +13,8 @@ const ChairHomePage = () => {
             <Sidebar />
             <div className='chair-homepage'>
                 <div className='buttons-container'>
-                    <Link to='/chair-assign-paper'>
+                    {/*<Link to='/chair-assign-paper'>*/}
+                    <Link to='/chairseepapers'>
                         <button style={{width: '20vw'}} className='bigger'>See papers</button>
                     </Link>
                     <Link to='/chair-organize-sessions'>
