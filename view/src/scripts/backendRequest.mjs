@@ -2,14 +2,14 @@ export const callBackendAPI = async (link, idToken, ...args) => {
     let requestHeaders = null;
     if (args.length === 4) {
         requestHeaders = {
-            'usertoken': `Bearer ${idToken}`,
+            'Authorization': `Bearer ${idToken}`,
             'username': args[0] + ' ' + args[1],
             'useremail': args[2],
             'usertype': args[3]
         };
     }
     else {
-        requestHeaders = { 'usertoken': `Bearer ${idToken}` };
+        requestHeaders = { 'Authorization': `Bearer ${idToken}` };
     }
 
     const response = await fetch(link, {

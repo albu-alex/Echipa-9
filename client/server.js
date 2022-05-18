@@ -18,7 +18,7 @@ async function startServer() {
 
   app.post('/signIn', async (req, res) => {
     try {
-      const idToken = req.headers.usertoken.split(' ')[1];
+      const idToken = req.headers.authorization.split(' ')[1];
 
       await userManager.signIn(idToken);
       res.send('ok');
@@ -33,7 +33,7 @@ async function startServer() {
 
   app.post('/signUp', async (req, res) => {
     try {
-      const idToken = req.headers.usertoken.split(' ')[1];
+      const idToken = req.headers.authorization.split(' ')[1];
   
       const name = req.headers.username;
       const email = req.headers.useremail;

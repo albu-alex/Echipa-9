@@ -18,6 +18,7 @@ const signIn = async (email, password) => {
                 const role = idTokenResult.claims.role;
 
                 localStorage.setItem("uid", auth.currentUser.uid);
+                localStorage.setItem("idToken", userData['idToken']);
                 localStorage.setItem("email", auth.currentUser.email)
                 localStorage.setItem("isLoggedIn", "true");
                 localStorage.setItem("role", role);
@@ -51,11 +52,8 @@ const signUp = async (firstName, lastName, type, email, password, confirmPasswor
         callBackendAPI('/signUp', userData['idToken'], firstName, lastName, email, type).then(response => {
 
             localStorage.setItem("uid", auth.currentUser.uid);
-<<<<<<< HEAD
             localStorage.setItem("idToken", userData['idToken']);
-=======
             localStorage.setItem("email", email)
->>>>>>> a5eae8d823e1af16e3e0e95425e096743463f5a3
             localStorage.setItem("isLoggedIn", "true");
             localStorage.setItem("role", type);
 
