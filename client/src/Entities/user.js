@@ -36,7 +36,7 @@ class User {
     setAge(newAge) { this.#age = newAge; }
     setType(newType) { this.#type = newType; }
 
-    toString() { return `Name: ${this.#name} | Email: ${this.#email}`}
+    toString() { return `Name: ${this.#name} | Email: ${this.#email} | Type: ${this.#type}`}
 
     // ! check default id in firebase
 

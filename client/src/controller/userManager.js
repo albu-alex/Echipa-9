@@ -38,7 +38,11 @@ class UserManager {
     }
 
     async setUser(uid, args) {
-        let user = new User(...args);
+        let user = new User(uid, ...args);
+
+        console.log(args)
+        console.log(user.toString())
+        console.log(user.toFirestore())
 
         await db.collection(this.collection).doc(uid).set(user.toFirestore());
 

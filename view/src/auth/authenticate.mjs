@@ -8,8 +8,10 @@ import { callBackendAPI } from '../scripts/backendRequest.mjs';
 const signIn = async (email, password) => {
     try {
         validateSignIn(email, password);
-        const uid = await firebaseSignIn(email, password);
-        callBackendAPI('/signIn', uid).then(response => {
+        const userData = await firebaseSignIn(email, password);
+
+
+        callBackendAPI('/signIn', userData['idToken']).then(response => {
             auth.currentUser.getIdToken(true);
 
             auth.currentUser.getIdTokenResult().then(idTokenResult => {
@@ -43,10 +45,12 @@ const signIn = async (email, password) => {
 const signUp = async (firstName, lastName, type, email, password, confirmPassword) => {
     try {
         validateRegister(firstName, lastName, type, email, password, confirmPassword);
-        const uid = await firebaseSignUp(email, password);
+        const userData = await firebaseSignUp(email, password);
 
-        callBackendAPI('/signUp', uid, firstName, lastName, email, type).then(response => {
+        callBackendAPI('/signUp', userData['idToken'], firstName, lastName, email, type).then(response => {
+
             localStorage.setItem("uid", auth.currentUser.uid);
+            localStorage.setItem("idToken", userData['idToken']);
             localStorage.setItem("isLoggedIn", "true");
             localStorage.setItem("role", type);
 
