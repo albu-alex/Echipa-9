@@ -5,9 +5,12 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { getEmail } from "../../methods/getEmail";
 
 import './sidebar.styles.css';
+import {getType} from "../../methods/getType";
 
 const Sidebar = () => {
     const email = getEmail()
+    const type = getType()
+
     return (
         <div class='sidebar'>
             <nav class="menu" tabindex="0">
@@ -20,22 +23,26 @@ const Sidebar = () => {
                 <ul>
                     {/* conditional rendering based on who is logged in */}
 
-                    {/* author */}
-                    <Link to='/authorpapers' className='no-decoration'>
-                        <li class="icon-papers"><span>&nbsp;&nbsp; My papers</span></li>
-                    </Link>
-                    {/* reviewer */}
-                    <Link to='/reviewerpapers' className='no-decoration'>
-                        <li class="icon-papers"><span>&nbsp;&nbsp; Papers</span></li>
-                    </Link>
-                    {/* reviewer */}
-                    <Link to='/allauthors' className='no-decoration'>
-                        <li class="icon-authors"><span>&nbsp;&nbsp; Authors</span></li>
-                    </Link>
-                    {/* chair */}
-                    <Link to='/chair-organize-sessions' className='no-decoration'>
-                        <li class="icon-conferences"><span>&nbsp;&nbsp; Conference Sessions</span></li>
-                    </Link>
+                    { type === "author" &&              /* author */
+                        <Link to='/authorpapers' className='no-decoration'>
+                            <li class="icon-papers"><span>&nbsp;&nbsp; My papers</span></li>
+                        </Link>
+                    }
+                    { type === "reviewer" &&            /* reviewer */
+                        <Link to='/reviewerpapers' className='no-decoration'>
+                            <li class="icon-papers"><span>&nbsp;&nbsp; Papers</span></li>
+                        </Link>
+                    }
+                    { type === "reviewer" &&            /* reviewer */
+                        <Link to='/allauthors' className='no-decoration'>
+                            <li class="icon-authors"><span>&nbsp;&nbsp; Authors</span></li>
+                        </Link>
+                    }
+                    { type === "chair" &&               /* chair */
+                        <Link to='/chair-organize-sessions' className='no-decoration'>
+                            <li class="icon-conferences"><span>&nbsp;&nbsp; Conference Sessions</span></li>
+                        </Link>
+                    }
                 </ul>
             </nav>
         </div>

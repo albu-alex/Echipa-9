@@ -64,13 +64,12 @@ export default UserUpdateInfoPage;
 
 
 //  <div class="row mt-2">
-//                                 <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" onChange={text => setFirstName(text)} value="" /></div>
-//                                 <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="" onChange={text => setSurname(text)} placeholder="surname" /></div>
-//                             </div>
-//                             <div class="row mt-3">
-//                                 <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control" onChange={text => setPhoneNumber(text)} placeholder="enter phone number" value="" /></div>
-//                                 <div class="col-md-12"><label class="labels">Email Address</label><input type="text" class="form-control" onChange={text => setEmail(text)} placeholder="enter email address" value="" /></div>
-//                                 <div class="col-md-12"><label class="labels">Webpage</label><input type="text" class="form-control" onChange={text => setWebpage(text)} placeholder="enter webpage" value="" /></div>
-//                                 <div class="col-md-12"><label class="labels">Topics of expertise</label><input type="text" class="form-control" onChange={text => setTopics(text)} placeholder="enter topics" value="" /></div>
-//                             </div>
-//
+// <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" onChange={text => setFirstName(text)} value="" /></div>
+// <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="" onChange={text => setSurname(text)} placeholder="surname" /></div>
+// </div>
+// <div class="row mt-3">
+// <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control" onChange={text => setPhoneNumber(text)} placeholder="enter phone number" value="" /></div>
+// <div class="col-md-12"><label class="labels">Email Address</label><input type="text" class="form-control" onChange={text => setEmail(text)} placeholder="enter email address" value="" /></div>
+// <div class="col-md-12"><label class="labels">Webpage</label><input type="text" class="form-control" onChange={text => setWebpage(text)} placeholder="enter webpage" value="" /></div>
+// <div class="col-md-12"><label class="labels">Topics of expertise</label><input type="text" class="form-control" onChange={text => setTopics(text)} placeholder="enter topics" value="" /></div>
+// </div>
