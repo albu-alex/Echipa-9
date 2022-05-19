@@ -21,7 +21,7 @@ import './App.css';
 
 import {LoginPrivateRoute, AuthorPrivateRoute, ReviewerPrivateRoute, ChairPrivateRoute} from './pages/PrivateRoute';
 import ChairSeePapers from "./pages/chair-see-papers/chair-see-papers.component";
-import ChairReviewPaper from "./pages/chair-reviewpaper/chair-reviewpaper.component";
+import ChairConferenceDetails from "./pages/chair-conferencedetails/chair-conferencedetails.component";
 import UserUpdateInfoPage from './pages/genericuser-updateinfopage/user-updateinfo.component';
 
 function App() {
@@ -55,7 +55,7 @@ function App() {
               <Route exact path='/chairhome' element={<ChairHomePage />} />
               <Route exact path = '/chair-organize-sessions' element={<ChairOrganizeSessions />} />
               <Route exact path = '/chairseepapers' element={<ChairSeePapers/>} />
-              <Route exact path = '/chairreviewpaper' element={<ChairReviewPaper/>} />
+              <Route exact path = '/chair-conferencedetails' element={<ChairConferenceDetails/>} />
             </Route>
           </Route>
         </Routes>
