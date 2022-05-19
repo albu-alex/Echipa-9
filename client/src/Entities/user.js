@@ -38,8 +38,6 @@ class User {
 
     toString() { return `Name: ${this.#name} | Email: ${this.#email} | Type: ${this.#type}`}
 
-    // ! check default id in firebase
-
     toFirestore() {
         return {
             username: this.#username,

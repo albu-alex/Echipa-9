@@ -7,6 +7,7 @@ class Paper {
         this.coAuthor = null;
         this.keywords = null;
         this.abstract = null;
+        this.reviews = new Map();
         this.accepted = false;
     }
 
@@ -17,7 +18,12 @@ class Paper {
     getCoAuthor() { return this.coAuthor; }
     getKeywords() { return this.keywords; }
     getAbstract() { return this.abstract; }
+    getReviews() { return this.reviews; }
     isAccepted() { return this.accepted; }
+
+    addReview(reviewerId, review) {
+        this.reviews.set(reviewerId, review);
+    }
 
     setPath(newPath) { this.path = newPath; }
     setTitle(newTitle) { this.title = newTitle; }
@@ -26,6 +32,7 @@ class Paper {
     setCoAuthor(newCoAuthor) { this.coAuthor = newCoAuthor !== '' ?  newCoAuthor : null; }
     setKeywords(newKeywords) { this.keywords = newKeywords; }
     setAbstract(newAbstract) { this.abstract = newAbstract !== '' ?  newAbstract : null; }
+    setReviews(newReviews) { this.reviews = newReviews; }
     acceptPaper() { this.accepted = true; }
 
     toFirestore() {
@@ -37,22 +44,28 @@ class Paper {
             coAuthor: this.coAuthor,
             keywords: this.keywords,
             abstract: this.abstract,
+            reviews: Object.fromEntries(this.reviews),
             accepted: this.accepted
         };
 
     }
 
     static fromFirestore(Object) {
-        return new Paper(
-            Object.path,
-            Object.title,
-            Object.topic,
-            Object.authorId,
-            Object.coAuthor,
-            Object.keywords,
-            Object.abstract,
-            Object.accepted
-        )
+        let paper = new Paper();
+        paper.setPath(Object.path);
+        paper.setTitle(Object.title);
+        paper.setTopic(Object.topic);
+        paper.setAuthorId(Object.authorId);
+        paper.setCoAuthor(Object.coAuthor);
+        paper.setKeywords(Object.keywords);
+        paper.setAbstract(Object.abstract);
+
+        const reviews = Object.reviews;
+        for(const key in reviews) {
+            paper.addReview(key, reviews[key])
+        }
+
+        return paper;
     }
 }
 

@@ -39,6 +39,28 @@ class PaperManager {
         const result = await db.collection(this.collection).add(paper.toFirestore());
         return result.id;
     }
+
+    async addReview(reviewerId, paperId, reviewText) {
+        const userRef = db.collection(this.collection).doc(paperId);
+        const doc = await userRef.get();
+        let paper = Paper.fromFirestore(doc.data());
+
+        paper.addReview(reviewerId, reviewText);
+        await db.collection(this.collection).doc(paperId).set(paper.toFirestore());
+    }
 }
+
+async function test() {
+    const pm = new PaperManager();
+    await pm.addReview('lazzzlaID', 'b1UYIPsqtUnqWyNTgxyc', 'this is a new review!');
+    await pm.addReview('myID', 'b1UYIPsqtUnqWyNTgxyc', 'this is a new review! x2');
+
+    const userRef = db.collection('Papers').doc('b1UYIPsqtUnqWyNTgxyc');
+    const doc = await userRef.get();
+
+    const paper = Paper.fromFirestore(doc.data());
+    console.log(paper.getReviews());
+}
+test();
 
 exports.PaperManager = PaperManager;

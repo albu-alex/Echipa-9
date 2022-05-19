@@ -23,7 +23,7 @@ class UserManager {
 
     async getUser(uid) {
         const userRef = db.collection(this.collection).doc(uid);
-        const doc = await userRef.get()
+        const doc = await userRef.get();
 
         if(!doc.exists) {
             return null;
