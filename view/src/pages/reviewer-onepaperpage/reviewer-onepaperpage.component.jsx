@@ -66,11 +66,11 @@ const ReviewerOnePaperPage = () => {
 
             <div className='flex-container'>
                 <div class="input">
-                    <input type="text" id="input-a" />
+                    <input onChange={(event) => setReview(event.target.value)} type="text" id="input-a" />
                     <label for="input-a">Write review...</label>
                 </div>
                 <div>
-                    <button className='bigger right-placed' onChange={text => setReview(text)} onClick={() => sendReview(review)}>Submit</button>
+                    <button className='bigger right-placed'  onClick={() => sendReview(review)}>Submit</button>
                 </div>
             </div>
 
