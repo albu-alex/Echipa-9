@@ -13,7 +13,7 @@ const Sidebar = () => {
 
     return (
         <div class='sidebar'>
-            <nav class="menu" tabindex="0">
+            <nav class="menu" tabIndex="0">
                 <header class="avatar">
                     <Link to='/updateuserinfo' className='no-decoration'>
                         <AiOutlineUser size={80} />
@@ -21,8 +21,6 @@ const Sidebar = () => {
                     <h2>{email}</h2>
                 </header>
                 <ul>
-                    {/* conditional rendering based on who is logged in */}
-
                     { type === "author" &&              /* author */
                         <Link to='/authorpapers' className='no-decoration'>
                             <li class="icon-papers"><span>&nbsp;&nbsp; My papers</span></li>
@@ -43,6 +41,12 @@ const Sidebar = () => {
                             <li class="icon-conferences"><span>&nbsp;&nbsp; Conference Sessions</span></li>
                         </Link>
                     }
+                    { type === "chair" &&               /* chair */
+                        <Link to='/chair-conferencedetails' className='no-decoration'>
+                            <li class="icon-papers"><span>&nbsp;&nbsp; Conference Details</span></li>
+                        </Link>
+                    }
+
                 </ul>
             </nav>
         </div>
