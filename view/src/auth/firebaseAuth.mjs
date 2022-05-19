@@ -6,7 +6,10 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'fire
 const firebaseSignIn = async (email, password) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        return userCredential.user.uid;
+        
+        return {'userId': userCredential.user.uid,
+                'idToken': userCredential.user.accessToken
+            };
     }
     catch (error) {
         throw new Error(error.message);
@@ -16,7 +19,10 @@ const firebaseSignIn = async (email, password) => {
 const firebaseSignUp = async (email, password) => {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        return userCredential.user.uid;
+        
+        return {'userId': userCredential.user.uid,
+                'idToken': userCredential.user.accessToken
+            };
     }
     catch (error) {
         throw new Error(error.message);

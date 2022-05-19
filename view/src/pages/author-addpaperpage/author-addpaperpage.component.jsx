@@ -46,7 +46,11 @@ const AuthorAddPaperPage = () => {
                         <input onChange={text => setKeywords(text)} type="text" name="field2" placeholder="required" required />
                         <label>Abstract</label>
                         <textarea onChange={text => setResume(text)} name="field3" placeholder="Resume your paper"></textarea>
-                        <button onClick={() => submitPaper(topic, title, coAuthor, keywords, resume)}>
+                        <button onClick={(e) => {
+                            e.preventDefault();
+                            submitPaper(topic, title, coAuthor, keywords, resume);
+                            window.location.reload();                     
+                        }}>
                             <p>Submit paper</p>
                         </button>
                     </form>
@@ -55,7 +59,7 @@ const AuthorAddPaperPage = () => {
                     <div className='plus-button-container'>
                         <div className='right-button'>
                             <label for="file-upload" class="plus-button plus-button--large"></label>
-                            <input id="file-upload" type="file" />
+                            <input id="file-upload" type="file" name="paper" />
                         </div>
                         <br></br>
                         <div className='right-paragraph'>

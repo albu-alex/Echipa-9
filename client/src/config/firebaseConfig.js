@@ -10,3 +10,6 @@ admin.initializeApp({
 
 exports.admin = admin;
 exports.db = getFirestore();
+
+exports.bucketLocation = 'gs://echipa-9.appspot.com/papers/'
+exports.storageRef = admin.storage().bucket('gs://echipa-9.appspot.com')

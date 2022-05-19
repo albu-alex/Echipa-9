@@ -1,4 +1,5 @@
 const { Repository } = require('../repository/repository');
+const { PaperService } = require('./paperService');
 
 class Service {
 
@@ -44,6 +45,16 @@ class Service {
 
     set repositoryReviewer(value) {
         this.#repositoryReviewer = value;
+    }
+
+
+    uploadPaper(data, filename) {
+        PaperService.uploadPaper(data, filename);
+    }
+
+
+    downloadPaper(paperPath) {
+        return PaperService.downloadPaper(paperPath, localPath);
     }
 }
 
