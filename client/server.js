@@ -72,6 +72,26 @@ async function startServer() {
     }
   });
 
+  app.post('/add-review', async (req, res) => {
+    try {
+      const idToken = req.headers.authorization.split(' ')[1];
+
+      const review = req.body.review;
+      const paperId = req.body.paperId;
+
+      await appService.addReview(idToken, review, paperId);
+
+      res.send('ok');
+
+    } catch(error) {
+      console.log(error.message);
+
+      res.status(400);
+      res.send(error.message);
+    }
+  });
+
+
   app.get('/get-papers', async (req, res) => {
     const idToken = req.headers.authorization.split(' ')[1];
 
@@ -79,7 +99,8 @@ async function startServer() {
     console.log(papers);
 
     res.json(papers);
-  })
+  });
 
 }
+
 startServer();
