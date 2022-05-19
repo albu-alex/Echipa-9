@@ -7,9 +7,9 @@ import Scroll from "../../components/scroll/scroll.component";
 import CardList from "../../components/cardlist/cardlist.component";
 import {Link} from "react-router-dom";
 
-import './chair-reviewpaper.styles.css';
+import './chair-conferencedetails.styles.css';
 
-const ChairReviewPaper = () => {
+const ChairConferenceDetails = () => {
     return (
         <>
             <Header/>
@@ -62,4 +62,4 @@ const ChairReviewPaper = () => {
     )
 }
 
-export default ChairReviewPaper;
+export default ChairConferenceDetails;
