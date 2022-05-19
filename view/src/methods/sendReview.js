@@ -1,8 +1,10 @@
 export async function sendReview(review) {
-    const authToken = localStorage.getItem('uid')
-    console.log(authToken)
+    const authToken = localStorage.getItem('idToken')
+    // console.log(authToken)
+    // console.log(`printing ${review}...`)
     const data = {
-        "review": review
+        "review": review,
+        "paperId": 'WlaCTI6hdbLYHqhwjYgX'
     }
 
     await fetch('/add-review', {
