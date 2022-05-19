@@ -1,4 +1,6 @@
 import React from 'react';
+import { renderMatches } from 'react-router-dom';
+import { getPapers } from '../../methods/getPapers';
 
 import ListItem from '../listitem/listitem.component';
 
@@ -28,6 +30,8 @@ const List = () => {
             authors: ['Adam Paul', 'BarabasElina']
         }
     ];
+
+    // let dummyPapers = await getPapers();
 
     return (
         <ol class="ol-cards">

@@ -36,6 +36,10 @@ class AppService {
         console.log(`Added paper with ID: ${paperId}`);
     }
 
+    async getPapers(idToken) {
+        return await this.paperManager.getPapersFull();
+    }
+
     async hasRole(idToken, role) {
         const userData = await UserValidator.getUserData(idToken);
         if(userData.role === role) {

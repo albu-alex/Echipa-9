@@ -1,6 +1,6 @@
 export async function sendReview(review) {
-    const authToken = localStorage.getItem('uid')
-    console.log(authToken)
+    const authToken = localStorage.getItem('tokenId');
+    console.log(authToken);
     const data = {
         "review": review
     }
