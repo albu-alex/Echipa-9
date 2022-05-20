@@ -30,14 +30,14 @@ const UserUpdateInfoPage = () => {
                                 <h4 class="text-right">Personal info</h4>
                             </div>
                             <div class="row mt-2">
-                                <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" onChange={text => setFirstName(text)}/></div>
-                                <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" onChange={text => setSurname(text)} placeholder="surname" /></div>
+                                <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" onChange={text => setFirstName(text.target.value)}/></div>
+                                <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" onChange={text => setSurname(text.target.value)} placeholder="surname" /></div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control" onChange={text => setPhoneNumber(text)} placeholder="enter phone number"/></div>
-                                <div class="col-md-12"><label class="labels">Email Address</label><input type="text" class="form-control" onChange={text => setEmail(text)} placeholder="enter email address"/></div>
-                                <div class="col-md-12"><label class="labels">Webpage</label><input type="text" class="form-control" onChange={text => setWebpage(text)} placeholder="enter webpage"/></div>
-                                <div class="col-md-12"><label class="labels">Topics of expertise</label><input type="text" class="form-control" onChange={text => setTopics(text)} placeholder="enter topics"/></div>
+                                <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control" onChange={text => setPhoneNumber(text.target.value)} placeholder="enter phone number"/></div>
+                                <div class="col-md-12"><label class="labels">Email Address</label><input type="text" class="form-control" onChange={text => setEmail(text.target.value)} placeholder="enter email address"/></div>
+                                <div class="col-md-12"><label class="labels">Webpage</label><input type="text" class="form-control" onChange={text => setWebpage(text.target.value)} placeholder="enter webpage"/></div>
+                                <div class="col-md-12"><label class="labels">Topics of expertise</label><input type="text" class="form-control" onChange={text => setTopics(text.target.value)} placeholder="enter topics"/></div>
                             </div>
                             <div class="text-center left-pad">
                                 <button class="btn btn-primary profile-button width-size" type="button" onClick={() => saveUserData(firstName, surname, phoneNumber, email, webpage, topics)}>

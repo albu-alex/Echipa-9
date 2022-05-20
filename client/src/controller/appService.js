@@ -48,6 +48,21 @@ class AppService {
         console.log(`added review ${review} to paper ${paperId} by reviewer ${reviewerId}`);
     }
 
+    async updateUserInformation(idToken, firstName, surname, phoneNo, email, webpage, topics) {
+        const userData = await UserValidator.getUserData(idToken);
+        const userId = userData.uid;
+
+        await this.userManager.updateUserInformation(userId, firstName, surname, phoneNo, email, webpage, topics);
+
+        // console.log(`updated the information for the user with id ${userId}:
+        //  \n\tfirst name: ${firstName}
+        //  \n\tsurname: ${surname}
+        //  \n\tphone number: ${phoneNo}
+        //  \n\temail: ${email}
+        //  \n\twebpage: ${webpage}
+        //  \n\ttopics: ${topics}`);
+    }
+
     async hasRole(idToken, role) {
         const userData = await UserValidator.getUserData(idToken);
         if(userData.role === role) {

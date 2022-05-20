@@ -91,6 +91,30 @@ async function startServer() {
     }
   });
 
+  app.post('/save-user-data', async (req, res) => {
+    try {
+      const idToken = req.headers.authorization.split(' ')[1];
+
+      const firstName = req.body.firstName;
+      const surname = req.body.surname;
+      const phoneNo = req.body.phoneNumber;
+      const email = req.body.email;
+      const webpage = req.body.webpage;
+      const topics = req.body.topics;
+
+      await appService.updateUserInformation(idToken, firstName, surname, phoneNo, email, webpage, topics);
+
+      res.send('ok');
+
+    } catch(error) {
+      console.log(error.message);
+
+      res.status(400);
+      res.send(error.message);
+    }
+  });
+
+
 }
 
 startServer();

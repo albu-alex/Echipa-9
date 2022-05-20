@@ -29,6 +29,8 @@ class UserManager {
             return null;
         }
 
+        // let u =  User.fromFirestore(doc.data());
+        // console.log(u);
         return User.fromFirestore(doc.data());
     }
 
@@ -51,6 +53,47 @@ class UserManager {
                 return error;
             });
     };
+
+    async updateUserInformation(userId, firstName, surname, phoneNo, email, webpage, topics) {
+        const userRef = db.collection(this.collection).doc(userId);
+        await userRef.update(
+        {
+                name: `${firstName}  ${surname}`,
+                phoneNumber: phoneNo,
+                address: webpage,
+                email: email
+            }
+        )
+
+
+        const doc = await userRef.get();
+
+        if(!doc.exists) {
+            return null;
+        }
+
+        let user = User.fromFirestore(doc.data());
+
+        // console.log(user.toFirestore())
+        //
+        // user.setName(`${firstName} ${surname}`);
+        // user.setPhoneNumber(phoneNo);
+        // user.setEmail(email);
+        // user.setAddress(webpage);
+        // // todo: add topics?
+        //
+        // // await db.collection(this.collection).doc(userId).set(user.toFirestore());
+        // await db.collection(this.collection).doc(userId).update(user.toFirestore());
+        //
+        return user;
+    }
 }
 
+// async function test() {
+//     const um = new UserManager();
+//     let u = await um.updateUserInformation('TQDePfXlaUWhsACzIJ5bosuawpK2', 'Teo', 'Arsene', '0727432037', 'teo.author@test.com', 'www.teodoraarsene.com', 'nodejs:)');
+//     console.log(u)
+//     // um.getUser('TQDePfXlaUWhsACzIJ5bosuawpK2')
+// }
+// test()
 exports.UserManager = UserManager;

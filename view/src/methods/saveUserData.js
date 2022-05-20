@@ -1,6 +1,8 @@
 export async function saveUserData(firstName, surname, phoneNumber, email, webpage, topics) {
     const authToken = localStorage.getItem('idToken')
     console.log(authToken)
+    console.log('firstname:......')
+    console.log(firstName)
     const data = {
         "firstName": firstName,
         "surname": surname,
