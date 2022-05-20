@@ -18,7 +18,7 @@ const Sidebar = () => {
                     <Link to='/updateuserinfo' className='no-decoration'>
                         <AiOutlineUser size={80} />
                     </Link>
-                    <h2>{email}</h2>
+                    <h2 className='smaller-h2'>{email}</h2>
                 </header>
                 <ul>
                     {type === "author" &&              /* author */

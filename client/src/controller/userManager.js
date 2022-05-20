@@ -25,7 +25,7 @@ class UserManager {
         const userRef = db.collection(this.collection).doc(uid);
         const doc = await userRef.get();
 
-        if(!doc.exists) {
+        if (!doc.exists) {
             return null;
         }
 
@@ -54,21 +54,20 @@ class UserManager {
             });
     };
 
-    async updateUserInformation(userId, firstName, surname, phoneNo, email, webpage, topics) {
+    async updateUserInformation(userId, firstName, surname, phoneNo, webpage, topics) {
         const userRef = db.collection(this.collection).doc(userId);
         await userRef.update(
-        {
+            {
                 name: `${firstName}  ${surname}`,
                 phoneNumber: phoneNo,
                 address: webpage,
-                email: email
             }
         )
 
 
         const doc = await userRef.get();
 
-        if(!doc.exists) {
+        if (!doc.exists) {
             return null;
         }
 

@@ -18,6 +18,14 @@ const AuthorAddPaperPage = () => {
     const changeCoAuthor = (e) => {
         setCoAuthor(e.target.value)
     }
+
+    const [fileName, setFileName] = useState("");
+
+    const handleFile = (e) => {
+        // alert(e.target.files[0].name);
+        setFileName(e.target.files[0].name);
+    }
+
     return (
         <>
             <Header />
@@ -49,7 +57,7 @@ const AuthorAddPaperPage = () => {
                         <button onClick={(e) => {
                             e.preventDefault();
                             submitPaper(topic, title, coAuthor, keywords, resume);
-                            window.location.reload();                     
+                            window.location.reload();
                         }}>
                             <p>Submit paper</p>
                         </button>
@@ -59,13 +67,13 @@ const AuthorAddPaperPage = () => {
                     <div className='plus-button-container'>
                         <div className='right-button'>
                             <label for="file-upload" class="plus-button plus-button--large"></label>
-                            <input id="file-upload" type="file" name="paper" />
+                            <input id="file-upload" type="file" name="paper" onChange={(e) => handleFile(e)} />
                         </div>
                         <br></br>
                         <div className='right-paragraph'>
                             <p>&nbsp;&nbsp; Upload paper (PDF or Word)</p>
                         </div>
-                        <p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;   Label with file name here</p>
+                        <p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; {fileName}</p>
                     </div>
                 </div>
             </div>

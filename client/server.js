@@ -26,18 +26,18 @@ async function startServer() {
       await appService.signIn(idToken);
       res.send('ok');
 
-      } catch(error) {
-        console.log(error.message);
-  
-        res.status(400);
-        res.send(error.message);
-      }
+    } catch (error) {
+      console.log(error.message);
+
+      res.status(400);
+      res.send(error.message);
+    }
   });
 
   app.post('/signUp', async (req, res) => {
     try {
       const idToken = req.headers.authorization.split(' ')[1];
-  
+
       const name = req.headers.username;
       const email = req.headers.useremail;
       const type = req.headers.usertype;
@@ -45,12 +45,12 @@ async function startServer() {
       await appService.signUp(idToken, name, email, type);
       res.send('ok')
 
-      } catch(error) {
-        console.log(error.message);
-  
-        res.status(400);
-        res.send(error.message);
-      }
+    } catch (error) {
+      console.log(error.message);
+
+      res.status(400);
+      res.send(error.message);
+    }
   });
 
   app.post('/submit-paper', upload.single('paper'), async (req, res) => {
@@ -64,7 +64,7 @@ async function startServer() {
 
       res.send('ok');
 
-    } catch(error) {
+    } catch (error) {
       console.log(error.message);
 
       res.status(400);
@@ -83,7 +83,7 @@ async function startServer() {
 
       res.send('ok');
 
-    } catch(error) {
+    } catch (error) {
       console.log(error.message);
 
       res.status(400);
@@ -107,15 +107,14 @@ async function startServer() {
       const firstName = req.body.firstName;
       const surname = req.body.surname;
       const phoneNo = req.body.phoneNumber;
-      const email = req.body.email;
       const webpage = req.body.webpage;
       const topics = req.body.topics;
 
-      await appService.updateUserInformation(idToken, firstName, surname, phoneNo, email, webpage, topics);
+      await appService.updateUserInformation(idToken, firstName, surname, phoneNo, webpage, topics);
 
       res.send('ok');
 
-    } catch(error) {
+    } catch (error) {
       console.log(error.message);
 
       res.status(400);

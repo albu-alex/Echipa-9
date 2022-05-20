@@ -42,6 +42,10 @@ const ReviewerOnePaperPage = () => {
         return () => clearInterval(slider);   // !!! mandatory
     }, [index])
 
+    const handleSubmit = () => {
+        setReview("");
+    }
+
     return (
         <>
             <Header />
@@ -71,11 +75,11 @@ const ReviewerOnePaperPage = () => {
 
             <div className='flex-container'>
                 <div className="input">
-                    <input onChange={(event) => setReview(event.target.value)} type="text" id="input-a" />
+                    <input onChange={(event) => setReview(event.target.value)} type="text" id="input-a" value={review} />
                     <label htmlFor="input-a">Write review...</label>
                 </div>
                 <div>
-                    <button className='bigger right-placed' onClick={() => sendReview(review)}>Submit</button>
+                    <button className='bigger right-placed' onClick={() => { sendReview(review); handleSubmit() }}>Submit</button>
                 </div>
             </div>
 

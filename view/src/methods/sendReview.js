@@ -20,9 +20,9 @@ export async function sendReview(review) {
         body: JSON.stringify(data)
     })
         .then(() => {
-            alert("Yay")
+            alert("Success!");
         })
         .catch(() => {
-            alert("Nay")
+            alert("Failure!");
         })
 }
