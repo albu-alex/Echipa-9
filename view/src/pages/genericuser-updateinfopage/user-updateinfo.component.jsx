@@ -52,7 +52,7 @@ const UserUpdateInfoPage = () => {
                             <h4 className="text-right">About me</h4>
                         </div>
                         <div className="">
-                            <textarea id="textarea" name="textarea" rows="10" cols="35" />
+                            <textarea style={{resize: 'none'}} id="textarea" name="textarea" rows="10" cols="35" />
                         </div>
                     </div>
                 </div>

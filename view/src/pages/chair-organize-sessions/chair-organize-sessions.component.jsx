@@ -8,10 +8,6 @@ import PresentationCard from "../../components/presentation-card/presentation-ca
 
 import './chair-organize-sessions.styles.css';
 
-const rowHeights = new Array(1000)
-    .fill(true)
-    .map(() => 25 + Math.round(Math.random() * 50));
-
 const getItemSize = () => 80
 
 const Row = () => (
