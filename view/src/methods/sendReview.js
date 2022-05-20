@@ -1,5 +1,5 @@
 export async function sendReview(review) {
-    const authToken = localStorage.getItem('tokenId');
+    const authToken = localStorage.getItem('idToken');
     console.log(authToken);
 
     const queryString = window.location.search;
