@@ -19,7 +19,8 @@ const signIn = async (email, password) => {
 
                 localStorage.setItem("uid", auth.currentUser.uid);
                 localStorage.setItem("idToken", userData['idToken']);
-                localStorage.setItem("email", auth.currentUser.email)
+                localStorage.setItem("email", auth.currentUser.email);
+                // localStorage.setItem("name", auth.currentUser.name);
                 localStorage.setItem("isLoggedIn", "true");
                 localStorage.setItem("role", role);
 
@@ -54,6 +55,7 @@ const signUp = async (firstName, lastName, type, email, password, confirmPasswor
             localStorage.setItem("uid", auth.currentUser.uid);
             localStorage.setItem("idToken", userData['idToken']);
             localStorage.setItem("email", email)
+            localStorage.setItem("name", firstName + " " + lastName);
             localStorage.setItem("isLoggedIn", "true");
             localStorage.setItem("role", type);
 

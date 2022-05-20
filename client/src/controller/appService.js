@@ -24,7 +24,7 @@ class AppService {
 
     async uploadPaper(idToken, paperDataJSON, paper) {
         const userData = await this.hasRole(idToken, 'author');
-        if(userData === null) {
+        if (userData === null) {
             throw Error(`User with ID: ${idToken} can not upload papers!`);
         }
 
@@ -38,7 +38,7 @@ class AppService {
 
     async getPapers(idToken) {
         const userData = await this.hasRole(idToken, 'reviewer');
-        if(userData === null) {
+        if (userData === null) {
             throw Error(`User with ID: ${idToken} can not get all papers!`);
         }
 
@@ -47,7 +47,7 @@ class AppService {
 
     async addReview(idToken, review, paperId) {
         const userData = await this.hasRole(idToken, 'reviewer');
-        if(userData === null) {
+        if (userData === null) {
             throw Error(`User with ID: ${idToken} can not review papers!`);
         }
 
@@ -57,9 +57,24 @@ class AppService {
         console.log(`added review ${review} to paper ${paperId} by reviewer ${reviewerId}`);
     }
 
+    async updateUserInformation(idToken, firstName, surname, phoneNo, webpage, topics) {
+        const userData = await UserValidator.getUserData(idToken);
+        const userId = userData.uid;
+
+        await this.userManager.updateUserInformation(userId, firstName, surname, phoneNo, webpage, topics);
+
+        // console.log(`updated the information for the user with id ${userId}:
+        //  \n\tfirst name: ${firstName}
+        //  \n\tsurname: ${surname}
+        //  \n\tphone number: ${phoneNo}
+        //  \n\temail: ${email}
+        //  \n\twebpage: ${webpage}
+        //  \n\ttopics: ${topics}`);
+    }
+
     async hasRole(idToken, role) {
         const userData = await UserValidator.getUserData(idToken);
-        if(userData.role === role) {
+        if (userData.role === role) {
             return userData;
         }
         return null;

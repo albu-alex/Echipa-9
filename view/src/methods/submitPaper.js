@@ -1,16 +1,16 @@
 export async function submitPaper(_topic, _title, _coAuthor, _keywords, _resume) {
     const authToken = localStorage.getItem('idToken');
 
-    if(_title === '' || _topic === '' || _keywords === '') {
+    if (_title === '' || _topic === '' || _keywords === '') {
         alert('Mandatory fields are empty!');
         return;
     }
     const paper = document.getElementById('file-upload').files[0];
-    if(paper === undefined) {
+    if (paper === undefined) {
         alert('No paper selected!');
         return;
     }
-    
+
     let formData = new FormData();
     formData.append('paper', paper);
 
@@ -30,10 +30,10 @@ export async function submitPaper(_topic, _title, _coAuthor, _keywords, _resume)
         },
         body: formData
     })
-    .then((response) => {
-        alert("Yay");
-    })
-    .catch(() => {
-        alert("Nay");
-    });
+        .then((response) => {
+            alert("Success!");
+        })
+        .catch(() => {
+            // alert("Failure!");
+        });
 }

@@ -3,24 +3,20 @@ import { Link } from 'react-router-dom';
 
 import './listitem.styles.css';
 
-const ListItem = ({ title, authors }) => {
+const ListItem = ({ id, title, authors, topic, keywords }) => {
 
     const displayAuthors = (authors) => {
         let authorsString = authors.map((author) => author + ', ');
-        // console.log(authorsString.replace(/,(\s+)?$/, ''));
-
-        // return authorsString.replace(/,(\s+)?$/, '');
         return authorsString;
     }
 
     return (
         <li className='list-item'>
-            <Link to='/itwillbepaperid'>
+            <Link to={`/reviewspaper?id=${id}&title=${title}&authors=${authors}&topic=${topic}&keywords=${keywords}`}>
                 <button className='button-hidden'>Review</button>
             </Link>
-            <div class="title">{title}</div>
-            {/* <div class="descr">{authors.map((author) => author + ',')}</div> */}
-            <div class="descr">{displayAuthors(authors)}</div>
+            <div className="title">{title}</div>
+            <div className="descr">{displayAuthors(authors)}</div>
         </li>
     )
 }

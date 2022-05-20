@@ -212,3 +212,7 @@
 .no-decoration:not(:hover) {
     opacity: 0.9;
 }
+
+.smaller-h2 {
+    font-size: 15px;
+}
