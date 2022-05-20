@@ -1,23 +1,28 @@
 export async function sendReview(review) {
     const authToken = localStorage.getItem('tokenId');
     console.log(authToken);
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const id = urlParams.get('id')
+
     const data = {
         "review": review,
-        "paperId": 'WlaCTI6hdbLYHqhwjYgX'
+        "paperId": id
     }
 
     await fetch('/add-review', {
         method: 'POST',
         headers: {
-            'Content-Type' : 'application/json',
+            'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + authToken
         },
         body: JSON.stringify(data)
     })
-    .then(() => {
-        alert("Yay")
-    })
-    .catch(() => {
-        alert("Nay")
-    })
+        .then(() => {
+            alert("Yay")
+        })
+        .catch(() => {
+            alert("Nay")
+        })
 }
