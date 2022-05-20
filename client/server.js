@@ -91,6 +91,15 @@ async function startServer() {
     }
   });
 
+  app.get('/get-papers', async (req, res) => {
+    const idToken = req.headers.authorization.split(' ')[1];
+
+    const papers = await appService.getPapers(idToken);
+    console.log(papers);
+
+    res.json(papers);
+  });
+
   app.post('/save-user-data', async (req, res) => {
     try {
       const idToken = req.headers.authorization.split(' ')[1];

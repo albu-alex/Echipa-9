@@ -36,6 +36,15 @@ class AppService {
         console.log(`Added paper with ID: ${paperId}`);
     }
 
+    async getPapers(idToken) {
+        const userData = await this.hasRole(idToken, 'reviewer');
+        if(userData === null) {
+            throw Error(`User with ID: ${idToken} can not get all papers!`);
+        }
+
+        return await this.paperManager.getPapersFull();
+    }
+
     async addReview(idToken, review, paperId) {
         const userData = await this.hasRole(idToken, 'reviewer');
         if(userData === null) {

@@ -5,7 +5,7 @@ import './header.styles.css';
 
 const Header = () => {
     return (
-        <div class='header'>
+        <div className='header'>
             <img src={Logo} alt='Logo' width='180em' />
         </div>
     )

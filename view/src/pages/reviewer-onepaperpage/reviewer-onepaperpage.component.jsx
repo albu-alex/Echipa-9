@@ -14,11 +14,16 @@ import { sendComment } from "../../methods/sendComment";
 import './reviewer-onepaperpage.styles.css';
 
 const ReviewerOnePaperPage = () => {
-    let title = 'Paper 1 title', topic = 'Topic 1', authors = ['Author 1'], keywords = ['Keyword 1'];
-
     const [index, setIndex] = useState(0);
     const [review, setReview] = useState("");
     const [comment, setComment] = useState("");
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const title = urlParams.get('title');
+    const authors = urlParams.get('authors');
+    const topic = urlParams.get('topic');
+    const keywords = urlParams.get('keywords');
 
     useEffect(() => {
         const lastIndex = people.length - 1;
@@ -48,11 +53,11 @@ const ReviewerOnePaperPage = () => {
             </div>
 
             <div className='flex-container'>
-                <div class="form__group field">
-                    <input type="input" class="form__field" value={title} readOnly={'readOnly'} />
-                    <input type="input" class="form__field" value={topic} readOnly={'readOnly'} />
-                    <input type="input" class="form__field" value={authors} readOnly={'readOnly'} />
-                    <input type="input" class="form__field" value={keywords} readOnly={'readOnly'} />
+                <div className="form__group field">
+                    <input type="input" className="form__field" value={title} readOnly={'readOnly'} />
+                    <input type="input" className="form__field" value={topic} readOnly={'readOnly'} />
+                    <input type="input" className="form__field" value={authors} readOnly={'readOnly'} />
+                    <input type="input" className="form__field" value={keywords} readOnly={'readOnly'} />
                 </div>
 
                 <div className='upload-paper show-paper'>
@@ -65,12 +70,12 @@ const ReviewerOnePaperPage = () => {
             </div>
 
             <div className='flex-container'>
-                <div class="input">
+                <div className="input">
                     <input onChange={(event) => setReview(event.target.value)} type="text" id="input-a" />
-                    <label for="input-a">Write review...</label>
+                    <label htmlFor="input-a">Write review...</label>
                 </div>
                 <div>
-                    <button className='bigger right-placed'  onClick={() => sendReview(review)}>Submit</button>
+                    <button className='bigger right-placed' onClick={() => sendReview(review)}>Submit</button>
                 </div>
             </div>
 
@@ -79,9 +84,9 @@ const ReviewerOnePaperPage = () => {
             </div>
 
             <div className='flex-container'>
-                <div class="input" style={{ paddingBottom: '10px' }}>
+                <div className="input" style={{ paddingBottom: '10px' }}>
                     <input type="text" id="input-b" onChange={text => setComment(text)} onClick={() => sendComment(comment)} />
-                    <label for="input-b">Write comment...</label>
+                    <label htmlFor="input-b">Write comment...</label>
                 </div>
                 <div>
                     <button className='bigger right-placed'>Submit</button>
