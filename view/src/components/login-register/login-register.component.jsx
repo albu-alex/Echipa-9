@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useGlobalContext } from '../../context';
-import { useNavigate } from 'react-router-dom';
 
 import { signIn, signUp } from '../../auth/authenticate.mjs';
 
@@ -10,7 +9,7 @@ import './login-register.styles.css';
 // test@test.test -> test123!
 
 
-const LoginRegister = (props) => {
+const LoginRegister = () => {
     const { isSignIn, changeToRegister, changeToSignIn } = useGlobalContext();
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
@@ -28,10 +27,8 @@ const LoginRegister = (props) => {
         setConfirmPassword("")
     }
 
-    const location = useNavigate()
-
     return (
-        <div class='login-register'>
+        <div className='login-register'>
             <div className={`${isSignIn ? 'container' : 'right-panel-active container'}`} id="container">
                 <div className="form-container sign-up-container">
                     <form>
