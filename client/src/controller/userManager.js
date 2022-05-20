@@ -29,9 +29,7 @@ class UserManager {
             return null;
         }
 
-        // let u =  User.fromFirestore(doc.data());
-        // console.log(u);
-        return User.fromFirestore(doc.data());
+        return User.fromFirestore(uid, doc.data());
     }
 
     async setUser(uid, name, email, type) {
@@ -71,20 +69,7 @@ class UserManager {
             return null;
         }
 
-        let user = User.fromFirestore(doc.data());
-
-        // console.log(user.toFirestore())
-        //
-        // user.setName(`${firstName} ${surname}`);
-        // user.setPhoneNumber(phoneNo);
-        // user.setEmail(email);
-        // user.setAddress(webpage);
-        // // todo: add topics?
-        //
-        // // await db.collection(this.collection).doc(userId).set(user.toFirestore());
-        // await db.collection(this.collection).doc(userId).update(user.toFirestore());
-        //
-        return user;
+        return User.fromFirestore(userId, doc.data());
     }
 }
 
