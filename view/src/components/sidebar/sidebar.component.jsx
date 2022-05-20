@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { AiOutlineUser } from 'react-icons/ai';
 
 import { getEmail } from "../../methods/getEmail";
+import { getType } from "../../methods/getType";
+import { logout } from "../../methods/logout";
 
 import './sidebar.styles.css';
-import { getType } from "../../methods/getType";
 
 const Sidebar = () => {
     const email = getEmail()
@@ -46,7 +47,9 @@ const Sidebar = () => {
                             <li className="icon-papers"><span>&nbsp;&nbsp; Conference Details</span></li>
                         </Link>
                     }
-
+                    <Link to='/login' className='no-decoration'>
+                        <button className='logout-button' onClick={logout}>Log Out</button>
+                    </Link>
                 </ul>
             </nav>
         </div>

@@ -216,3 +216,9 @@
 .smaller-h2 {
     font-size: 15px;
 }
+
+.logout-button {
+    border: 1px solid white;
+    margin-top: 10rem;
+    margin-left: 2.5rem;
+}
