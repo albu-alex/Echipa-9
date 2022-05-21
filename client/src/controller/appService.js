@@ -12,14 +12,14 @@ class AppService {
         const userData = await UserValidator.getUserData(idToken);
         console.log(userData);
 
-        await this.userManager.signIn(userData.uid);
+        return await this.userManager.signIn(userData.uid);
     }
 
     async signUp(idToken, name, email, type) {
         const userData = await UserValidator.getUserData(idToken);
         console.log(userData);
 
-        await this.userManager.signUp(userData.uid, name, email, type);
+        return await this.userManager.signUp(userData.uid, name, email, type);
     }
 
     async uploadPaper(idToken, paperDataJSON, paper) {

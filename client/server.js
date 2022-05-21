@@ -1,4 +1,5 @@
 const { AppService } = require('./src/controller/appService');
+const { Logger } = require('./src/logger/logger');
 
 const express = require('express');
 const bp = require('body-parser')
@@ -17,17 +18,21 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 async function startServer() {
   const appService = new AppService();
+  const logger = new Logger('./serverLog.log');
 
   app.post('/signIn', async (req, res) => {
     try {
       const idToken = req.headers.authorization.split(' ')[1];
       console.log(idToken);
 
-      await appService.signIn(idToken);
+      const user = await appService.signIn(idToken);
+      logger.log(`SignedIn: ${user.getName()} | ${user.getEmail()} | ${user.getType()}`);
+
       res.send('ok');
 
     } catch (error) {
       console.log(error.message);
+      logger.error(error.message);
 
       res.status(400);
       res.send(error.message);
@@ -42,7 +47,10 @@ async function startServer() {
       const email = req.headers.useremail;
       const type = req.headers.usertype;
 
-      await appService.signUp(idToken, name, email, type);
+      const resData = await appService.signUp(idToken, name, email, type);
+      logger.log(`SignedUp: ${resData.user.getName()} | ${resData.user.getEmail()} | ${resData.user.getType()}`);
+      logger.log(resData.status.message);
+
       res.send('ok')
 
     } catch (error) {
