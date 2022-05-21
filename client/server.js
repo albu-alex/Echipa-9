@@ -99,7 +99,6 @@ async function startServer() {
     }
   });
 
-
   app.post('/add-comment', async(req, res) => {
     try{
         const idToken = req.headers.authorization.split(' ')[1];
@@ -112,6 +111,24 @@ async function startServer() {
     }catch(error) {
       console.log(error.message);
     
+      res.status(400);
+      res.send(error.message);
+    }
+  });
+
+  app.post('/add-session', async(req, res) => {
+    try{
+      const idToken = req.headers.authorization.split(' ')[1];
+
+      const conferenceId = req.body.conferenceId;
+      const name = req.body.name;
+
+      await appService.addSession(idToken, conferenceId, name);
+
+      res.send('ok');
+    }catch(error) {
+      console.log(error.message);
+
       res.status(400);
       res.send(error.message);
     }
@@ -160,6 +177,18 @@ async function startServer() {
       res.send(error.message);
     }
   });
+
+  app.get('/get-sessions', async (req, res) => {
+    const idToken = req.headers.authorization.split(' ')[1];
+
+    const conferenceId = req.body.conferenceId;
+
+    const sessions = await appService.getSessions(idToken, conferenceId);
+    console.log(sessions);
+
+    res.json(sessions);
+  });
+
 
   app.get('/get-paper-reviews', async (req, res) => {
     try {

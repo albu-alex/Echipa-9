@@ -2,12 +2,13 @@ const { db } = require('../config/firebaseConfig');
 const {storageRef } = require('../config/firebaseConfig');
 
 const { Paper } = require('../Entities/paper');
-
+const { Session } = require('../Entities/session')
 const { v4: uuidv4 } = require('uuid');
 
 class PaperManager {
     constructor() {
-        this.collection = 'Papers';
+        this.papersCollection = 'Papers';
+        this.sessionsCollection = 'Sessions';
     }
 
     async uploadToFirebase(paperBytes, filename) {
@@ -36,46 +37,39 @@ class PaperManager {
         paper.setAbstract(paperDataJSON.resume);
         paper.setPath(paperDataJSON.path);
 
-        const result = await db.collection(this.collection).add(paper.toFirestore());
+        const result = await db.collection(this.papersCollection).add(paper.toFirestore());
+        return result.id;
+    }
+
+    async addSession(conferenceId, name) {
+        let session = new Session();
+        session.setConferenceId(conferenceId);
+        session.setName(name);
+
+        const result = await db.collection(this.sessionsCollection).add(session.toFirestore());
         return result.id;
     }
 
     async addReview(reviewerId, paperId, reviewText) {
-        const userRef = db.collection(this.collection).doc(paperId);
+        const userRef = db.collection(this.papersCollection).doc(paperId);
         const doc = await userRef.get();
         let paper = Paper.fromFirestore(doc.data());
 
         paper.addReview(reviewerId, reviewText);
-        await db.collection(this.collection).doc(paperId).set(paper.toFirestore());
+        await db.collection(this.papersCollection).doc(paperId).set(paper.toFirestore());
     }
 
-    async addComment(reviewrId, paperId, commentText){
-        const userRef = db.collection(this.collection).doc(paperId);
+    async addComment(reviewerId, paperId, commentText){
+        const userRef = db.collection(this.papersCollection).doc(paperId);
         const doc = await userRef.get();
         let paper = Paper.fromFirestore(doc.data());
 
-        paper.addComment(reviewrId, commentText);
-        await db.collection(this.collection).doc(paperId).set(paper.toFirestore());
-    }
-
-    async getPaperLink(paperId) {
-        const papersRef = db.collection(this.collection).doc(paperId);
-        const paper = await papersRef.get();
-        const path = paper.data();
-
-        console.log(path);
-
-        const options = {
-            action: 'read',
-            expires: '03-09-2491'
-        };
-
-        const res =  await storageRef.file(paper.data().path).getSignedUrl(options);
-        return res[0];
+        paper.addComment(reviewerId, commentText);
+        await db.collection(this.papersCollection).doc(paperId).set(paper.toFirestore());
     }
 
     async getPapers() {
-        const papersRef = db.collection(this.collection);
+        const papersRef = db.collection(this.papersCollection);
         const snapshot = await papersRef.get();
 
         let papers = [];
@@ -86,7 +80,7 @@ class PaperManager {
             papers.push(data);
         });
 
-        return papers
+        return papers;
     }
 
     async getPapersFull() {
@@ -102,8 +96,25 @@ class PaperManager {
         return '{"papers": ' + JSON.stringify(papers) + '}';
     }
 
+    async getSessions(conferenceId) {
+        const sessionsRef = db.collection(this.sessionsCollection);
+        const snapshot = await sessionsRef.get();
+
+        let sessions = [];
+        snapshot.forEach(doc => {
+            if (doc.data().conferenceId === conferenceId) {
+                let data = doc.data();
+                data['id'] = doc.id;
+
+                sessions.push(data);
+            }
+        });
+
+        return sessions;
+    }
+
     async getPaperReviews(paperId) {
-        const papersRef = db.collection(this.collection).doc(paperId);
+        const papersRef = db.collection(this.papersCollection).doc(paperId);
         const doc = await papersRef.get();
 
         if (!doc.exists) {
@@ -115,7 +126,7 @@ class PaperManager {
     }
 
     async getPaperComments(paperId) {
-        const papersRef = db.collection(this.collection).doc(paperId);
+        const papersRef = db.collection(this.papersCollection).doc(paperId);
         const doc = await papersRef.get();
 
         if(!doc.exists){
@@ -128,20 +139,30 @@ class PaperManager {
 }
 
 // async function test() {
-    // const pm = new PaperManager();
+//     const pm = new PaperManager();
     // await pm.addReview('lazzzlaID', 'b1UYIPsqtUnqWyNTgxyc', 'this is a new review!');
     // await pm.addReview('myID', 'b1UYIPsqtUnqWyNTgxyc', 'this is a new review! x2');
-
+    //
     // const userRef = db.collection('Papers').doc('b1UYIPsqtUnqWyNTgxyc');
     // const doc = await userRef.get();
-    
+    //
     // const paper = Paper.fromFirestore(doc.data());
     // console.log(paper.getReviews());
+    //
+    // test getPaperReviews :)
+    // const reviews = await pm.getPaperReviews('C9NisMpZSeh5wL7lBZ3H');
+    // console.log([...reviews.entries()]);
 
-//     const res = await pm.getPaperBytes('i2p064mFRHDxPVkcwOoy');
-//     console.log(res);
+    // const sessionId = await pm.addSession('99PN0HXy9GmArJN67VIh', 'test-add-session');
+    // console.log(sessionId);
+
+//     const sessions = await pm.getSessions('99PN0HXy9GmArJN67VIh');
+//     console.log(sessions[0]);
+//     console.log('...')
+//     console.log(sessions[1]);
+//
 // }
-
+//
 // test();
 
 exports.PaperManager = PaperManager;

@@ -58,6 +58,15 @@ class AppService {
         return await this.paperManager.getPapersFull();
     }
 
+    async getSessions(idToken, conferenceId) {
+        const userData = await this.hasRole(idToken, 'chair');
+        if (userData === null) {
+            throw Error(`User with ID: ${idToken} can not get all papers!`);
+        }
+
+        return await this.paperManager.getSessions(conferenceId);
+    }
+
     async getPaperReviews(idToken, paperId) {
         const userData = await this.hasRole(idToken, 'chair');
         if (userData === null) {
@@ -97,6 +106,17 @@ class AppService {
         const reviewerId = userData.uid;
         await this.paperManager.addComment(reviewerId, paperId, comment);
         console.log(`added comment ${comment} to paper ${paperId} by reviewer ${reviewerId}`);
+    }
+
+    async addSession(idToken, conferenceId, name) {
+        const userData = await this.hasRole(idToken, 'chair');
+        if(userData === null){
+            throw Error(`User with ID: ${idToken} can not add comments to papers!`);
+        }
+
+        const chairId = userData.uid;
+        const sessionId = await this.paperManager.addSession(conferenceId, name);
+        console.log(`added session ${sessionId} : ${name} to conference ${conferenceId} by chair ${chairId}`);
     }
 
     async updateUserInformation(idToken, firstName, surname, phoneNo, webpage, topics) {
