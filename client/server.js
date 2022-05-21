@@ -109,6 +109,18 @@ async function startServer() {
     }
   });
 
+  app.get('/get-authors', async(req, res) => {
+    const authors = await appService.getUsersByType("author");
+    console.log(authors);
+    res.json(authors);
+  })
+
+  app.get('/get-reviewers', async(req, res) => {
+    const reviewers = await appService.getUsersByType("reviewer");
+    console.log(reviewers);
+    res.json(reviewers);
+  })
+
   app.get('/get-papers', async (req, res) => {
     try {
       const idToken = req.headers.authorization.split(' ')[1];

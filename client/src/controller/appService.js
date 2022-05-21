@@ -44,6 +44,10 @@ class AppService {
 
         return await this.paperManager.getPaperLink(paperId);
     }
+  
+    async getUsersByType(type) {
+        return await this.userManager.getUsersByType(type);
+    }
 
     async getPapers(idToken) {
         const userData = await this.hasRole(idToken, 'reviewer');
