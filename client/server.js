@@ -31,7 +31,6 @@ async function startServer() {
       res.send('ok');
 
     } catch (error) {
-      console.log(error.message);
       logger.error(error.message);
 
       res.status(400);
@@ -54,7 +53,7 @@ async function startServer() {
       res.send('ok')
 
     } catch (error) {
-      console.log(error.message);
+      logger.error(error.message);
 
       res.status(400);
       res.send(error.message);
@@ -69,11 +68,12 @@ async function startServer() {
       const file = req.file;
 
       await appService.uploadPaper(idToken, paperData, file);
+      logger.log("Submitted paper.")
 
       res.send('ok');
 
     } catch (error) {
-      console.log(error.message);
+      logger.error(error.message);
 
       res.status(400);
       res.send(error.message);
@@ -88,19 +88,18 @@ async function startServer() {
       const paperId = req.body.paperId;
 
       await appService.addReview(idToken, review, paperId);
+      logger.log(`Added review to paper ${paperId}.`);
 
       res.send('ok');
 
     } catch (error) {
-      console.log(error.message);
+      logger.error(error.message);
 
       res.status(400);
       res.send(error.message);
     }
   });
 
-<<<<<<< Updated upstream
-=======
   app.post('/accept-paper', async(req, res) => {
     try {
       const idToken = req.headers.authorization.split(' ')[1];
@@ -116,7 +115,6 @@ async function startServer() {
     }
   })
 
->>>>>>> Stashed changes
   app.post('/add-comment', async(req, res) => {
     try{
         const idToken = req.headers.authorization.split(' ')[1];
@@ -124,10 +122,11 @@ async function startServer() {
         const comment = req.body.comment;
         const paperId  = req.body.paperId;
         await appService.addComment(idToken, comment, paperId);
+        logger.log(`Added comment to paper ${paperId}.`);
 
         res.send('ok');
     }catch(error) {
-      console.log(error.message);
+      logger.error(error.message);
     
       res.status(400);
       res.send(error.message);
@@ -142,10 +141,11 @@ async function startServer() {
       const name = req.body.name;
 
       await appService.addSession(idToken, conferenceId, name);
+      logger.log(`Added a new session to conference ${conferenceId}.`);
 
       res.send('ok');
     }catch(error) {
-      console.log(error.message);
+      logger.error(error.message);
 
       res.status(400);
       res.send(error.message);
@@ -154,13 +154,13 @@ async function startServer() {
 
   app.get('/get-authors', async(req, res) => {
     const authors = await appService.getUsersByType("author");
-    console.log(authors);
+    logger.log(authors);
     res.json(authors);
   })
 
   app.get('/get-reviewers', async(req, res) => {
     const reviewers = await appService.getUsersByType("reviewer");
-    console.log(reviewers);
+    logger.log(reviewers);
     res.json(reviewers);
   })
 
@@ -169,10 +169,11 @@ async function startServer() {
       const idToken = req.headers.authorization.split(' ')[1];
 
       const papers = await appService.getPapers(idToken);
+      logger.log(papers);
 
       res.json(papers);
   } catch (error) {
-      console.log(error.message);
+      logger.error(error.message);
 
       res.status(400);
       res.send(error.message);
@@ -185,11 +186,11 @@ async function startServer() {
       const paperId = req.body.paperId;
 
       const paperLink = await appService.getPaperLink(idToken, paperId);
-      console.log(paperLink);
+      logger.log(paperLink);
 
       res.send(paperLink);
     } catch (error) {
-      console.log(error.message);
+      logger.error(error.message);
 
       res.status(400);
       res.send(error.message);
@@ -202,7 +203,7 @@ async function startServer() {
     const conferenceId = req.body.conferenceId;
 
     const sessions = await appService.getSessions(idToken, conferenceId);
-    console.log(sessions);
+    logger.log(sessions);
 
     res.json(sessions);
   });
@@ -216,11 +217,11 @@ async function startServer() {
 
       const reviews = await appService.getPaperReviews(idToken, paperId);
 
-      console.log([...reviews.entries()]);
+      logger.log([...reviews.entries()]);
 
       res.json(reviews);
     } catch (error) {
-      console.log(error.message);
+      logger.error(error.message);
 
       res.status(400);
       res.send(error.message);
@@ -234,10 +235,10 @@ async function startServer() {
 
       const comments = await appService.getPaperComments(idToken, paperId);
 
-      console.log([...comments.entries()]);
+      logger.log([...comments.entries()]);
       res.json(comments);
     } catch (error) {
-      console.log(error.message);
+      logger.error(error.message);
 
       res.status(400);
       res.send(error.message);
@@ -255,11 +256,12 @@ async function startServer() {
       const topics = req.body.topics;
 
       await appService.updateUserInformation(idToken, firstName, surname, phoneNo, webpage, topics);
+      logger.log(`Updated user info for ${firstName} ${surname}`);
 
       res.send('ok');
 
     } catch (error) {
-      console.log(error.message);
+      logger.error(error.message);
 
       res.status(400);
       res.send(error.message);
@@ -281,11 +283,12 @@ async function startServer() {
       const conferenceId = req.body.conferenceId;
 
       await appService.updateConferenceInformation(idToken, conferenceId, name, date, url, topics, dlPaperSubmission, dlPaperReview, dlPaperAccept, dlCameraReady);
+      logger.log(`Updated the conference details for ${conferenceId}`);
 
       res.send('ok');
 
     } catch(error) {
-      console.log(error.message);
+      logger.error(error.message);
 
       res.status(400);
       res.send(error.message);
