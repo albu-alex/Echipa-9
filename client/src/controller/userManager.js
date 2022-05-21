@@ -126,6 +126,16 @@ class UserManager {
         return users;
     }
 
+    async getTopics(conferenceId){
+        const conferenceRef = db.collection(this.conferencesCollection).doc(conferenceId).select("topics");
+        const topicsField = conferenceRef.get();
+
+        if(!topicsField.exists){
+            return null;
+        }
+        const topics = topicsField.data().topics;
+        return topics
+    }
     
 }
 

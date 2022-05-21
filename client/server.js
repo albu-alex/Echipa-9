@@ -227,6 +227,13 @@ async function startServer() {
     res.json(sessions);
   });
 
+  app.get('/get-topics', async(req, res) => {
+    const idToken = req.headers.authorization.split(' ')[1];
+    const conferenceId = req.body.conferenceId;
+    const topics = await appService.getTopics(idToken, conferenceId);
+    logger.log(topics);
+    res.json(topics);
+  })
 
   app.get('/get-paper-reviews', async (req, res) => {
     try {

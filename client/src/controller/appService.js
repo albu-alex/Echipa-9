@@ -1,6 +1,7 @@
 const { UserManager } = require('./userManager');
 const { PaperManager } = require('./paperManager');
 const { UserValidator } = require('./userValidator');
+const { Timestamp } = require('firebase-admin/firestore');
 
 class AppService {
     constructor() {
@@ -67,6 +68,16 @@ class AppService {
         return await this.paperManager.getSessions(conferenceId);
     }
 
+    async getTopics(idToken, conferenceId){
+        const userData = await this.hasRole(idToken, 'chair');
+        if (userData === null) {
+            throw Error(`User with ID: ${idToken} can not get all topics of the conference!`);
+        }
+
+        return await this.userManager.getTopics(conferenceId);
+
+    }
+
     async getPaperReviews(idToken, paperId) {
         const userData = await this.hasRole(idToken, 'chair');
         if (userData === null) {
@@ -126,6 +137,7 @@ class AppService {
 
         await this.paperManager.acceptPaper(paperId)
         console.log(`accepted paper ${paperId}`);
+<<<<<<< Updated upstream
     }
 
     async addPaperToSession(idToken, paperId, sessionId) {
@@ -138,6 +150,8 @@ class AppService {
 
         await this.paperManager.addPaperToSession(sessionId, paperId);
         console.log(`added paper ${paperId} to session ${sessionId} by chair ${chairId}`);
+=======
+>>>>>>> Stashed changes
     }
 
     async updateUserInformation(idToken, firstName, surname, phoneNo, webpage, topics) {
