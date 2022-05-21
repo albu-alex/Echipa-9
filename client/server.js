@@ -100,6 +100,18 @@ async function startServer() {
     res.json(papers);
   });
 
+  app.get('/get-paper-reviews', async (req, res) => {
+    const idToken = req.headers.authorization.split(' ')[1];
+
+    const paperId = req.body.paperId;
+
+    const reviews = await appService.getPaperReviews(idToken, paperId);
+
+    console.log([...reviews.entries()]);
+
+    res.json(reviews);
+  })
+
   app.post('/save-user-data', async (req, res) => {
     try {
       const idToken = req.headers.authorization.split(' ')[1];
@@ -123,7 +135,6 @@ async function startServer() {
   });
 
   app.post('/save-conference-data', async (req, res) => {
-
     try {
       const idToken = req.headers.authorization.split(' ')[1];
 
@@ -137,7 +148,6 @@ async function startServer() {
       const dlCameraReady = req.body.dlCameraReady;
       const conferenceId = req.body.conferenceId;
 
-      console.log("salutttti");
       await appService.updateConferenceInformation(idToken, conferenceId, name, date, url, topics, dlPaperSubmission, dlPaperReview, dlPaperAccept, dlCameraReady);
 
       res.send('ok');

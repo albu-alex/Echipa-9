@@ -76,19 +76,36 @@ class PaperManager {
 
         return '{"papers": ' + JSON.stringify(papers) + '}';
     }
+
+    async getPaperReviews(paperId) {
+        const papersRef = db.collection(this.collection).doc(paperId);
+        const doc = await papersRef.get();
+
+        if (!doc.exists) {
+            return null;
+        }
+
+        const paper = Paper.fromFirestore(doc.data());
+        return paper.reviews;
+    }
 }
 
 // async function test() {
 //     const pm = new PaperManager();
-//     await pm.addReview('lazzzlaID', 'b1UYIPsqtUnqWyNTgxyc', 'this is a new review!');
-//     await pm.addReview('myID', 'b1UYIPsqtUnqWyNTgxyc', 'this is a new review! x2');
+    // await pm.addReview('lazzzlaID', 'b1UYIPsqtUnqWyNTgxyc', 'this is a new review!');
+    // await pm.addReview('myID', 'b1UYIPsqtUnqWyNTgxyc', 'this is a new review! x2');
 
-//     const userRef = db.collection('Papers').doc('b1UYIPsqtUnqWyNTgxyc');
-//     const doc = await userRef.get();
+    // const userRef = db.collection('Papers').doc('b1UYIPsqtUnqWyNTgxyc');
+    // const doc = await userRef.get();
+    //
+    // const paper = Paper.fromFirestore(doc.data());
+    // console.log(paper.getReviews());
 
-//     const paper = Paper.fromFirestore(doc.data());
-//     console.log(paper.getReviews());
+    // test getPaperReviews :)
+    // const reviews = await pm.getPaperReviews('C9NisMpZSeh5wL7lBZ3H');
+    // console.log([...reviews.entries()]);
 // }
+
 // test();
 
 exports.PaperManager = PaperManager;
