@@ -49,6 +49,15 @@ class PaperManager {
         await db.collection(this.collection).doc(paperId).set(paper.toFirestore());
     }
 
+    async addComment(reviewrId, paperId, commentText){
+        const userRef = db.collection(this.collection).doc(paperId);
+        const doc = await userRef.get();
+        let paper = Paper.fromFirestore(doc.data());
+
+        paper.addComment(reviewrId, commentText);
+        await db.collection(this.collection).doc(paperId).set(paper.toFirestore());
+    }
+
     async getPapers() {
         const papersRef = db.collection(this.collection);
         const snapshot = await papersRef.get();

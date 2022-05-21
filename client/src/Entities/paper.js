@@ -8,6 +8,7 @@ class Paper {
         this.keywords = null;
         this.abstract = null;
         this.reviews = new Map();
+        this.comments = new Map();
         this.accepted = false;
     }
 
@@ -19,10 +20,15 @@ class Paper {
     getKeywords() { return this.keywords; }
     getAbstract() { return this.abstract; }
     getReviews() { return this.reviews; }
+    getComments() { return this.comments; }
     isAccepted() { return this.accepted; }
 
     addReview(reviewerId, review) {
         this.reviews.set(reviewerId, review);
+    }
+
+    addComment(reviewerId, comment){
+        this.comments.set(reviewerId, comment);
     }
 
     setPath(newPath) { this.path = newPath; }
@@ -33,6 +39,7 @@ class Paper {
     setKeywords(newKeywords) { this.keywords = newKeywords; }
     setAbstract(newAbstract) { this.abstract = newAbstract !== '' ?  newAbstract : null; }
     setReviews(newReviews) { this.reviews = newReviews; }
+    setComments(newComments) {this.comments = newComments; }
     acceptPaper() { this.accepted = true; }
 
     toFirestore() {
@@ -45,6 +52,7 @@ class Paper {
             keywords: this.keywords,
             abstract: this.abstract,
             reviews: Object.fromEntries(this.reviews),
+            comments: Object.fromEntries(this.comments),
             accepted: this.accepted
         };
 
@@ -63,6 +71,11 @@ class Paper {
         const reviews = Object.reviews;
         for(const key in reviews) {
             paper.addReview(key, reviews[key])
+        }
+
+        const comments = Object.comments;
+        for(const key in comments){
+            paper.addComment(key, comments[key]);
         }
 
         return paper;

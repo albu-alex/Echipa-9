@@ -66,6 +66,17 @@ class AppService {
         console.log(`added review ${review} to paper ${paperId} by reviewer ${reviewerId}`);
     }
 
+    async addComment(idToken, comment, paperId){
+        const userData = await this.hasRole(idToken, 'reviewer');
+        if(userData === null){
+            throw Error(`User with ID: ${idToken} can not add comments to papers!`);
+        }
+
+        const reviewerId = userData.uid;
+        await this.paperManager.addComment(reviewerId, paperId, comment);
+        console.log(`added comment ${comment} to paper ${paperId} by reviewer ${reviewerId}`);
+    }
+
     async updateUserInformation(idToken, firstName, surname, phoneNo, webpage, topics) {
         const userData = await UserValidator.getUserData(idToken);
         const userId = userData.uid;

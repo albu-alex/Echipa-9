@@ -91,6 +91,24 @@ async function startServer() {
     }
   });
 
+
+  app.post('/add-comment', async(req, res) => {
+    try{
+        const idToken = req.headers.authorization.split(' ')[1];
+
+        const comment = req.body.comment;
+        const paperId  = req.body.paperId;
+        await appService.addComment(idToken, comment, paperId);
+
+        res.send('ok');
+    }catch(error) {
+      console.log(error.message);
+    
+      res.status(400);
+      res.send(error.message);
+    }
+  });
+
   app.get('/get-papers', async (req, res) => {
     const idToken = req.headers.authorization.split(' ')[1];
 

@@ -44,6 +44,7 @@ const ReviewerOnePaperPage = () => {
 
     const handleSubmit = () => {
         setReview("");
+        setComment("");
     }
 
     return (
@@ -89,11 +90,11 @@ const ReviewerOnePaperPage = () => {
 
             <div className='flex-container'>
                 <div className="input" style={{ paddingBottom: '10px' }}>
-                    <input type="text" id="input-b" onChange={text => setComment(text)} onClick={() => sendComment(comment)} />
+                    <input type="text" id="input-b" onChange={(event) => setComment(event.target.value)} value={comment}/>
                     <label htmlFor="input-b">Write comment...</label>
                 </div>
                 <div>
-                    <button className='bigger right-placed'>Submit</button>
+                    <button className='bigger right-placed' onClick={()=> {sendComment(comment); handleSubmit()}}>Submit</button>
                 </div>
             </div>
         </>

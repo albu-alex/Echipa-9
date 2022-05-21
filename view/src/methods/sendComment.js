@@ -1,8 +1,14 @@
 export async function sendComment(comment) {
-    const authToken = localStorage.getItem('uid')
-    console.log(authToken)
+    const authToken = localStorage.getItem('idToken');
+    console.log(authToken);
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const id = urlParams.get('id')
+
     const data = {
-        "comment": comment
+        "comment": comment,
+        "paperId": id
     }
     await fetch('/add-comment', {
         method: 'POST',
@@ -13,9 +19,9 @@ export async function sendComment(comment) {
         body: JSON.stringify(data)
     })
     .then(() => {
-        alert("Yay")
+        alert("Success!")
     })
     .catch(() => {
-        alert("Nay")
+        alert("Failure!")
     })
 }
