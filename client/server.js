@@ -130,6 +130,16 @@ async function startServer() {
     res.json(reviews);
   })
 
+  app.get('/get-paper-comments', async(req, res) => {
+    const idToken = req.headers.authorization.split(' ')[1];
+    const paperId = req.body.paperId;
+
+    const comments = await appService.getPaperComments(idToken, paperId);
+
+    console.log([...comments.entries()]);
+    res.json(comments);
+  })
+
   app.post('/save-user-data', async (req, res) => {
     try {
       const idToken = req.headers.authorization.split(' ')[1];

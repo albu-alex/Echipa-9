@@ -97,6 +97,18 @@ class PaperManager {
         const paper = Paper.fromFirestore(doc.data());
         return paper.reviews;
     }
+
+    async getPaperComments(paperId) {
+        const papersRef = db.collection(this.collection).doc(paperId);
+        const doc = await papersRef.get();
+
+        if(!doc.exists){
+            return null;
+        }
+
+        const paper = Paper.fromFirestore(doc.data());
+        return paper.comments;
+    }
 }
 
 // async function test() {

@@ -47,11 +47,20 @@ class AppService {
 
     async getPaperReviews(idToken, paperId) {
         const userData = await this.hasRole(idToken, 'chair');
-        if (userData == null) {
+        if (userData === null) {
             throw Error(`User with ID: ${idToken} can not get all papers!`);
         }
 
         return await this.paperManager.getPaperReviews(paperId);
+    }
+
+    async getPaperComments(idToken, paperId) {
+        const userData = await this.hasRole(idToken, 'reviewer');
+        if(userData === null) {
+            throw Error(`User with ID: ${idToken} cannot see comments!`);
+        }
+
+        return await this.paperManager.getPaperComments(paperId);
     }
 
     async addReview(idToken, review, paperId) {
