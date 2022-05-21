@@ -9,25 +9,9 @@ import './list.styles.css';
 const List = () => {
     const [papers, setPapers] = useState([]);
 
-    useEffect(() => {
-        const authToken = localStorage.getItem('idToken');
-
-        let printPapers = [];
-        fetch('/get-papers', {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + authToken,
-                'Accept': 'application/json'
-            }
-        }).then(response => response.json()).then(data => {
-            for (const paper of JSON.parse(data).papers) {
-                console.log(paper);
-                const _title = paper.title;
-                const _authors = [paper.authorName, paper.coAuthor];
-
-                printPapers.push({ id: paper.id, title: _title, authors: _authors, topic: paper.topic, keywords: paper.keywords });
-            }
-        }).then(() => { setPapers(printPapers) })
+    useEffect(async () => {
+        const newPapers = await getPapers()
+        setPapers(newPapers)
     }, [])
 
     return (

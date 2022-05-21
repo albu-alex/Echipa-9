@@ -16,10 +16,8 @@ export async function getPapers() {
             const _title = paper.title;
             const _authors = [paper.authorName, paper.coAuthor];
 
-            printPapers.push({ title: _title, authors: _authors });
+            printPapers.push({ id: paper.id, title: _title, authors: _authors, topic: paper.topic, keywords: paper.keywords });
         }
-    }).catch(() => {
-        printPapers = []
     })
     return printPapers
 }
