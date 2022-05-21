@@ -99,6 +99,24 @@ async function startServer() {
     }
   });
 
+<<<<<<< Updated upstream
+=======
+  app.post('/accept-paper', async(req, res) => {
+    try {
+      const idToken = req.headers.authorization.split(' ')[1];
+      const paperId = req.body.paperId;
+
+      await appService.acceptPaper(idToken, paperId);
+      res.send('ok');
+    } catch(error) {
+      console.log(error.message);
+
+      res.status(400);
+      res.send(error.message);
+    }
+  })
+
+>>>>>>> Stashed changes
   app.post('/add-comment', async(req, res) => {
     try{
         const idToken = req.headers.authorization.split(' ')[1];
