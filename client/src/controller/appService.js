@@ -79,7 +79,6 @@ class AppService {
         }
 
         const chairId = userData.uid;
-
         await this.userManager.updateConferenceInformation(chairId, conferenceId, name, date, url, topics, dlPaperSubmission, dlPaperReview, dlPaperAccept, dlCameraReady);
     }
 

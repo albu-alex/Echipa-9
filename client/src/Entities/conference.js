@@ -1,16 +1,18 @@
 class Conference {
-    #id         // is an id needed for the conference since it is only one?
+    #id
     #name
+    #date
     #url
-    #subtitles  // list?
-    #chairId    // TODO: ask if we should use the id of the chair or the chair
+    #topics
+    #chairId
     #deadlines  // map of all the deadlines regarding the conference ( paperSubmissionDL, paperReviewDL, ...)
 
-    constructor(id, name, url, subtitles, chairId, deadlines) {
+    constructor(id, name, url, date, topics, chairId, deadlines) {
         this.#id = id;
         this.#name = name;
         this.#url = url;
-        this.#subtitles = subtitles;
+        this.#date = date;
+        this.#topics = topics;
         this.#chairId = chairId;
         this.#deadlines = deadlines;
     }
@@ -23,12 +25,16 @@ class Conference {
         return this.#name;
     }
 
+    getDate() {
+        return this.#date
+    }
+
     getUrl() {
         return this.#url;
     }
 
-    getSubtitles() {
-        return this.#subtitles;
+    getTopics() {
+        return this.#topics;
     }
 
     getChairId() {
@@ -47,8 +53,12 @@ class Conference {
         this.#url = newUrl;
     }
 
-    setSubtitles(newSubtitles) {
-        this.#subtitles = newSubtitles;
+    setDate(newDate) {
+        this.#date = newDate;
+    }
+
+    setTopics(newSubtitles) {
+        this.#topics = newSubtitles;
     }
 
     setChairId(newChairId) {

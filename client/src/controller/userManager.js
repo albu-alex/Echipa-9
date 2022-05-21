@@ -1,11 +1,12 @@
 const { admin } = require('../config/firebaseConfig');
 const { db } = require('../config/firebaseConfig');
-
+const {Conference} = require("../Entities/conference");
 const { User } = require('../Entities/user');
 
 class UserManager {
     constructor() {
         this.collection = 'Users';
+        this.conferencesCollection = 'Conferences';
     }
 
     async signIn(uid) {

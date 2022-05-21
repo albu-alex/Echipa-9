@@ -123,6 +123,7 @@ async function startServer() {
   });
 
   app.post('/save-conference-data', async (req, res) => {
+
     try {
       const idToken = req.headers.authorization.split(' ')[1];
 
@@ -136,6 +137,7 @@ async function startServer() {
       const dlCameraReady = req.body.dlCameraReady;
       const conferenceId = req.body.conferenceId;
 
+      console.log("salutttti");
       await appService.updateConferenceInformation(idToken, conferenceId, name, date, url, topics, dlPaperSubmission, dlPaperReview, dlPaperAccept, dlCameraReady);
 
       res.send('ok');
