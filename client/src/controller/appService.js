@@ -108,17 +108,16 @@ class AppService {
         console.log(`added comment ${comment} to paper ${paperId} by reviewer ${reviewerId}`);
     }
 
-<<<<<<< Updated upstream
     async addSession(idToken, conferenceId, name) {
         const userData = await this.hasRole(idToken, 'chair');
-        if(userData === null){
+        if (userData === null) {
             throw Error(`User with ID: ${idToken} can not add session to conference!`);
         }
 
         const chairId = userData.uid;
         const sessionId = await this.paperManager.addSession(conferenceId, name);
         console.log(`added session ${sessionId} : ${name} to conference ${conferenceId} by chair ${chairId}`);
-=======
+    }
     async acceptPaper(idToken, paperId){
         const userData = await this.hasRole(idToken, 'chair');
         if (userData === null) {
@@ -127,7 +126,6 @@ class AppService {
 
         await this.paperManager.acceptPaper(paperId)
         console.log(`accepted paper ${paperId}`);
->>>>>>> Stashed changes
     }
 
     async addPaperToSession(idToken, paperId, sessionId) {
