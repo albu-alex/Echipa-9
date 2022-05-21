@@ -72,6 +72,17 @@ class AppService {
         //  \n\ttopics: ${topics}`);
     }
 
+    async updateConferenceInformation(idToken, conferenceId, name, date, url, topics, dlPaperSubmission, dlPaperReview, dlPaperAccept, dlCameraReady) {
+        const userData = await this.hasRole(idToken, 'chair');
+        if(userData === null) {
+            throw Error(`User with ID: ${idToken} can not review papers!`);
+        }
+
+        const chairId = userData.uid;
+
+        await this.userManager.updateConferenceInformation(chairId, conferenceId, name, date, url, topics, dlPaperSubmission, dlPaperReview, dlPaperAccept, dlCameraReady);
+    }
+
     async hasRole(idToken, role) {
         const userData = await UserValidator.getUserData(idToken);
         if (userData.role === role) {

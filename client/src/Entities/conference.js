@@ -58,4 +58,34 @@ class Conference {
     setDeadlines(newDeadlines) {
         this.#deadlines = newDeadlines;
     }
+
+    toString() {
+        //todo
+    }
+
+    toFirestore() {
+        return {
+            name: this.#name,
+            url: this.#url,
+            date: this.#date,
+            chairId: this.#chairId,
+            topics: this.#topics,
+            dlPaperSubmission: this.#deadlines.get('dlPaperSubmission'),
+            dlPaperReview: this.#deadlines.get('dlPaperReview'),
+            dlPaperAccept: this.#deadlines.get('dlPaperAccept'),
+            dlCameraReady: this.#deadlines.get('dlCameraReady'),
+        }
+    }
+
+    static fromFirestore(conferenceId, Object) {
+        let deadlines = new Map();
+        deadlines.set('dlPaperSubmission', Object.dlPaperSubmission);
+        deadlines.set('dlPaperReview', Object.dlPaperReview);
+        deadlines.set('dlPaperAccept', Object.dlPaperAccept);
+        deadlines.set('dlCameraReady', Object.dlCameraReady);
+
+        return new Conference(conferenceId, Object.name, Object.url, Object.date, Object.topics, Object.chairId, deadlines);
+    }
 }
+
+exports.Conference = Conference;

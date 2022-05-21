@@ -52,6 +52,37 @@ class UserManager {
             });
     };
 
+
+    async updateConferenceInformation(chairId, conferenceId, name, date, url, topics, dlPaperSubmission, dlPaperReview, dlPaperAccept, dlCameraReady) {
+        const conferenceRef = db.collection(this.conferencesCollection).doc(conferenceId);
+        await conferenceRef.update(
+            {
+                name: name,
+                date: date,
+                url: url,
+                topics: topics,
+                dlPaperSubmission: dlPaperSubmission,
+                dlPaperReview: dlPaperReview,
+                dlPaperAccept: dlPaperAccept,
+                dlCameraReady: dlCameraReady,
+                chairId: chairId
+            }
+        );
+
+        const doc = await conferenceRef.get();
+
+        if(!doc.exists) {
+            return null;
+        }
+
+        let conference = Conference.fromFirestore(conferenceId, doc.data());
+
+        // console.log(conference.toString());
+
+        return conference;
+    }
+
+
     async updateUserInformation(userId, firstName, surname, phoneNo, webpage, topics) {
         const userRef = db.collection(this.collection).doc(userId);
         await userRef.update(

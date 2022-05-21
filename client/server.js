@@ -122,6 +122,32 @@ async function startServer() {
     }
   });
 
+  app.post('/save-conference-data', async (req, res) => {
+    try {
+      const idToken = req.headers.authorization.split(' ')[1];
+
+      const name = req.body.name;
+      const date = req.body.date;
+      const url = req.body.url;
+      const topics = req.body.topics;
+      const dlPaperSubmission = req.body.dlPaperSubmission;
+      const dlPaperReview = req.body.dlPaperReview;
+      const dlPaperAccept = req.body.dlPaperAccept;
+      const dlCameraReady = req.body.dlCameraReady;
+      const conferenceId = req.body.conferenceId;
+
+      await appService.updateConferenceInformation(idToken, conferenceId, name, date, url, topics, dlPaperSubmission, dlPaperReview, dlPaperAccept, dlCameraReady);
+
+      res.send('ok');
+
+    } catch(error) {
+      console.log(error.message);
+
+      res.status(400);
+      res.send(error.message);
+    }
+  });
+
 
 }
 
