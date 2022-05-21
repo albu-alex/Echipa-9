@@ -1,6 +1,7 @@
 # Vlad added this
 zzz_*
 src/config/serviceAccount.json
+serverLog.log
 
 # Logs
 logs

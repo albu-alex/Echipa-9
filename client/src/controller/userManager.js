@@ -12,6 +12,8 @@ class UserManager {
     async signIn(uid) {
         const user = await this.getUser(uid);
         console.log(`>>> SignedIn: ${uid} | ${user.getName()} | ${user.getEmail()} | ${user.getType()}`);
+
+        return user;
     }
 
     async signUp(uid, name, email, type) {
@@ -20,6 +22,11 @@ class UserManager {
 
         const status = await this.setUserRole(uid, user.getType());
         console.log(status.message);
+
+        return {
+            user: user,
+            status: status
+        };
     }
 
     async getUser(uid) {

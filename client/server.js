@@ -1,4 +1,5 @@
 const { AppService } = require('./src/controller/appService');
+const { Logger } = require('./src/logger/logger');
 
 const express = require('express');
 const bp = require('body-parser')
@@ -17,17 +18,21 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 async function startServer() {
   const appService = new AppService();
+  const logger = new Logger('./serverLog.log');
 
   app.post('/signIn', async (req, res) => {
     try {
       const idToken = req.headers.authorization.split(' ')[1];
       console.log(idToken);
 
-      await appService.signIn(idToken);
+      const user = await appService.signIn(idToken);
+      logger.log(`SignedIn: ${user.getName()} | ${user.getEmail()} | ${user.getType()}`);
+
       res.send('ok');
 
     } catch (error) {
       console.log(error.message);
+      logger.error(error.message);
 
       res.status(400);
       res.send(error.message);
@@ -42,7 +47,10 @@ async function startServer() {
       const email = req.headers.useremail;
       const type = req.headers.usertype;
 
-      await appService.signUp(idToken, name, email, type);
+      const resData = await appService.signUp(idToken, name, email, type);
+      logger.log(`SignedUp: ${resData.user.getName()} | ${resData.user.getEmail()} | ${resData.user.getType()}`);
+      logger.log(resData.status.message);
+
       res.send('ok')
 
     } catch (error) {
@@ -122,34 +130,71 @@ async function startServer() {
   })
 
   app.get('/get-papers', async (req, res) => {
-    const idToken = req.headers.authorization.split(' ')[1];
+    try {
+      const idToken = req.headers.authorization.split(' ')[1];
 
-    const papers = await appService.getPapers(idToken);
-    console.log(papers);
+      const papers = await appService.getPapers(idToken);
 
-    res.json(papers);
+      res.json(papers);
+  } catch (error) {
+      console.log(error.message);
+
+      res.status(400);
+      res.send(error.message);
+  }
+  });
+
+  app.get('/get-paper-link', async (req, res) => {
+    try {
+      const idToken = req.headers.authorization.split(' ')[1];
+      const paperId = req.body.paperId;
+
+      const paperLink = await appService.getPaperLink(idToken, paperId);
+      console.log(paperLink);
+
+      res.send(paperLink);
+    } catch (error) {
+      console.log(error.message);
+
+      res.status(400);
+      res.send(error.message);
+    }
   });
 
   app.get('/get-paper-reviews', async (req, res) => {
-    const idToken = req.headers.authorization.split(' ')[1];
+    try {
+      const idToken = req.headers.authorization.split(' ')[1];
 
-    const paperId = req.body.paperId;
+      const paperId = req.body.paperId;
 
-    const reviews = await appService.getPaperReviews(idToken, paperId);
+      const reviews = await appService.getPaperReviews(idToken, paperId);
 
-    console.log([...reviews.entries()]);
+      console.log([...reviews.entries()]);
 
-    res.json(reviews);
+      res.json(reviews);
+    } catch (error) {
+      console.log(error.message);
+
+      res.status(400);
+      res.send(error.message);
+    }
   })
 
   app.get('/get-paper-comments', async(req, res) => {
-    const idToken = req.headers.authorization.split(' ')[1];
-    const paperId = req.body.paperId;
+    try {
+      const idToken = req.headers.authorization.split(' ')[1];
+      const paperId = req.body.paperId;
 
-    const comments = await appService.getPaperComments(idToken, paperId);
+      const comments = await appService.getPaperComments(idToken, paperId);
 
-    console.log([...comments.entries()]);
-    res.json(comments);
+      console.log([...comments.entries()]);
+      res.json(comments);
+    } catch (error) {
+      console.log(error.message);
+
+      res.status(400);
+      res.send(error.message);
+    }
   })
 
   app.post('/save-user-data', async (req, res) => {

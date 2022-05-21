@@ -58,6 +58,22 @@ class PaperManager {
         await db.collection(this.collection).doc(paperId).set(paper.toFirestore());
     }
 
+    async getPaperLink(paperId) {
+        const papersRef = db.collection(this.collection).doc(paperId);
+        const paper = await papersRef.get();
+        const path = paper.data();
+
+        console.log(path);
+
+        const options = {
+            action: 'read',
+            expires: '03-09-2491'
+        };
+
+        const res =  await storageRef.file(paper.data().path).getSignedUrl(options);
+        return res[0];
+    }
+
     async getPapers() {
         const papersRef = db.collection(this.collection);
         const snapshot = await papersRef.get();
@@ -112,19 +128,18 @@ class PaperManager {
 }
 
 // async function test() {
-//     const pm = new PaperManager();
+    // const pm = new PaperManager();
     // await pm.addReview('lazzzlaID', 'b1UYIPsqtUnqWyNTgxyc', 'this is a new review!');
     // await pm.addReview('myID', 'b1UYIPsqtUnqWyNTgxyc', 'this is a new review! x2');
 
     // const userRef = db.collection('Papers').doc('b1UYIPsqtUnqWyNTgxyc');
     // const doc = await userRef.get();
-    //
+    
     // const paper = Paper.fromFirestore(doc.data());
     // console.log(paper.getReviews());
 
-    // test getPaperReviews :)
-    // const reviews = await pm.getPaperReviews('C9NisMpZSeh5wL7lBZ3H');
-    // console.log([...reviews.entries()]);
+//     const res = await pm.getPaperBytes('i2p064mFRHDxPVkcwOoy');
+//     console.log(res);
 // }
 
 // test();

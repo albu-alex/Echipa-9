@@ -12,14 +12,14 @@ class AppService {
         const userData = await UserValidator.getUserData(idToken);
         console.log(userData);
 
-        await this.userManager.signIn(userData.uid);
+        return await this.userManager.signIn(userData.uid);
     }
 
     async signUp(idToken, name, email, type) {
         const userData = await UserValidator.getUserData(idToken);
         console.log(userData);
 
-        await this.userManager.signUp(userData.uid, name, email, type);
+        return await this.userManager.signUp(userData.uid, name, email, type);
     }
 
     async uploadPaper(idToken, paperDataJSON, paper) {
@@ -36,7 +36,16 @@ class AppService {
         console.log(`Added paper with ID: ${paperId}`);
     }
 
-    async getUsersByType(type){
+    async getPaperLink(idToken, paperId) {
+        const userData = await this.hasRoles(idToken, ['reviewer', 'chair']);
+        if (userData === null) {
+            throw Error(`User with ID: ${idToken} can not get all papers!`);
+        }
+
+        return await this.paperManager.getPaperLink(paperId);
+    }
+  
+    async getUsersByType(type) {
         return await this.userManager.getUsersByType(type);
     }
 
@@ -119,6 +128,16 @@ class AppService {
         const userData = await UserValidator.getUserData(idToken);
         if (userData.role === role) {
             return userData;
+        }
+        return null;
+    }
+
+    async hasRoles(idToken, roles) {
+        const userData = await UserValidator.getUserData(idToken);
+        for(const role of roles) {
+            if(userData.role == role) {
+                return userData;
+            }
         }
         return null;
     }
