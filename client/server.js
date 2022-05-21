@@ -109,6 +109,12 @@ async function startServer() {
     }
   });
 
+  app.get('/get-authors', async(req, res) => {
+    const authors = await appService.getAuthors();
+    console.log(authors);
+    res.json(authors);
+  })
+
   app.get('/get-papers', async (req, res) => {
     const idToken = req.headers.authorization.split(' ')[1];
 
