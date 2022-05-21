@@ -61,7 +61,7 @@ class AppService {
     async getSessions(idToken, conferenceId) {
         const userData = await this.hasRole(idToken, 'chair');
         if (userData === null) {
-            throw Error(`User with ID: ${idToken} can not get all papers!`);
+            throw Error(`User with ID: ${idToken} can not get all sessions!`);
         }
 
         return await this.paperManager.getSessions(conferenceId);
@@ -70,7 +70,7 @@ class AppService {
     async getPaperReviews(idToken, paperId) {
         const userData = await this.hasRole(idToken, 'chair');
         if (userData === null) {
-            throw Error(`User with ID: ${idToken} can not get all papers!`);
+            throw Error(`User with ID: ${idToken} can not get all reviews!`);
         }
 
         return await this.paperManager.getPaperReviews(paperId);
@@ -79,7 +79,7 @@ class AppService {
     async getPaperComments(idToken, paperId) {
         const userData = await this.hasRole(idToken, 'reviewer');
         if(userData === null) {
-            throw Error(`User with ID: ${idToken} cannot see comments!`);
+            throw Error(`User with ID: ${idToken} cannot see paper comments!`);
         }
 
         return await this.paperManager.getPaperComments(paperId);
@@ -111,12 +111,24 @@ class AppService {
     async addSession(idToken, conferenceId, name) {
         const userData = await this.hasRole(idToken, 'chair');
         if(userData === null){
-            throw Error(`User with ID: ${idToken} can not add comments to papers!`);
+            throw Error(`User with ID: ${idToken} can not add session to conference!`);
         }
 
         const chairId = userData.uid;
         const sessionId = await this.paperManager.addSession(conferenceId, name);
         console.log(`added session ${sessionId} : ${name} to conference ${conferenceId} by chair ${chairId}`);
+    }
+
+    async addPaperToSession(idToken, paperId, sessionId) {
+        const userData = await this.hasRole(idToken, 'chair');
+        if (userData === null) {
+            throw Error(`User with ID: ${idToken} can not add paper to session!`);
+        }
+
+        const chairId = userData.uid;
+
+        await this.paperManager.addPaperToSession(sessionId, paperId);
+        console.log(`added paper ${paperId} to session ${sessionId} by chair ${chairId}`);
     }
 
     async updateUserInformation(idToken, firstName, surname, phoneNo, webpage, topics) {

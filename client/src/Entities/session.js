@@ -46,7 +46,7 @@ class Session {
         return {
             conferenceId: this.conferenceId,
             name: this.name,
-            papers: Object.fromEntries(this.papers)
+            papers: this.papers
         }
     }
 
@@ -54,11 +54,11 @@ class Session {
         let session = new Session();
         session.setSessionId(sessionId);
         session.setConferenceId(Object.conferenceId);
-        session.setName(Object.getName());
+        session.setName(Object.name);
 
         const papers = Object.papers;
-        for (const paper in papers) {
-            session.addPaper(paper);
+        for (const index in papers) {
+            session.addPaper(papers[index]);
         }
 
         return session;

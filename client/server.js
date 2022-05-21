@@ -99,6 +99,26 @@ async function startServer() {
     }
   });
 
+  app.post('/add-paper-to-session', async (req, res) => {
+    try {
+      const idToken = req.headers.authorization.split(' ')[1];
+
+      const paperId = req.body.paperId;
+      const sessionId = req.body.sessionId;
+
+      await appService.addPaperToSession(idToken, paperId, sessionId);
+
+      res.send('ok');
+
+    } catch (error) {
+      console.log(error.message);
+
+      res.status(400);
+      res.send(error.message);
+    }
+  });
+
+
   app.post('/add-comment', async(req, res) => {
     try{
         const idToken = req.headers.authorization.split(' ')[1];

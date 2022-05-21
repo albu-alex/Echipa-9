@@ -51,8 +51,8 @@ class PaperManager {
     }
 
     async addReview(reviewerId, paperId, reviewText) {
-        const userRef = db.collection(this.papersCollection).doc(paperId);
-        const doc = await userRef.get();
+        const paperRef = db.collection(this.papersCollection).doc(paperId);
+        const doc = await paperRef.get();
         let paper = Paper.fromFirestore(doc.data());
 
         paper.addReview(reviewerId, reviewText);
@@ -60,12 +60,21 @@ class PaperManager {
     }
 
     async addComment(reviewerId, paperId, commentText){
-        const userRef = db.collection(this.papersCollection).doc(paperId);
-        const doc = await userRef.get();
+        const paperRef = db.collection(this.papersCollection).doc(paperId);
+        const doc = await paperRef.get();
         let paper = Paper.fromFirestore(doc.data());
 
         paper.addComment(reviewerId, commentText);
         await db.collection(this.papersCollection).doc(paperId).set(paper.toFirestore());
+    }
+
+    async addPaperToSession(paperId, sessionId) {
+        const sessionRef = db.collection(this.sessionsCollection).doc(sessionId);
+        const doc = await sessionRef.get();
+        let session = Session.fromFirestore(sessionId, doc.data());
+
+        session.addPaper(paperId);
+        await db.collection(this.sessionsCollection).doc(sessionId).set(session.toFirestore());
     }
 
     async getPapers() {
@@ -160,7 +169,10 @@ class PaperManager {
 //     console.log(sessions[0]);
 //     console.log('...')
 //     console.log(sessions[1]);
-//
+
+//     await pm.addPaperToSession('CA27L3UTamWyZ4K2AKpa', 'j7ScMFnlleXAuqpUGZrO');
+//     await pm.addPaperToSession('TPN4ahlWbLgHG1X5R0pU', 'j7ScMFnlleXAuqpUGZrO');
+//     await pm.addPaperToSession('QIYtNSlcDsU8LFgrRIyA', 'j7ScMFnlleXAuqpUGZrO');
 // }
 //
 // test();
