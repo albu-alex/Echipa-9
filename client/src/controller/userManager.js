@@ -104,20 +104,22 @@ class UserManager {
         return User.fromFirestore(userId, doc.data());
     }
 
-    async getAuthors() {
+    async getUsersByType(userType) {
         const usersRef = db.collection(this.collection);
 
-        const authorsQuery = query(usersRef, where("type", "==", "author"));
-        const querySnapshot = await getDocs(authorsQuery);
+        const usersQuery = query(usersRef, where("type", "==", userType));
+        const querySnapshot = await getDocs(usersQuery);
 
-        let authors = [];
+        let users = [];
         querySnapshot.forEach(doc => {
             let data = doc.data();
             data['id'] = doc.id;
-            authors.push(data);
+            users.push(data);
         });
-        return authors;
+        return users;
     }
+
+    
 }
 
 // async function test() {

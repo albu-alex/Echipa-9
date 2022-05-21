@@ -36,8 +36,8 @@ class AppService {
         console.log(`Added paper with ID: ${paperId}`);
     }
 
-    async getAuthors(){
-        return await this.userManager.getAuthors();
+    async getUsersByType(type){
+        return await this.userManager.getUsersByType(type);
     }
 
     async getPapers(idToken) {
