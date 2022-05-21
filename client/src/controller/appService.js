@@ -36,6 +36,15 @@ class AppService {
         console.log(`Added paper with ID: ${paperId}`);
     }
 
+    async getPaperLink(idToken, paperId) {
+        const userData = await this.hasRoles(idToken, ['reviewer', 'chair']);
+        if (userData === null) {
+            throw Error(`User with ID: ${idToken} can not get all papers!`);
+        }
+
+        return await this.paperManager.getPaperLink(paperId);
+    }
+
     async getPapers(idToken) {
         const userData = await this.hasRole(idToken, 'reviewer');
         if (userData === null) {
@@ -115,6 +124,16 @@ class AppService {
         const userData = await UserValidator.getUserData(idToken);
         if (userData.role === role) {
             return userData;
+        }
+        return null;
+    }
+
+    async hasRoles(idToken, roles) {
+        const userData = await UserValidator.getUserData(idToken);
+        for(const role of roles) {
+            if(userData.role == role) {
+                return userData;
+            }
         }
         return null;
     }

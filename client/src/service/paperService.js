@@ -23,7 +23,7 @@ class PaperService {
             destination: localPath,
         };
     
-        const res = await storageRef.file(storagePath).get();
+        const res = await storageRef.file(storagePath).getSignedUrl({action: 'read', expires: '03-09-2491'});
         return res;
     }
 }
@@ -32,6 +32,6 @@ class PaperService {
 
 (async() => {
     //const path = await PaperService.uploadPaper('D:\\etc\\UBB_FMI\\Sem 4\\SE\\test.txt', 'test.txt');
-    const res = await PaperService.downloadPaper('papers/test.txt', 'D:\\etc\\UBB_FMI\\Sem 4\\SE\\test_downloaded.txt');
+    const res = await PaperService.downloadPaper('papers/sample.pdf', 'D:\\UBB_FMI\\Sem 4\\ISS\\test_downloaded.txt');
     console.log(res);
 })();

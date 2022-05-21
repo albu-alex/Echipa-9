@@ -110,34 +110,71 @@ async function startServer() {
   });
 
   app.get('/get-papers', async (req, res) => {
-    const idToken = req.headers.authorization.split(' ')[1];
+    try {
+      const idToken = req.headers.authorization.split(' ')[1];
 
-    const papers = await appService.getPapers(idToken);
-    console.log(papers);
+      const papers = await appService.getPapers(idToken);
 
-    res.json(papers);
+      res.json(papers);
+  } catch (error) {
+      console.log(error.message);
+
+      res.status(400);
+      res.send(error.message);
+  }
+  });
+
+  app.get('/get-paper-link', async (req, res) => {
+    try {
+      const idToken = req.headers.authorization.split(' ')[1];
+      const paperId = req.body.paperId;
+
+      const paperLink = await appService.getPaperLink(idToken, paperId);
+      console.log(paperLink);
+
+      res.send(paperLink);
+    } catch (error) {
+      console.log(error.message);
+
+      res.status(400);
+      res.send(error.message);
+    }
   });
 
   app.get('/get-paper-reviews', async (req, res) => {
-    const idToken = req.headers.authorization.split(' ')[1];
+    try {
+      const idToken = req.headers.authorization.split(' ')[1];
 
-    const paperId = req.body.paperId;
+      const paperId = req.body.paperId;
 
-    const reviews = await appService.getPaperReviews(idToken, paperId);
+      const reviews = await appService.getPaperReviews(idToken, paperId);
 
-    console.log([...reviews.entries()]);
+      console.log([...reviews.entries()]);
 
-    res.json(reviews);
+      res.json(reviews);
+    } catch (error) {
+      console.log(error.message);
+
+      res.status(400);
+      res.send(error.message);
+    }
   })
 
   app.get('/get-paper-comments', async(req, res) => {
-    const idToken = req.headers.authorization.split(' ')[1];
-    const paperId = req.body.paperId;
+    try {
+      const idToken = req.headers.authorization.split(' ')[1];
+      const paperId = req.body.paperId;
 
-    const comments = await appService.getPaperComments(idToken, paperId);
+      const comments = await appService.getPaperComments(idToken, paperId);
 
-    console.log([...comments.entries()]);
-    res.json(comments);
+      console.log([...comments.entries()]);
+      res.json(comments);
+    } catch (error) {
+      console.log(error.message);
+
+      res.status(400);
+      res.send(error.message);
+    }
   })
 
   app.post('/save-user-data', async (req, res) => {

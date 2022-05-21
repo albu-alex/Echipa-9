@@ -60,7 +60,7 @@ class Paper {
 
     static fromFirestore(Object) {
         let paper = new Paper();
-        //paper.setPath(Object.path);
+        paper.setPath(Object.path);
         paper.setTitle(Object.title);
         paper.setTopic(Object.topic);
         paper.setAuthorId(Object.authorId);
