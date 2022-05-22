@@ -12,6 +12,7 @@ import { sendReview } from "../../methods/sendReview";
 import { sendComment } from "../../methods/sendComment";
 
 import './reviewer-onepaperpage.styles.css';
+import { getPaperLink } from '../../methods/getPaperLink';
 
 const ReviewerOnePaperPage = () => {
     const [index, setIndex] = useState(0);
@@ -47,6 +48,13 @@ const ReviewerOnePaperPage = () => {
         setComment("");
     }
 
+    const [paperLink, setPaperLink] = useState("");
+    useEffect(async () => {
+        const link = await getPaperLink();
+        setPaperLink(link);
+        console.log(paperLink);
+    }, []);
+
     return (
         <>
             <Header />
@@ -68,7 +76,10 @@ const ReviewerOnePaperPage = () => {
                 <div className='upload-paper show-paper'>
                     <div className='plus-button-container'>
                         <div className='right-paragraph'>
-                            <p>Paper in PDF format shown here</p>
+                            <p>Paper in PDF format</p>
+                            <div style={{ paddingTop: '5em' }}>
+                                <a href={paperLink} target='_blank' rel='noreferrer' className='link'>PDF</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -90,11 +101,11 @@ const ReviewerOnePaperPage = () => {
 
             <div className='flex-container'>
                 <div className="input" style={{ paddingBottom: '10px' }}>
-                    <input type="text" id="input-b" onChange={(event) => setComment(event.target.value)} value={comment}/>
+                    <input type="text" id="input-b" onChange={(event) => setComment(event.target.value)} value={comment} />
                     <label htmlFor="input-b">Write comment...</label>
                 </div>
                 <div>
-                    <button className='bigger right-placed' onClick={()=> {sendComment(comment); handleSubmit()}}>Submit</button>
+                    <button className='bigger right-placed' onClick={() => { sendComment(comment); handleSubmit() }}>Submit</button>
                 </div>
             </div>
         </>

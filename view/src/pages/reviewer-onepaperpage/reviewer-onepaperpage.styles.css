@@ -93,3 +93,10 @@
 .right-placed {
     margin-left: 36em;
 }
+
+.link {
+    text-decoration: none;
+    color: black;
+    padding-left: 5em;
+    font-size: large;
+}

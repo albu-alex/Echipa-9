@@ -4,7 +4,7 @@ export async function sendReview(review) {
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const id = urlParams.get('id')
+    const id = urlParams.get('id');
 
     const data = {
         "review": review,

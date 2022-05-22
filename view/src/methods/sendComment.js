@@ -1,6 +1,5 @@
 export async function sendComment(comment) {
     const authToken = localStorage.getItem('idToken');
-    console.log(authToken);
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -13,15 +12,15 @@ export async function sendComment(comment) {
     await fetch('/add-comment', {
         method: 'POST',
         headers: {
-            'Content-Type' : 'application/json',
+            'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + authToken
         },
         body: JSON.stringify(data)
     })
-    .then(() => {
-        alert("Success!")
-    })
-    .catch(() => {
-        alert("Failure!")
-    })
+        .then(() => {
+            alert("Success!")
+        })
+        .catch(() => {
+            alert("Failure!")
+        })
 }
