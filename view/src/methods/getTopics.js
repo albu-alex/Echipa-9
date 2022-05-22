@@ -10,12 +10,10 @@ export async function getTopics() {
       'conferenceId': '99PN0HXy9GmArJN67VIh'
     },
   }).then(response => response.json()).then(data => {
-    for (const topic of JSON.parse(data).topics) {
-      console.log(topic);
-      topics.push({
-        name: topic
-      });
+    for (const topic of data) {
+      topics.push(topic);
     }
-  })
+  });
+
   return topics;
 }

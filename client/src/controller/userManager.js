@@ -1,7 +1,8 @@
 const { admin } = require('../config/firebaseConfig');
 const { db } = require('../config/firebaseConfig');
-const {Conference} = require("../Entities/conference");
+const { Conference } = require("../Entities/conference");
 const { User } = require('../Entities/user');
+// const { query, where } = require('../config/firebaseConfig');
 
 class UserManager {
     constructor() {
@@ -79,7 +80,7 @@ class UserManager {
 
         const doc = await conferenceRef.get();
 
-        if(!doc.exists) {
+        if (!doc.exists) {
             return null;
         }
 
@@ -126,16 +127,16 @@ class UserManager {
         return users;
     }
 
-    async getTopics(conferenceId){
+    async getTopics(conferenceId) {
         const conferenceRef = db.collection(this.conferencesCollection).doc(conferenceId);
         const topicsField = await conferenceRef.get();
-        if(!topicsField.exists){
+        if (!topicsField.exists) {
             return null;
         }
         const topics = topicsField.data().topics;
         return topics
     }
-    
+
 }
 
 // async function test() {
