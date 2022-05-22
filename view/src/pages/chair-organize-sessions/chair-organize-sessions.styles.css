@@ -20,7 +20,7 @@
     transform: scale(1.1);
 }
 
-.session-list{
+.session-list {
     display: flex;
     flex-direction: row;
     height: 10vh;
@@ -31,4 +31,8 @@
 .list-container {
     width: 65vw;
     border: 1px solid #070700;
+}
+
+.add-session {
+    padding-bottom: 50px;
 }

@@ -41,7 +41,13 @@ const ChairOrganizeSessions = () => {
                 </div>
                 <div className='buttons-container'>
                     <Link to='/chair-assign-paper'>
-                        <button style={{width: '20vw'}} className='bigger'>Add presentation</button>
+                        <button style={{ width: '20vw' }} className='bigger'>Add presentation</button>
+                    </Link>
+                </div>
+                <div className='add-session'>
+                    <Link to='#'>
+                        <input type="text" placeholder="Session name" />
+                        <button style={{ width: '20vw' }} className='bigger'>Add session</button>
                     </Link>
                 </div>
             </div>
