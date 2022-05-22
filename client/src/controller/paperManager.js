@@ -105,6 +105,22 @@ class PaperManager {
         return '{"papers": ' + JSON.stringify(papers) + '}';
     }
 
+    async getPaperLink(paperId) {
+        const papersRef = db.collection(this.papersCollection).doc(paperId);
+        const paper = await papersRef.get();
+        const path = paper.data();
+
+        console.log(path);
+
+        const options = {
+            action: 'read',
+            expires: '03-09-2491'
+        };
+
+        const res =  await storageRef.file(paper.data().path).getSignedUrl(options);
+        return res[0];
+    }
+
     async getSessions(conferenceId) {
         const sessionsRef = db.collection(this.sessionsCollection);
         const snapshot = await sessionsRef.get();
