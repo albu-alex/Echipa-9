@@ -1,4 +1,5 @@
 const admin = require('firebase-admin');
+
 const serviceAccount = require('./serviceAccount.json') // ! File ignored by git (Echipa-9/server/src/config/serviceAccount.json)
 
 const { getFirestore } = require('firebase-admin/firestore');
