@@ -10,8 +10,8 @@ const List = () => {
     const [papers, setPapers] = useState([]);
 
     useEffect(async () => {
-        const newPapers = await getPapers()
-        setPapers(newPapers)
+        const newPapers = await getPapers();
+        setPapers(newPapers);
     }, [])
 
     return (

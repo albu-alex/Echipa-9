@@ -1,5 +1,3 @@
-// NOT USED
-
 export async function getPapers() {
     const authToken = localStorage.getItem('idToken');
 

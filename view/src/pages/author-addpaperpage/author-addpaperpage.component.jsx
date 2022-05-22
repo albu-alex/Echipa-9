@@ -1,49 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Header from '../../components/header/header.component';
 import Sidebar from '../../components/sidebar/sidebar.component';
+import { getTopics } from '../../methods/getTopics';
 import { submitPaper } from "../../methods/submitPaper";
 
 import './author-addpaperpage.styles.css';
 
 const AuthorAddPaperPage = () => {
-    const [topic, setTopic] = useState("")
-    const [title, setTitle] = useState("")
-    const [coAuthor, setCoAuthor] = useState("")
-    const [keywords, setKeywords] = useState("")
-    const [resume, setResume] = useState("")
+    const [topic, setTopic] = useState("");
+    const [title, setTitle] = useState("");
+    const [coAuthor, setCoAuthor] = useState("");
+    const [keywords, setKeywords] = useState("");
+    const [resume, setResume] = useState("");
     const changeTopic = (e) => {
         setTopic(e.target.value);
     }
     const changeCoAuthor = (e) => {
-        setCoAuthor(e.target.value)
+        setCoAuthor(e.target.value);
     }
 
     const [fileName, setFileName] = useState("");
 
     const handleFile = (e) => {
-        // alert(e.target.files[0].name);
         setFileName(e.target.files[0].name);
     }
+
+    const [topics, setTopics] = useState("");
+    useEffect(async () => {
+        const topics = await getTopics();
+        setTopics(topics);
+    }, [])
 
     return (
         <>
             <Header />
             <Sidebar />
             <div className='add-container'>
-                <div class="form-style-5">
+                <div className="form-style-5">
                     <form>
                         <legend>Add your paper</legend>
                         <label>Paper Title *</label>
                         <input onChange={text => setTitle(text)} type="text" name="field1" placeholder="required" required />
-                        <label for="topic">Topic *</label>
+                        <label htmlFor="topic">Topic *</label>
                         <select value={topic} onChange={changeTopic} id="topic" name="field4">
-                            <option value="sports">Sports</option>
+                            {/* <option value="sports">Sports</option>
                             <option value="history">History</option>
                             <option value="health">Health</option>
-                            <option value="more">More to come...</option>
+                            <option value="more">More to come...</option> */}
+                            {topics && topics.map((topic, index) => {
+                                return (
+                                    <option value={`${topic}`}>{topic}</option>
+                                );
+                            })}
                         </select>
-                        <label for="co-authors">Co-authors</label>
+                        <label htmlFor="co-authors">Co-authors</label>
                         <select value={coAuthor} onChange={changeCoAuthor} id="co-authors" name="field4">
                             <option value="name1">Adam Paul</option>
                             <option value="name2">Albu Alex</option>
@@ -66,7 +77,7 @@ const AuthorAddPaperPage = () => {
                 <div className='upload-paper'>
                     <div className='plus-button-container'>
                         <div className='right-button'>
-                            <label for="file-upload" class="plus-button plus-button--large"></label>
+                            <label htmlFor="file-upload" className="plus-button plus-button--large"></label>
                             <input id="file-upload" type="file" name="paper" onChange={(e) => handleFile(e)} />
                         </div>
                         <br></br>

@@ -45,7 +45,7 @@ class AppService {
 
         return await this.paperManager.getPaperLink(paperId);
     }
-  
+
     async getUsersByType(type) {
         return await this.userManager.getUsersByType(type);
     }
@@ -68,8 +68,8 @@ class AppService {
         return await this.paperManager.getSessions(conferenceId);
     }
 
-    async getTopics(idToken, conferenceId){
-        const userData = await this.hasRole(idToken, 'chair');
+    async getTopics(idToken, conferenceId) {
+        const userData = await this.hasRole(idToken, 'author');
         if (userData === null) {
             throw Error(`User with ID: ${idToken} can not get all topics of the conference!`);
         }
@@ -89,7 +89,7 @@ class AppService {
 
     async getPaperComments(idToken, paperId) {
         const userData = await this.hasRole(idToken, 'reviewer');
-        if(userData === null) {
+        if (userData === null) {
             throw Error(`User with ID: ${idToken} cannot see paper comments!`);
         }
 
@@ -108,9 +108,9 @@ class AppService {
         console.log(`added review ${review} to paper ${paperId} by reviewer ${reviewerId}`);
     }
 
-    async addComment(idToken, comment, paperId){
+    async addComment(idToken, comment, paperId) {
         const userData = await this.hasRole(idToken, 'reviewer');
-        if(userData === null){
+        if (userData === null) {
             throw Error(`User with ID: ${idToken} can not add comments to papers!`);
         }
 
@@ -129,7 +129,7 @@ class AppService {
         const sessionId = await this.paperManager.addSession(conferenceId, name);
         console.log(`added session ${sessionId} : ${name} to conference ${conferenceId} by chair ${chairId}`);
     }
-    async acceptPaper(idToken, paperId){
+    async acceptPaper(idToken, paperId) {
         const userData = await this.hasRole(idToken, 'chair');
         if (userData === null) {
             throw Error(`User with ID: ${idToken} can not accept papers!`);
@@ -168,7 +168,7 @@ class AppService {
 
     async updateConferenceInformation(idToken, conferenceId, name, date, url, topics, dlPaperSubmission, dlPaperReview, dlPaperAccept, dlCameraReady) {
         const userData = await this.hasRole(idToken, 'chair');
-        if(userData === null) {
+        if (userData === null) {
             throw Error(`User with ID: ${idToken} can not review papers!`);
         }
 
@@ -186,8 +186,8 @@ class AppService {
 
     async hasRoles(idToken, roles) {
         const userData = await UserValidator.getUserData(idToken);
-        for(const role of roles) {
-            if(userData.role == role) {
+        for (const role of roles) {
+            if (userData.role == role) {
                 return userData;
             }
         }

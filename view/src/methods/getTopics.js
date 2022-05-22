@@ -5,16 +5,16 @@ export async function getTopics() {
   await fetch('/get-topics', {
     method: 'GET',
     headers: {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer ' + authToken
-    }    
+      'Authorization': 'Bearer ' + authToken,
+      'Accept': 'application/json'
+    }
   }).then(response => response.json()).then(data => {
-    for(const topic of JSON.parse(data).topics){
-        console.log(topic);
-        topics.push({
-          name: topic
-        });
+    for (const topic of JSON.parse(data).topics) {
+      console.log(topic);
+      topics.push({
+        name: topic
+      });
     }
   })
-  return topics
+  return topics;
 }
