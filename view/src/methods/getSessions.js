@@ -10,15 +10,12 @@ export async function getSessions() {
       'conferenceId': '99PN0HXy9GmArJN67VIh'
     },
   }).then(response => response.json()).then(data => {
-    console.log(data);
-    for (const session of JSON.parse(data).sessions) {
-      console.log(session);
+    for(let i=0;i<data.length;i++){
       sessions.push({
-        name: session.name,
-        papers: session.papers
-      });
+        name: data[i].name,
+        papers: data[i].papers
+      })
     }
   })
   return sessions;
-
 }

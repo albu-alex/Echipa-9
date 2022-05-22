@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import { VariableSizeList as List } from 'react-window';
 
@@ -7,6 +7,7 @@ import Sidebar from '../../components/sidebar/sidebar.component';
 import PresentationCard from "../../components/presentation-card/presentation-card.component";
 
 import './chair-organize-sessions.styles.css';
+import {getSessions} from "../../methods/getSessions";
 
 const getItemSize = () => 80
 
@@ -15,24 +16,24 @@ const Row = () => (
 );
 
 const ChairOrganizeSessions = () => {
+
+    const [sessions, setSessions] = useState([])
+    useEffect(async () => {
+        const sessionList = await getSessions()
+        setSessions(sessionList)
+    })
+
     return (
         <>
             <Header />
             <Sidebar />
             <div className='chair-homepage'>
                 <div className='session-list'>
-                    <a>
-                        Session 1
-                    </a>
-                    <a>
-                        Session 2
-                    </a>
-                    <a>
-                        Session 3
-                    </a>
-                    <a>
-                        Session 4
-                    </a>
+                    {sessions && sessions.map((session) => {
+                        return(
+                            <a>{session.name}</a>
+                        )
+                    })}
                 </div>
                 <div className='list-container'>
                     <List width={'100%'} height={250} className='list' itemCount={200} itemSize={getItemSize}>
