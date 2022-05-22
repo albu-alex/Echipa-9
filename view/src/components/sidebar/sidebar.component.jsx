@@ -47,6 +47,11 @@ const Sidebar = () => {
                             <li className="icon-papers"><span>&nbsp;&nbsp; Conference Details</span></li>
                         </Link>
                     }
+                    {type === "chair" &&               /* chair */
+                        <Link to='/chairseepapers' className='no-decoration'>
+                            <li className="icon-papers"><span>&nbsp;&nbsp; Papers</span></li>
+                        </Link>
+                    }
                     <Link to='/login' className='no-decoration'>
                         <button className='logout-button' onClick={logout}>Log Out</button>
                     </Link>
