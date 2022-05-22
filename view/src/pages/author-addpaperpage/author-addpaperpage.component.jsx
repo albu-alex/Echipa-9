@@ -37,7 +37,6 @@ const AuthorAddPaperPage = () => {
     useEffect(async () => {
         const authors = await getAuthors();
         setCoAuthors(authors);
-        console.log(coAuthors);
     }, [])
 
     return (

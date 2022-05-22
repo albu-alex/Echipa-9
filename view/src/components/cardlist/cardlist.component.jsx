@@ -36,38 +36,21 @@ const CardList = () => {
         }
     ];
 
-    let dummyAuthors = [
-        {
-            name: 'Daria Andrioaie',
-            title: 'Paper 1'
-        },
-        {
-            name: 'Elina Barabas',
-            title: 'Paper 2'
-        },
-        {
-            name: 'Teodora Arsene',
-            title: 'Paper 3'
-        }
-    ];
-
-    // const [authors, setAuthors] = useState([]);
-
-    // useEffect(async () => {
-    //     const newAuthors = await getAuthors();
-    //     setAuthors(newAuthors);
-    //     console.log(authors);
-    // }, [])
+    const [authors, setAuthors] = useState([]);
+    useEffect(async () => {
+        const newAuthors = await getAuthors();
+        setAuthors(newAuthors);
+    }, [])
 
     let isReviewer = getType();
 
     return (
         <div className='cards-container'>
             {isReviewer === 'reviewer' ? (
-                dummyAuthors.map((author, index) => {
-                    const { title, name } = author;
+                authors.map((author, index) => {
+                    const { email, name } = author;
                     return (
-                        <Card isReviewer={isReviewer} key={index} index={index + 1} title={title} name={name} />
+                        <Card isReviewer={isReviewer} key={index} index={index + 1} title={email} name={name} />
                     );
                 })
             ) : (
