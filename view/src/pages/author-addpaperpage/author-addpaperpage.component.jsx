@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import Header from '../../components/header/header.component';
 import Sidebar from '../../components/sidebar/sidebar.component';
+import { getAuthors } from '../../methods/getAuthors';
 import { getTopics } from '../../methods/getTopics';
 import { submitPaper } from "../../methods/submitPaper";
 
@@ -32,6 +33,12 @@ const AuthorAddPaperPage = () => {
         setTopics(topics);
     }, [])
 
+    const [coAuthors, setCoAuthors] = useState("");
+    useEffect(async () => {
+        const authors = await getAuthors();
+        setCoAuthors(authors);
+    })
+
     return (
         <>
             <Header />
@@ -44,22 +51,23 @@ const AuthorAddPaperPage = () => {
                         <input onChange={text => setTitle(text)} type="text" name="field1" placeholder="required" required />
                         <label htmlFor="topic">Topic *</label>
                         <select value={topic} onChange={changeTopic} id="topic" name="field4">
-                            {/* <option value="sports">Sports</option>
-                            <option value="history">History</option>
-                            <option value="health">Health</option>
-                            <option value="more">More to come...</option> */}
                             {topics && topics.map((topic, index) => {
                                 return (
-                                    <option value={`${topic}`}>{topic}</option>
+                                    <option key={index} value={`${topic}`}>{topic}</option>
                                 );
                             })}
                         </select>
                         <label htmlFor="co-authors">Co-authors</label>
                         <select value={coAuthor} onChange={changeCoAuthor} id="co-authors" name="field4">
-                            <option value="name1">Adam Paul</option>
+                            {/* <option value="name1">Adam Paul</option>
                             <option value="name2">Albu Alex</option>
                             <option value="name3">Andrioaie Daria</option>
-                            <option value="more">More to come...</option>
+                            <option value="more">More to come...</option> */}
+                            {coAuthors && coAuthors.map((coAuthor, index) => {
+                                return (
+                                    <option key={index} value={`${coAuthor}`}>{coAuthor}</option>
+                                );
+                            })}
                         </select>
                         <label>Keywords *</label>
                         <input onChange={text => setKeywords(text)} type="text" name="field2" placeholder="required" required />

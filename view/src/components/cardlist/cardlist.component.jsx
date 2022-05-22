@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getAuthors } from '../../methods/getAuthors';
+import { getType } from '../../methods/getType';
 
 import Card from '../card/card.component';
 
@@ -49,11 +51,19 @@ const CardList = () => {
         }
     ];
 
-    let isReviewer = false;
+    // const [authors, setAuthors] = useState([]);
+
+    // useEffect(async () => {
+    //     const newAuthors = await getAuthors();
+    //     setAuthors(newAuthors);
+    //     console.log(authors);
+    // }, [])
+
+    let isReviewer = getType();
 
     return (
         <div className='cards-container'>
-            {isReviewer ? (
+            {isReviewer === 'reviewer' ? (
                 dummyAuthors.map((author, index) => {
                     const { title, name } = author;
                     return (

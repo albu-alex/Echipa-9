@@ -100,14 +100,14 @@ async function startServer() {
     }
   });
 
-  app.post('/accept-paper', async(req, res) => {
+  app.post('/accept-paper', async (req, res) => {
     try {
       const idToken = req.headers.authorization.split(' ')[1];
       const paperId = req.body.paperId;
 
       await appService.acceptPaper(idToken, paperId);
       res.send('ok');
-    } catch(error) {
+    } catch (error) {
       console.log(error.message);
 
       res.status(400);
@@ -115,26 +115,26 @@ async function startServer() {
     }
   })
 
-  app.post('/add-comment', async(req, res) => {
-    try{
-        const idToken = req.headers.authorization.split(' ')[1];
+  app.post('/add-comment', async (req, res) => {
+    try {
+      const idToken = req.headers.authorization.split(' ')[1];
 
-        const comment = req.body.comment;
-        const paperId  = req.body.paperId;
-        await appService.addComment(idToken, comment, paperId);
-        logger.log(`Added comment to paper ${paperId}.`);
+      const comment = req.body.comment;
+      const paperId = req.body.paperId;
+      await appService.addComment(idToken, comment, paperId);
+      logger.log(`Added comment to paper ${paperId}.`);
 
-        res.send('ok');
-    }catch(error) {
+      res.send('ok');
+    } catch (error) {
       logger.error(error.message);
-    
+
       res.status(400);
       res.send(error.message);
     }
   });
 
-  app.post('/add-session', async(req, res) => {
-    try{
+  app.post('/add-session', async (req, res) => {
+    try {
       const idToken = req.headers.authorization.split(' ')[1];
 
       const conferenceId = req.body.conferenceId;
@@ -144,7 +144,7 @@ async function startServer() {
       logger.log(`Added a new session to conference ${conferenceId}.`);
 
       res.send('ok');
-    }catch(error) {
+    } catch (error) {
       logger.error(error.message);
 
       res.status(400);
@@ -152,8 +152,8 @@ async function startServer() {
     }
   });
 
-  app.post('/add-paper-to-session', async(req, res) => {
-    try{
+  app.post('/add-paper-to-session', async (req, res) => {
+    try {
       const idToken = req.headers.authorization.split(' ')[1];
 
       const paperId = req.body.paperId;
@@ -163,7 +163,7 @@ async function startServer() {
       logger.log(`Added paper ${paperId} to session ${sessionId}.`);
 
       res.send('ok');
-    }catch(error) {
+    } catch (error) {
       logger.error(error.message);
 
       res.status(400);
@@ -171,13 +171,13 @@ async function startServer() {
     }
   });
 
-  app.get('/get-authors', async(req, res) => {
+  app.get('/get-authors', async (req, res) => {
     const authors = await appService.getUsersByType("author");
     logger.log(authors);
     res.json(authors);
   })
 
-  app.get('/get-reviewers', async(req, res) => {
+  app.get('/get-reviewers', async (req, res) => {
     const reviewers = await appService.getUsersByType("reviewer");
     logger.log(reviewers);
     res.json(reviewers);
@@ -191,12 +191,12 @@ async function startServer() {
       logger.log(papers);
 
       res.json(papers);
-  } catch (error) {
+    } catch (error) {
       logger.error(error.message);
 
       res.status(400);
       res.send(error.message);
-  }
+    }
   });
 
   app.get('/get-paper-link', async (req, res) => {
@@ -227,7 +227,7 @@ async function startServer() {
     res.json(sessions);
   });
 
-  app.get('/get-topics', async(req, res) => {
+  app.get('/get-topics', async (req, res) => {
     const idToken = req.headers.authorization.split(' ')[1];
     const conferenceId = req.headers.conferenceid;
 
@@ -255,7 +255,7 @@ async function startServer() {
     }
   })
 
-  app.get('/get-paper-comments', async(req, res) => {
+  app.get('/get-paper-comments', async (req, res) => {
     try {
       const idToken = req.headers.authorization.split(' ')[1];
       const paperId = req.body.paperId;
@@ -314,7 +314,7 @@ async function startServer() {
 
       res.send('ok');
 
-    } catch(error) {
+    } catch (error) {
       logger.error(error.message);
 
       res.status(400);
