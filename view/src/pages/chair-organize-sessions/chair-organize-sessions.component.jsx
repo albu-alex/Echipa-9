@@ -7,7 +7,8 @@ import Sidebar from '../../components/sidebar/sidebar.component';
 import PresentationCard from "../../components/presentation-card/presentation-card.component";
 
 import './chair-organize-sessions.styles.css';
-import {getSessions} from "../../methods/getSessions";
+import { getSessions } from "../../methods/getSessions";
+import { saveSession } from "../../methods/saveSession";
 
 const getItemSize = () => 80
 
@@ -18,6 +19,8 @@ const Row = () => (
 const ChairOrganizeSessions = () => {
 
     const [sessions, setSessions] = useState([])
+    const [sessionName, setSessionName] = useState("")
+
     useEffect(async () => {
         const sessionList = await getSessions()
         setSessions(sessionList)
@@ -47,8 +50,8 @@ const ChairOrganizeSessions = () => {
                 </div>
                 <div className='add-session'>
                     <Link to='#'>
-                        <input type="text" placeholder="Session name" />
-                        <button style={{ width: '20vw' }} className='bigger'>Add session</button>
+                        <input type="text" placeholder="Session name" onChange={(event) => setSessionName(event.target.value)} />
+                        <button onClick={() => saveSession(sessionName)} style={{ width: '20vw' }} className='bigger'>Add session</button>
                     </Link>
                 </div>
             </div>
