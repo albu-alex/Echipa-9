@@ -202,7 +202,7 @@ async function startServer() {
   app.get('/get-paper-link', async (req, res) => {
     try {
       const idToken = req.headers.authorization.split(' ')[1];
-      const paperId = req.body.paperId;
+      const paperId = req.headers.paperId;
 
       const paperLink = await appService.getPaperLink(idToken, paperId);
       logger.log(paperLink);
