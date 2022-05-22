@@ -137,7 +137,6 @@ class AppService {
 
         await this.paperManager.acceptPaper(paperId)
         console.log(`accepted paper ${paperId}`);
-<<<<<<< Updated upstream
     }
 
     async addPaperToSession(idToken, paperId, sessionId) {
@@ -150,8 +149,6 @@ class AppService {
 
         await this.paperManager.addPaperToSession(sessionId, paperId);
         console.log(`added paper ${paperId} to session ${sessionId} by chair ${chairId}`);
-=======
->>>>>>> Stashed changes
     }
 
     async updateUserInformation(idToken, firstName, surname, phoneNo, webpage, topics) {
