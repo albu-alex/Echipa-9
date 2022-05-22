@@ -13,11 +13,14 @@ import { sendComment } from "../../methods/sendComment";
 
 import './reviewer-onepaperpage.styles.css';
 import { getPaperLink } from '../../methods/getPaperLink';
+import {getPaperComments} from "../../methods/getPaperComments";
 
 const ReviewerOnePaperPage = () => {
     const [index, setIndex] = useState(0);
     const [review, setReview] = useState("");
     const [comment, setComment] = useState("");
+    const [comments, setComments] = useState([])
+    const [id, setId] = useState("")
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -52,8 +55,15 @@ const ReviewerOnePaperPage = () => {
     useEffect(async () => {
         const link = await getPaperLink();
         setPaperLink(link);
-        console.log(paperLink);
     }, []);
+
+    useEffect(async () => {
+        setId(window.location.href.split("=")[1].split("&")[0])
+        if(id) {
+            const paperComments = await getPaperComments(id)
+            setComments(paperComments)
+        }
+    }, [])
 
     return (
         <>
@@ -103,6 +113,13 @@ const ReviewerOnePaperPage = () => {
                 <div className="input" style={{ paddingBottom: '10px' }}>
                     <input type="text" id="input-b" onChange={(event) => setComment(event.target.value)} value={comment} />
                     <label htmlFor="input-b">Write comment...</label>
+                </div>
+                <div className='slider-container'>
+                {comments && comments.map((comment) => {
+                    return(
+                        <p>{comment}</p>
+                    )
+                })}
                 </div>
                 <div>
                     <button className='bigger right-placed' onClick={() => { sendComment(comment); handleSubmit() }}>Submit</button>

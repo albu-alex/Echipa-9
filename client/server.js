@@ -240,7 +240,7 @@ async function startServer() {
     try {
       const idToken = req.headers.authorization.split(' ')[1];
 
-      const paperId = req.headers.paperid;
+      const paperId = req.headers.paperId;
 
       const reviews = await appService.getPaperReviews(idToken, paperId);
 
@@ -258,7 +258,7 @@ async function startServer() {
   app.get('/get-paper-comments', async (req, res) => {
     try {
       const idToken = req.headers.authorization.split(' ')[1];
-      const paperId = req.headers.paperid;
+      const paperId = req.headers.paperId;
 
       const comments = await appService.getPaperComments(idToken, paperId);
 

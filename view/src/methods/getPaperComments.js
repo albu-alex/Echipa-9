@@ -1,5 +1,6 @@
 export async function getPaperComments(paperId) {
   const authToken = localStorage.getItem('idToken');
+  alert(paperId)
 
   let comments = [];
   await fetch('/get-paper-comments', {
@@ -9,12 +10,12 @@ export async function getPaperComments(paperId) {
           'Accept': 'application/json',
           'paperId': paperId
       }
-  }).then(response => response.json()).then(data => {
-      for (const comment of JSON.parse(data)) {
-          console.log(comment);
-
-          comments.push(comment);
-      }
-  })
+    })
+    .then(response => response.json()).then(data => {
+        console.log(data)
+    })
+    .catch(() => {
+        alert("sal")
+    })
   return comments
 }
