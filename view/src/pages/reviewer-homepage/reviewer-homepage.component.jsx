@@ -12,7 +12,7 @@ const ReviewerHomePage = () => {
             <Header />
             <Sidebar />
             <div className='reviewer-homepage'>
-                <p>You have 5 papers left to review</p>
+                <p>You have papers left to review</p>
                 <Link to='/reviewerpapers'>
                     <button className='bigger'>Review Papers</button>
                 </Link>
