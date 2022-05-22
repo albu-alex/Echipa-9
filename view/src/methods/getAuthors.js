@@ -6,7 +6,7 @@ export async function getAuthors() {
       'Accept': 'application/json' 
     }
   }).then(response => response.json()).then(data => {
-    for(const author of JSON.parse(data).authors) {
+    for(const author of JSON.parse(data)) {
       console.log(author);
       authors.push(
         {id: author.id,

@@ -1,8 +1,8 @@
-export async function getTopics() {
+export async function getSessions() {
   const authToken = localStorage.getItem('idToken');
 
-  let topics = [];
-  await fetch('/get-topics', {
+  let sessions = [];
+  await fetch('/get-sessions', {
     method: 'GET',
     headers: {
       'Authorization': 'Bearer ' + authToken,
@@ -11,13 +11,14 @@ export async function getTopics() {
     },
   }).then(response => response.json()).then(data => {
     console.log(data);
-    for (const topic of JSON.parse(data).topics) {
-      console.log(topic);
-      topics.push({
-        name: topic
+    for (const session of JSON.parse(data).sessions) {
+      console.log(session);
+      sessions.push({
+        name: session.name,
+        papers: session.papers
       });
     }
   })
-  return topics;
+  return sessions;
 
 }
