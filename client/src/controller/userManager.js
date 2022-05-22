@@ -127,9 +127,8 @@ class UserManager {
     }
 
     async getTopics(conferenceId){
-        const conferenceRef = db.collection(this.conferencesCollection).doc(conferenceId).select("topics");
-        const topicsField = conferenceRef.get();
-
+        const conferenceRef = db.collection(this.conferencesCollection).doc(conferenceId);
+        const topicsField = await conferenceRef.get();
         if(!topicsField.exists){
             return null;
         }

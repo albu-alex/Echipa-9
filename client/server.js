@@ -229,7 +229,8 @@ async function startServer() {
 
   app.get('/get-topics', async(req, res) => {
     const idToken = req.headers.authorization.split(' ')[1];
-    const conferenceId = req.body.conferenceId;
+    const conferenceId = req.headers.conferenceid;
+
     const topics = await appService.getTopics(idToken, conferenceId);
     logger.log(topics);
     res.json(topics);
