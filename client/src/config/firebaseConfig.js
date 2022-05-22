@@ -12,11 +12,5 @@ admin.initializeApp({
 exports.admin = admin;
 exports.db = getFirestore();
 
-// const query = require('firebase-admin/firestore');
-// exports.query = query;
-
-// const where = require('firebase-admin/firestore');
-// exports.where = where;
-
 exports.bucketLocation = 'gs://echipa-9.appspot.com/papers/'
 exports.storageRef = admin.storage().bucket('gs://echipa-9.appspot.com')

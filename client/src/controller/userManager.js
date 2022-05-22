@@ -2,7 +2,6 @@ const { admin } = require('../config/firebaseConfig');
 const { db } = require('../config/firebaseConfig');
 const { Conference } = require("../Entities/conference");
 const { User } = require('../Entities/user');
-// const { query, where } = require('../config/firebaseConfig');
 
 class UserManager {
     constructor() {
@@ -115,11 +114,10 @@ class UserManager {
     async getUsersByType(userType) {
         const usersRef = db.collection(this.collection);
 
-        const usersQuery = query(usersRef, where("type", "==", userType));
-        const querySnapshot = await getDocs(usersQuery);
+        const usersQuery = await usersRef.where('type', '==', userType).get();
 
         let users = [];
-        querySnapshot.forEach(doc => {
+        usersQuery.forEach(doc => {
             let data = doc.data();
             data['id'] = doc.id;
             users.push(data);

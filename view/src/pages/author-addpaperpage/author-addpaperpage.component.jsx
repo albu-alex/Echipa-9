@@ -27,17 +27,18 @@ const AuthorAddPaperPage = () => {
         setFileName(e.target.files[0].name);
     }
 
-    const [topics, setTopics] = useState("");
+    const [topics, setTopics] = useState([]);
     useEffect(async () => {
         const topics = await getTopics();
         setTopics(topics);
     }, [])
 
-    const [coAuthors, setCoAuthors] = useState("");
+    const [coAuthors, setCoAuthors] = useState([]);
     useEffect(async () => {
         const authors = await getAuthors();
         setCoAuthors(authors);
-    })
+        console.log(coAuthors);
+    }, [])
 
     return (
         <>
@@ -59,13 +60,9 @@ const AuthorAddPaperPage = () => {
                         </select>
                         <label htmlFor="co-authors">Co-authors</label>
                         <select value={coAuthor} onChange={changeCoAuthor} id="co-authors" name="field4">
-                            {/* <option value="name1">Adam Paul</option>
-                            <option value="name2">Albu Alex</option>
-                            <option value="name3">Andrioaie Daria</option>
-                            <option value="more">More to come...</option> */}
                             {coAuthors && coAuthors.map((coAuthor, index) => {
                                 return (
-                                    <option key={index} value={`${coAuthor}`}>{coAuthor}</option>
+                                    <option key={index} value={`${coAuthor.name}`}>{coAuthor.name}</option>
                                 );
                             })}
                         </select>

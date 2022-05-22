@@ -16,6 +16,7 @@ export async function getPapers() {
 
             printPapers.push({ id: paper.id, title: _title, authors: _authors, topic: paper.topic, keywords: paper.keywords });
         }
-    })
-    return printPapers
+    });
+
+    return printPapers;
 }
