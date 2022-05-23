@@ -106,6 +106,16 @@ class AppService {
         return await this.paperManager.getPaperComments(paperId);
     }
 
+    async getSessionPapers(idToken, sessionName) {
+        const userData = await this.hasRole(idToken, 'chair');
+        if (userData === null) {
+            throw Error(`User with ID: ${idToken} cannot see the papers associated with session ${sessionName}!`);
+        }
+
+        const session = await this.paperManager.getSessionByName(sessionName);
+        return await this.paperManager.getPapersForSession(session);
+    }
+
     async addReview(idToken, review, paperId) {
         const userData = await this.hasRole(idToken, 'reviewer');
         if (userData === null) {
