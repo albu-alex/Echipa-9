@@ -51,7 +51,7 @@ class AppService {
     }
 
     async getPapers(idToken) {
-        const userData = await this.hasRole(idToken, 'reviewer');
+        const userData = await this.hasRoles(idToken, ['reviewer', 'chair']);
         if (userData === null) {
             throw Error(`User with ID: ${idToken} can not get all papers!`);
         }
@@ -59,7 +59,7 @@ class AppService {
         return await this.paperManager.getPapersFull();
     }
 
-    async getPapersForAuthor(idToken){
+    async getPapersForAuthor(idToken) {
         const userData = await this.hasRole(idToken, 'author');
         if (userData === null) {
             throw Error(`User with ID: ${idToken} can not see his own papers!`);
