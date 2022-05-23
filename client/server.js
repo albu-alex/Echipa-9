@@ -242,11 +242,14 @@ async function startServer() {
 
       const paperId = req.headers.paperid;
 
-      const reviews = await appService.getPaperReviews(idToken, paperId);
+      let reviews = await appService.getPaperReviews(idToken, paperId);
 
+      // logger.log('get-paper-reviews-be...')
       logger.log([...reviews.entries()]);
 
+      reviews = Object.fromEntries(reviews);
       res.json(reviews);
+
     } catch (error) {
       logger.error(error.message);
 
@@ -260,10 +263,14 @@ async function startServer() {
       const idToken = req.headers.authorization.split(' ')[1];
       const paperId = req.headers.paperid;
 
-      const comments = await appService.getPaperComments(idToken, paperId);
+      let comments = await appService.getPaperComments(idToken, paperId);
 
-      logger.log([...comments.keys()]);
+      // logger.log('get-paper-comments-be...')
+      logger.log([...comments.entries()]);
+
+      comments = Object.fromEntries(comments);
       res.json(comments);
+
     } catch (error) {
       logger.error(error.message);
 

@@ -13,7 +13,7 @@ export async function getPaperComments(paperId) {
     })
     .then(response => response.json()).then(data => {
         console.log(data)
-        for(const comment of JSON.parse(data).comments) {
+        for(const comment of JSON.parse(data)) {
             comments.push(comment)
         }
     })
