@@ -7,20 +7,19 @@ import Slider from '../../components/slider/slider.component';
 
 import { IoMdArrowBack } from 'react-icons/io';
 
-import people from './people';
 import { sendReview } from "../../methods/sendReview";
 import { sendComment } from "../../methods/sendComment";
 
 import './reviewer-onepaperpage.styles.css';
 import { getPaperLink } from '../../methods/getPaperLink';
-import {getPaperComments} from "../../methods/getPaperComments";
+import { getPaperComments } from "../../methods/getPaperComments";
 
 const ReviewerOnePaperPage = () => {
     const [index, setIndex] = useState(0);
     const [review, setReview] = useState("");
     const [comment, setComment] = useState("");
-    const [comments, setComments] = useState([])
-    const [id, setId] = useState("")
+    const [paperComments, setPaperComments] = useState([]);
+    const [id, setId] = useState("");
     const [paperLink, setPaperLink] = useState("");
 
     const queryString = window.location.search;
@@ -31,14 +30,14 @@ const ReviewerOnePaperPage = () => {
     const keywords = urlParams.get('keywords');
 
     useEffect(() => {
-        const lastIndex = people.length - 1;
+        const lastIndex = paperComments.length - 1;
         if (index < 0) {
             setIndex(lastIndex);
         }
         if (index > lastIndex) {
             setIndex(0);
         }
-    }, [index, people]);
+    }, [index, paperComments]);
 
     useEffect(() => {
         let slider = setInterval(() => {
@@ -50,6 +49,7 @@ const ReviewerOnePaperPage = () => {
     const handleSubmit = () => {
         setReview("");
         setComment("");
+        // window.location.reload();
     }
 
     useEffect(async () => {
@@ -58,9 +58,9 @@ const ReviewerOnePaperPage = () => {
     }, []);
 
     useEffect(async () => {
-        setId(window.location.href.split("=")[1].split("&")[0])
-        const paperComments = await getPaperComments('CA27L3UTamWyZ4K2AKpa')
-        setComments(paperComments)
+        setId(window.location.href.split("=")[1].split("&")[0]);
+        const paperComments = await getPaperComments('CA27L3UTamWyZ4K2AKpa');
+        setPaperComments(paperComments);
     }, [])
 
     return (
@@ -104,20 +104,13 @@ const ReviewerOnePaperPage = () => {
             </div>
 
             <div className='slider-container'>
-                <Slider people={people} index={index} indexChanger={setIndex} />
+                <Slider comments={paperComments} index={index} indexChanger={setIndex} />
             </div>
 
             <div className='flex-container'>
                 <div className="input" style={{ paddingBottom: '10px' }}>
                     <input type="text" id="input-b" onChange={(event) => setComment(event.target.value)} value={comment} />
                     <label htmlFor="input-b">Write comment...</label>
-                </div>
-                <div className='slider-container'>
-                {comments && comments.map((comment) => {
-                    return(
-                        <p>{comment}</p>
-                    )
-                })}
                 </div>
                 <div>
                     <button className='bigger right-placed' onClick={() => { sendComment(comment); handleSubmit() }}>Submit</button>

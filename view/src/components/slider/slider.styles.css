@@ -21,10 +21,10 @@
 
 .section-center {
     margin: 0 auto;
-    margin-top: 4rem;
+    margin-top: 3rem;
     width: 80vw;
     /* have to have a height */
-    height: 450px;
+    height: 300px;
     max-width: 800px;
     text-align: center;
     position: relative;
@@ -71,7 +71,7 @@ article h4 {
 .prev,
 .next {
     position: absolute;
-    top: 200px;
+    top: 80px;
     transform: translateY(-50%);
     background: var(--clr-grey-5);
     color: var(--green);
@@ -85,9 +85,6 @@ article h4 {
     cursor: pointer;
     transition: all 0.3s linear;
 }
-
-.prev:hover,
-.next:hover {}
 
 .prev {
     left: 0;

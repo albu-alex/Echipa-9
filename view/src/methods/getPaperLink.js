@@ -14,6 +14,5 @@ export async function getPaperLink() {
         }
     }).then(response => { link = response.text() });
 
-    console.log(link);
     return link;
 }

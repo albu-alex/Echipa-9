@@ -1,24 +1,20 @@
 export async function getPaperComments(paperId) {
-  const authToken = localStorage.getItem('idToken');
-  alert(paperId)
+    const authToken = localStorage.getItem('idToken');
 
-  let comments = [];
-  await fetch('/get-paper-comments', {
-      method: 'GET',
-      headers: {
-          'Authorization': 'Bearer ' + authToken,
-          'Accept': 'application/json',
-          'paperId': paperId
-      }
-    })
-    .then(response => response.json()).then(data => {
-        console.log(data)
-        for(const comment of JSON.parse(data)) {
+    let comments = [];
+    await fetch('/get-paper-comments', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + authToken,
+            'Accept': 'application/json',
+            'paperId': paperId
+        }
+    }).then(response => response.json()).then(data => {
+        let commentsReceived = Object.values(data);
+        for (const comment of commentsReceived) {
             comments.push(comment)
         }
     })
-    .catch(() => {
-        console.log('Error')
-    })
-  return comments
+
+    return comments;
 }
