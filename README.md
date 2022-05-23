@@ -20,13 +20,13 @@
 &nbsp &nbsp &nbsp Click here
 </a>
 
-# Architecture Diagram
+# - Architecture Diagram
 
 <a href="https://github.com/albu-alex/Echipa-9/blob/main/diagrams/Architecture%20diagram.pdf">
 &nbsp &nbsp &nbsp Click here
 </a>
 
-# Sequence Diagram
+# - Sequence Diagram
 
 <a href="diagrams/Chair conference details - sequence diagram.pdf">
 &nbsp &nbsp &nbsp Chair - add conference details
