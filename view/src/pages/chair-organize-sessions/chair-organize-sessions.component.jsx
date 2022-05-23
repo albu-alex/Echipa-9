@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
-import { VariableSizeList as List } from 'react-window';
 
 import Header from '../../components/header/header.component';
 import Sidebar from '../../components/sidebar/sidebar.component';
@@ -9,6 +8,7 @@ import PresentationCard from "../../components/presentation-card/presentation-ca
 import './chair-organize-sessions.styles.css';
 import { getSessions } from "../../methods/getSessions";
 import { saveSession } from "../../methods/saveSession";
+import { getPapers } from "../../methods/getPapers";
 
 const getItemSize = () => 80
 
@@ -20,11 +20,17 @@ const ChairOrganizeSessions = () => {
 
     const [sessions, setSessions] = useState([])
     const [sessionName, setSessionName] = useState("")
+    const [papers, setPapers] = useState([])
 
     useEffect(async () => {
         const sessionList = await getSessions()
         setSessions(sessionList)
-    })
+    }, [])
+
+    useEffect(async () => {
+        const newPapers = await getPapers();
+        setPapers(newPapers);
+    }, [])
 
     return (
         <>
@@ -39,9 +45,11 @@ const ChairOrganizeSessions = () => {
                     })}
                 </div>
                 <div className='list-container'>
-                    <List width={'100%'} height={250} className='list' itemCount={200} itemSize={getItemSize}>
-                        {Row}
-                    </List>
+                    {papers && papers.map((paper, index) => {
+                        return (
+                            <PresentationCard key={index} paper={paper} />
+                        );
+                    })}
                 </div>
                 <div className='buttons-container'>
                     <Link to='/chair-assign-paper'>
