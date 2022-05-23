@@ -13,9 +13,12 @@ export async function getPaperComments(paperId) {
     })
     .then(response => response.json()).then(data => {
         console.log(data)
+        for(const comment of JSON.parse(data).comments) {
+            comments.push(comment)
+        }
     })
     .catch(() => {
-        alert("sal")
+        console.log('Error')
     })
   return comments
 }

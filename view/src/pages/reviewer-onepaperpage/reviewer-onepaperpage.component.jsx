@@ -21,6 +21,7 @@ const ReviewerOnePaperPage = () => {
     const [comment, setComment] = useState("");
     const [comments, setComments] = useState([])
     const [id, setId] = useState("")
+    const [paperLink, setPaperLink] = useState("");
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -51,7 +52,6 @@ const ReviewerOnePaperPage = () => {
         setComment("");
     }
 
-    const [paperLink, setPaperLink] = useState("");
     useEffect(async () => {
         const link = await getPaperLink();
         setPaperLink(link);
@@ -59,10 +59,8 @@ const ReviewerOnePaperPage = () => {
 
     useEffect(async () => {
         setId(window.location.href.split("=")[1].split("&")[0])
-        if(id) {
-            const paperComments = await getPaperComments(id)
-            setComments(paperComments)
-        }
+        const paperComments = await getPaperComments('CA27L3UTamWyZ4K2AKpa')
+        setComments(paperComments)
     }, [])
 
     return (
