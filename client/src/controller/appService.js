@@ -59,6 +59,16 @@ class AppService {
         return await this.paperManager.getPapersFull();
     }
 
+    async getPapersForAuthor(idToken){
+        const userData = await this.hasRole(idToken, 'author');
+        if (userData === null) {
+            throw Error(`User with ID: ${idToken} can not see his own papers!`);
+        }
+        const authorId = userData.uid;
+
+        return await this.paperManager.getPapersForAuthor(authorId);
+    }
+
     async getSessions(idToken, conferenceId) {
         const userData = await this.hasRole(idToken, 'chair');
         if (userData === null) {

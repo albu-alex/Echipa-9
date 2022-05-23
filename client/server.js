@@ -199,6 +199,22 @@ async function startServer() {
     }
   });
 
+  app.get('/get-papers-for-author', async(req, res) => {
+    try {
+      const idToken = req.headers.authorization.split(' ')[1];
+
+      const papers = await appService.getPapersForAuthor(idToken);
+      logger.log(papers);
+
+      res.json(papers);
+    } catch (error) {
+      logger.error(error.message);
+
+      res.status(400);
+      res.send(error.message);
+    }
+  });
+
   app.get('/get-paper-link', async (req, res) => {
     try {
       const idToken = req.headers.authorization.split(' ')[1];

@@ -92,6 +92,18 @@ class PaperManager {
         return papers;
     }
 
+    async getPapersForAuthor(authorId){
+        const papersRef = db.collection(this.papersCollection);
+        const papersQuery = await papersRef.where('authorId', '==', authorId).get();
+        let papers = [];
+        papersQuery.forEach(doc => {
+            let data = doc.data();
+            data['id'] = doc.id;
+            papers.push(data);
+        })
+        return papers
+    }
+
     async getPapersFull() {
         let papers = await this.getPapers();
 
