@@ -92,7 +92,7 @@ class PaperManager {
         return papers;
     }
 
-    async getPapersForAuthor(authorId){
+    async getPapersForAuthor(authorId) {
         const papersRef = db.collection(this.papersCollection);
         const papersQuery = await papersRef.where('authorId', '==', authorId).get();
         let papers = [];
@@ -101,8 +101,22 @@ class PaperManager {
             data['id'] = doc.id;
             papers.push(data);
         })
-        return papers
+        return papers;
     }
+
+    async getPapersForSession(session) {
+        const papersRef = db.collection(this.papersCollection);
+        const paperIds = session.papers;
+        const papersQuery = await papersRef.where('__name__', 'in', paperIds).get();
+        let papers = [];
+        papersQuery.forEach(doc => {
+            let data = doc.data();
+            data['id'] = doc.id;
+            papers.push(data);
+        })
+        return papers;
+    }
+
 
     async getPapersFull() {
         let papers = await this.getPapers();
@@ -131,6 +145,22 @@ class PaperManager {
 
         const res =  await storageRef.file(paper.data().path).getSignedUrl(options);
         return res[0];
+    }
+
+    async getSessionByName(sessionName) {
+        const sessionsRef = db.collection(this.sessionsCollection);
+        const snapshot = await sessionsRef.where('name', '==', sessionName).get();
+
+        if (snapshot.empty) {
+            console.log(`no matching sessions with session name ${sessionName}`);
+            return;
+        }
+
+        let session;
+        snapshot.forEach(doc => {
+            session = Session.fromFirestore(doc.id, doc.data());
+        });
+        return session;
     }
 
     async getSessions(conferenceId) {
@@ -189,18 +219,23 @@ class PaperManager {
     // test getPaperReviews :)
     // const reviews = await pm.getPaperReviews('C9NisMpZSeh5wL7lBZ3H');
     // console.log([...reviews.entries()]);
-
+    //
     // const sessionId = await pm.addSession('99PN0HXy9GmArJN67VIh', 'test-add-session');
     // console.log(sessionId);
+    //
+    // const sessions = await pm.getSessions('99PN0HXy9GmArJN67VIh');
+    // console.log(sessions[0]);
+    // console.log('...')
+    // console.log(sessions[1]);
+    //
+    // await pm.addPaperToSession('CA27L3UTamWyZ4K2AKpa', 'j7ScMFnlleXAuqpUGZrO');
+    // await pm.addPaperToSession('TPN4ahlWbLgHG1X5R0pU', 'j7ScMFnlleXAuqpUGZrO');
+    // await pm.addPaperToSession('QIYtNSlcDsU8LFgrRIyA', 'j7ScMFnlleXAuqpUGZrO');
 
-//     const sessions = await pm.getSessions('99PN0HXy9GmArJN67VIh');
-//     console.log(sessions[0]);
-//     console.log('...')
-//     console.log(sessions[1]);
-
-//     await pm.addPaperToSession('CA27L3UTamWyZ4K2AKpa', 'j7ScMFnlleXAuqpUGZrO');
-//     await pm.addPaperToSession('TPN4ahlWbLgHG1X5R0pU', 'j7ScMFnlleXAuqpUGZrO');
-//     await pm.addPaperToSession('QIYtNSlcDsU8LFgrRIyA', 'j7ScMFnlleXAuqpUGZrO');
+//     let session = await pm.getSessionByName('test-add-session');
+//     console.log(session)
+//     let papers = await pm.getPapersForSession(session);
+//     console.log(papers)
 // }
 //
 // test();

@@ -295,6 +295,26 @@ async function startServer() {
     }
   })
 
+  app.get('/get-session-papers', async (req, res) => {
+    try {
+      const idToken = req.headers.authorization.split(' ')[1];
+
+      const sessionName = req.headers.sessionName;
+
+      let papers = await appService.getSessionPapers(idToken, sessionName);
+
+      logger.log([...papers]);
+
+      res.json(papers);
+
+    } catch (error) {
+      logger.error(error.message);
+
+      res.status(400);
+      res.send(error.message);
+    }
+  })
+
   app.post('/save-user-data', async (req, res) => {
     try {
       const idToken = req.headers.authorization.split(' ')[1];
