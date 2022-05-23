@@ -10,17 +10,12 @@ import { getSessions } from "../../methods/getSessions";
 import { saveSession } from "../../methods/saveSession";
 import { getPapers } from "../../methods/getPapers";
 
-const getItemSize = () => 80
-
-const Row = () => (
-    <PresentationCard />
-);
-
 const ChairOrganizeSessions = () => {
 
     const [sessions, setSessions] = useState([])
     const [sessionName, setSessionName] = useState("")
     const [papers, setPapers] = useState([])
+    const [selectedSession, setSelectedSession] = useState({})
 
     useEffect(async () => {
         const sessionList = await getSessions()
@@ -38,16 +33,23 @@ const ChairOrganizeSessions = () => {
             <Sidebar />
             <div className='chair-homepage'>
                 <div className='session-list'>
-                    {sessions && sessions.map((session) => {
+                    {sessions && sessions.map((session, index) => {
                         return(
-                            <a>{session.name}</a>
+                        <a style={selectedSession.name === session.name ? {color: 'black', opacity: 1} : {color: 'gray'}}
+                           onClick={() => setSelectedSession(session)} key={index}>{session.name}</a>
                         )
                     })}
                 </div>
                 <div className='list-container'>
-                    {papers && papers.map((paper, index) => {
+                    {selectedSession.papers && selectedSession.papers.map((paperID, index) => {
+                        let renderedPaper = {}
+                        for(let i=0;i<papers.length;i++) {
+                            if(papers[i].id === paperID) {
+                                renderedPaper = papers[i]
+                            }
+                        }
                         return (
-                            <PresentationCard key={index} paper={paper} />
+                            <PresentationCard key={index} paper={renderedPaper} />
                         );
                     })}
                 </div>
