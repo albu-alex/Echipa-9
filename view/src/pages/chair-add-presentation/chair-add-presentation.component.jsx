@@ -8,7 +8,7 @@ import {getPapers} from "../../methods/getPapers";
 import PresentationCard from "../../components/presentation-card/presentation-card.component";
 import {assignPaper} from "../../methods/assignPaper";
 
-const ChairAddPresentation = (selectedSessionName) => {
+const ChairAddPresentation = () => {
     const [papers, setPapers] = useState([])
     const [selectedPaper, setSelectedPaper] = useState({})
 
@@ -33,7 +33,7 @@ const ChairAddPresentation = (selectedSessionName) => {
             <div className='selected-container'>
                 <p>Selected paper is: </p>
                 <PresentationCard paper={selectedPaper} />
-                <button style={{marginTop: '5vh'}} onClick={() => assignPaper(selectedSessionName, selectedPaper.id)}>
+                <button style={{marginTop: '5vh'}} onClick={() => assignPaper(localStorage.getItem('sessionID'), selectedPaper.id)}>
                     Assign paper to the previously selected session
                 </button>
             </div>

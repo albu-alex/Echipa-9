@@ -1,8 +1,8 @@
 export async function assignPaper(selectedSessionName, selectedPaperID) {
     const authToken = localStorage.getItem('idToken')
     const data = {
-        "sessionName": selectedSessionName,
-        "paperID": selectedPaperID
+        "sessionId": selectedSessionName,
+        "paperId": selectedPaperID
     }
     await fetch('/add-paper-to-session', {
         method: 'POST',

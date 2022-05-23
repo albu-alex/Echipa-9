@@ -40,7 +40,7 @@ const ChairOrganizeSessions = () => {
                         )
                     })}
                 </div>
-                <div className='list-container'>
+                <div className='specific-list-container'>
                     {selectedSession.papers && selectedSession.papers.map((paperID, index) => {
                         let renderedPaper = {}
                         for(let i=0;i<papers.length;i++) {
@@ -55,7 +55,7 @@ const ChairOrganizeSessions = () => {
                 </div>
                 <div className='buttons-container'>
                     <Link to='/chair-assign-paper'>
-                        <button style={{ width: '20vw' }} className='bigger'>Add presentation</button>
+                        <button onClick={() => localStorage.setItem('sessionID', selectedSession.id)} style={{ width: '20vw' }} className='bigger'>Add presentation</button>
                     </Link>
                 </div>
                 <div className='add-session'>

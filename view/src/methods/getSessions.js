@@ -11,10 +11,7 @@ export async function getSessions() {
     },
   }).then(response => response.json()).then(data => {
     for(let i=0;i<data.length;i++){
-      sessions.push({
-        name: data[i].name,
-        papers: data[i].papers
-      })
+      sessions.push(data[i])
     }
   })
   return sessions;
