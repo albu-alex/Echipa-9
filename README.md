@@ -32,4 +32,11 @@
 &nbsp &nbsp &nbsp Chair - add conference details
 </a>
 
+<a href="diagrams/Review paper - sequence diagram.pdf">
+&nbsp &nbsp &nbsp Reviewer - review paper
+</a>
+
+<a href="diagrams/Author add paper - sequence diagram.png">
+&nbsp &nbsp &nbsp Author - add paper
+</a>
 
