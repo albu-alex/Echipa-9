@@ -12,7 +12,7 @@ const AuthorHomePage = () => {
             <Header />
             <Sidebar />
             <div className='author-homepage'>
-                <p>Background, maybe with the deadline for paper submission</p>
+                {/* <p>Background, maybe with the deadline for paper submission</p> */}
                 <div className='buttons-container'>
                     <Link to='/authoraddpaper'>
                         <button className='bigger'>Add paper</button>

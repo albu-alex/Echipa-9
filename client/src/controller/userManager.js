@@ -68,7 +68,7 @@ class UserManager {
                 name: name,
                 date: date,
                 url: url,
-                topics: topics,
+                topics: admin.firestore.FieldValue.arrayUnion(topics),
                 dlPaperSubmission: dlPaperSubmission,
                 dlPaperReview: dlPaperReview,
                 dlPaperAccept: dlPaperAccept,
