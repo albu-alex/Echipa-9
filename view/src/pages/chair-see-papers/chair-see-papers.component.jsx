@@ -23,7 +23,7 @@ const ChairSeePapers = () => {
             <Sidebar />
 
             <div className='chair-homepage'>
-                <div className='list-container'>
+                <div className='paper-list-container'>
                     {papers && papers.map((paper, index) => {
                         return (
                             <PresentationCard key={index} paper={paper} />
