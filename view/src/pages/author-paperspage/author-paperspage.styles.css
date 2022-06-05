@@ -1,0 +1,9 @@
+.button-container {
+    position: relative;
+    margin-left: 60em;
+    padding-left: 10em;
+    bottom: 0%;
+    margin-bottom: 10em;
+    display: flex;
+    gap: 30px;
+}

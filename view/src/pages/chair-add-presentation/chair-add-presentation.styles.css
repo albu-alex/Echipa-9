@@ -1,0 +1,10 @@
+.list-container {
+    width: 65vw;
+    border: 1px solid #070700;
+    margin-left: 20em;
+}
+
+.selected-container {
+    width: 100vw;
+    margin-left: 20em;
+}

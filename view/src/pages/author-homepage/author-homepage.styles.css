@@ -1,0 +1,19 @@
+.author-homepage {
+    padding-left: 30em;
+    padding-top: 20em;
+    width: 85%;
+    text-align: center;
+}
+
+.buttons-container {
+    padding-left: 10em;
+    position: fixed;
+    bottom: 0%;
+    margin-bottom: 10em;
+    display: flex;
+    gap: 30px;
+}
+
+.bigger:hover {
+    transform: scale(1.1);
+}
